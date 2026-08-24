@@ -1,0 +1,8 @@
+node_modules
+.next
+coverage
+package-lock.json
+supabase/migrations
+docs
+playwright-report
+test-results

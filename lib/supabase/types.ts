@@ -1,0 +1,463 @@
+/**
+ * Database types for the LIFE OS schema.
+ */
+
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[];
+
+export type GoalLevel = "vision" | "year" | "quarter" | "month" | "week";
+export type GoalStatus = "active" | "achieved" | "dropped" | "paused";
+export type TaskType =
+  | "revenue"
+  | "career"
+  | "client"
+  | "learning"
+  | "product"
+  | "finance"
+  | "marriage"
+  | "relationship"
+  | "personal"
+  | "admin"
+  | "health_routine";
+export type TaskPriority = "critical" | "high" | "medium" | "low";
+export type TaskStatus =
+  | "backlog"
+  | "planned"
+  | "in_progress"
+  | "done"
+  | "dropped"
+  | "someday";
+export type BucketKind =
+  | "marriage"
+  | "emergency"
+  | "business"
+  | "personal"
+  | "hardware"
+  | "travel"
+  | "apartment"
+  | "other";
+export type TransactionKind = "income" | "expense";
+export type ProjectKind = "client" | "internal" | "experimental" | "learning";
+export type ProjectStatus = "idea" | "active" | "paused" | "done" | "killed";
+export type ClientStatus = "active" | "past" | "lost";
+export type PaymentStatus = "none" | "pending" | "partial" | "paid";
+export type FollowUpStatus = "none" | "asked" | "received" | "declined";
+export type LeadStage =
+  | "new"
+  | "qualified"
+  | "contacted"
+  | "proposal_sent"
+  | "follow_up"
+  | "call"
+  | "negotiation"
+  | "won"
+  | "in_progress"
+  | "delivered"
+  | "paid"
+  | "review_requested"
+  | "referral_requested"
+  | "lost";
+export type LeadEventType =
+  | "discovered"
+  | "outreach"
+  | "proposal_sent"
+  | "follow_up"
+  | "call"
+  | "negotiation"
+  | "won"
+  | "lost"
+  | "delivered"
+  | "invoiced"
+  | "paid"
+  | "review_requested"
+  | "referral_received"
+  | "note";
+export type BrainDumpStatus = "inbox" | "converted" | "archived";
+export type ReviewType = "daily" | "weekly" | "monthly" | "quarterly" | "yearly";
+
+export type MarriageExpenseCategory =
+  | "furniture"
+  | "finishing"
+  | "rent_deposit"
+  | "hall"
+  | "clothing"
+  | "photography"
+  | "transport"
+  | "appliances"
+  | "jewelry"
+  | "misc";
+export type MarriageExpenseStatus = "planned" | "in_progress" | "paid" | "dropped";
+export type ServiceComplexity = "low" | "medium" | "high";
+export type OutreachTemplateKind =
+  | "cold_dm"
+  | "email"
+  | "proposal"
+  | "follow_up"
+  | "referral_request"
+  | "testimonial_request";
+
+export type ProfileRow = {
+  id: string;
+  display_name: string;
+  email: string | null;
+  timezone: string;
+  currency: string;
+  weekly_off_day: string;
+  settings: Json;
+  created_at: string;
+  updated_at: string;
+};
+
+export type GoalRow = {
+  id: string;
+  user_id: string;
+  level: GoalLevel;
+  parent_id: string | null;
+  title: string;
+  description: string | null;
+  period_start: string | null;
+  period_end: string | null;
+  target_value: number | null;
+  unit: string | null;
+  status: GoalStatus;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+};
+
+export type TaskRow = {
+  id: string;
+  user_id: string;
+  title: string;
+  description: string | null;
+  area: string | null;
+  task_type: TaskType;
+  priority: TaskPriority;
+  effort: number | null;
+  duration_min: number | null;
+  scheduled_date: string | null;
+  deadline: string | null;
+  status: TaskStatus;
+  is_top_three: boolean;
+  recurring_rule: string | null;
+  recurring_source_id: string | null;
+  energy_level: number | null;
+  revenue_impact: number | null;
+  strategic_impact: number | null;
+  relationship_impact: number | null;
+  urgency: number | null;
+  goal_id: string | null;
+  project_id: string | null;
+  lead_id: string | null;
+  completed_at: string | null;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+};
+
+export type BucketRow = {
+  id: string;
+  user_id: string;
+  name: string;
+  kind: BucketKind;
+  target_amount: number | null;
+  starting_balance: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type TransactionRow = {
+  id: string;
+  user_id: string;
+  amount: number;
+  kind: TransactionKind;
+  category: string;
+  occurred_on: string;
+  source: string | null;
+  project_id: string | null;
+  lead_id: string | null;
+  bucket_id: string | null;
+  note: string | null;
+  is_recurring: boolean;
+  currency: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type ProjectRow = {
+  id: string;
+  user_id: string;
+  name: string;
+  kind: ProjectKind;
+  brief: string | null;
+  requirements: string | null;
+  status: ProjectStatus;
+  client_id: string | null;
+  budget: number | null;
+  started_on: string | null;
+  deadline: string | null;
+  meta: Json;
+  created_at: string;
+  updated_at: string;
+};
+
+export type ClientRow = {
+  id: string;
+  user_id: string;
+  name: string;
+  company: string | null;
+  contact: string | null;
+  source: string | null;
+  status: ClientStatus;
+  started_on: string | null;
+  deadline: string | null;
+  payment_status: PaymentStatus | null;
+  notes: string | null;
+  next_action: string | null;
+  follow_up_date: string | null;
+  testimonial_status: FollowUpStatus | null;
+  referral_status: FollowUpStatus | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type LeadRow = {
+  id: string;
+  user_id: string;
+  title: string;
+  source: string | null;
+  url: string | null;
+  stage: LeadStage;
+  expected_value: number | null;
+  probability: number | null;
+  client_id: string | null;
+  proposal_amount: number | null;
+  proposal_sent_at: string | null;
+  proposal_notes: string | null;
+  last_contact_at: string | null;
+  next_follow_up_at: string | null;
+  lost_reason: string | null;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type LeadEventRow = {
+  id: string;
+  user_id: string;
+  lead_id: string;
+  event_type: LeadEventType;
+  occurred_at: string;
+  amount: number | null;
+  transaction_id: string | null;
+  note: string | null;
+  created_at: string;
+};
+
+export type MarriageExpenseRow = {
+  id: string;
+  user_id: string;
+  item: string;
+  category: MarriageExpenseCategory | null;
+  estimated_cost: number;
+  actual_cost: number | null;
+  paid_amount: number;
+  deadline: string | null;
+  priority: TaskPriority;
+  status: MarriageExpenseStatus;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type ServiceRow = {
+  id: string;
+  user_id: string;
+  name: string;
+  base_price: number | null;
+  min_price: number | null;
+  estimated_hours: number | null;
+  complexity: ServiceComplexity | null;
+  profitability: number | null;
+  portfolio_example: string | null;
+  delivery_estimate: string | null;
+  maintenance_plan: string | null;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type OutreachTemplateRow = {
+  id: string;
+  user_id: string;
+  name: string;
+  kind: OutreachTemplateKind;
+  body: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type NoteRow = {
+  id: string;
+  user_id: string;
+  title: string;
+  content: string;
+  folder: string;
+  tags: string[];
+  pinned: boolean;
+  archived: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type BrainDumpRow = {
+  id: string;
+  user_id: string;
+  content: string;
+  status: BrainDumpStatus;
+  converted_type: string | null;
+  converted_id: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type ReviewRow = {
+  id: string;
+  user_id: string;
+  review_type: ReviewType;
+  period_start: string;
+  period_end: string | null;
+  answers: Json;
+  scores: Json;
+  created_at: string;
+  updated_at: string;
+};
+
+export type GenericRelationship = {
+  foreignKeyName: string;
+  columns: string[];
+  isOneToOne?: boolean;
+  referencedRelation: string;
+  referencedColumns: string[];
+};
+
+export type Database = {
+  public: {
+    Tables: {
+      profiles: {
+        Row: ProfileRow;
+        Insert: Partial<ProfileRow>;
+        Update: Partial<ProfileRow>;
+        Relationships: GenericRelationship[];
+      };
+      goals: {
+        Row: GoalRow;
+        Insert: Partial<GoalRow> & { user_id: string; level: GoalLevel; title: string };
+        Update: Partial<GoalRow>;
+        Relationships: GenericRelationship[];
+      };
+      tasks: {
+        Row: TaskRow;
+        Insert: Partial<TaskRow> & { user_id: string; title: string; task_type: TaskType };
+        Update: Partial<TaskRow>;
+        Relationships: GenericRelationship[];
+      };
+      buckets: {
+        Row: BucketRow;
+        Insert: Partial<BucketRow> & { user_id: string; name: string; kind: BucketKind };
+        Update: Partial<BucketRow>;
+        Relationships: GenericRelationship[];
+      };
+      transactions: {
+        Row: TransactionRow;
+        Insert: Partial<TransactionRow> & {
+          user_id: string;
+          amount: number;
+          kind: TransactionKind;
+          category: string;
+          occurred_on: string;
+        };
+        Update: Partial<TransactionRow>;
+        Relationships: GenericRelationship[];
+      };
+      projects: {
+        Row: ProjectRow;
+        Insert: Partial<ProjectRow> & { user_id: string; name: string; kind: ProjectKind };
+        Update: Partial<ProjectRow>;
+        Relationships: GenericRelationship[];
+      };
+      clients: {
+        Row: ClientRow;
+        Insert: Partial<ClientRow> & { user_id: string; name: string };
+        Update: Partial<ClientRow>;
+        Relationships: GenericRelationship[];
+      };
+      leads: {
+        Row: LeadRow;
+        Insert: Partial<LeadRow> & { user_id: string; title: string };
+        Update: Partial<LeadRow>;
+        Relationships: GenericRelationship[];
+      };
+      lead_events: {
+        Row: LeadEventRow;
+        Insert: Partial<LeadEventRow> & {
+          user_id: string;
+          lead_id: string;
+          event_type: LeadEventType;
+        };
+        Update: Partial<LeadEventRow>;
+        Relationships: GenericRelationship[];
+      };
+      marriage_expenses: {
+        Row: MarriageExpenseRow;
+        Insert: Partial<MarriageExpenseRow> & { user_id: string; item: string };
+        Update: Partial<MarriageExpenseRow>;
+        Relationships: GenericRelationship[];
+      };
+      services: {
+        Row: ServiceRow;
+        Insert: Partial<ServiceRow> & { user_id: string; name: string };
+        Update: Partial<ServiceRow>;
+        Relationships: GenericRelationship[];
+      };
+      outreach_templates: {
+        Row: OutreachTemplateRow;
+        Insert: Partial<OutreachTemplateRow> & { user_id: string; name: string; kind: OutreachTemplateKind; body: string };
+        Update: Partial<OutreachTemplateRow>;
+        Relationships: GenericRelationship[];
+      };
+      notes: {
+        Row: NoteRow;
+        Insert: Partial<NoteRow> & { user_id: string };
+        Update: Partial<NoteRow>;
+        Relationships: GenericRelationship[];
+      };
+      brain_dumps: {
+        Row: BrainDumpRow;
+        Insert: Partial<BrainDumpRow> & { user_id: string; content: string };
+        Update: Partial<BrainDumpRow>;
+        Relationships: GenericRelationship[];
+      };
+      reviews: {
+        Row: ReviewRow;
+        Insert: Partial<ReviewRow> & {
+          user_id: string;
+          review_type: ReviewType;
+          period_start: string;
+        };
+        Update: Partial<ReviewRow>;
+        Relationships: GenericRelationship[];
+      };
+    };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
+  };
+};
