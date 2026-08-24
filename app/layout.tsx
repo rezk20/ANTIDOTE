@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Geist, Geist_Mono, Cairo } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { LocaleProvider } from "@/components/providers/locale-provider";
+import type { Locale } from "@/lib/i18n/translations";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -24,15 +26,20 @@ export const metadata: Metadata = {
   description: "Personal command center for financial, career, and life execution.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get("life_os_locale")?.value;
+  const initialLocale: Locale = localeCookie === "en" ? "en" : "ar";
+  const isRtl = initialLocale === "ar";
+
   return (
     <html
-      lang="ar"
-      dir="rtl"
+      lang={initialLocale}
+      dir={isRtl ? "rtl" : "ltr"}
       suppressHydrationWarning
       className={`${cairo.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
@@ -43,7 +50,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <LocaleProvider>
+          <LocaleProvider initialLocale={initialLocale}>
             {children}
           </LocaleProvider>
         </ThemeProvider>

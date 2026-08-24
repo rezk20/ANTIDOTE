@@ -26,30 +26,32 @@ export function TaskFilters() {
   }
 
   const typeOptions = [
-    { value: "all", label: isRtl ? "جميع التصنيفات (All Types)" : "All Task Types" },
+    { value: "all", label: isRtl ? "جميع التصنيفات" : "All Task Types" },
     ...TASK_TYPES.map((type) => {
       const arTypeLabels: Record<string, string> = {
-        revenue: "💰 عائد مباشر (Revenue)",
-        product: "🔨 بناء وتطوير (Product)",
-        client: "👥 تسليم عميل (Client)",
-        career: "🚀 مسار مهني (Career)",
-        finance: "💳 مالية (Finance)",
-        marriage: "💍 زواج (Marriage)",
-        learning: "📚 تعلم (Learning)",
-        relationship: "❤️ علاقة وأسرة (Relationship)",
-        personal: "👤 شخصي (Personal)",
-        admin: "⚙️ إداري (Admin)",
-        health_routine: "🏃 روتين صحي (Health)",
+        revenue: "💰 عائد مباشر",
+        product: "🔨 بناء وتطوير",
+        client: "👥 تسليم عميل",
+        career: "🚀 مسار مهني",
+        finance: "💳 مالية",
+        marriage: "💍 زواج",
+        learning: "📚 تعلم",
+        relationship: "❤️ علاقة وأسرة",
+        personal: "👤 شخصي",
+        admin: "⚙️ إداري",
+        health_routine: "🏃 روتين صحي",
       };
       return {
         value: type,
-        label: isRtl ? arTypeLabels[type] || type : type.charAt(0).toUpperCase() + type.slice(1),
+        label: isRtl
+          ? arTypeLabels[type] || type
+          : type.charAt(0).toUpperCase() + type.slice(1),
       };
     }),
   ];
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 shadow-xs">
+    <div className="flex flex-col justify-between gap-4 rounded-2xl border border-zinc-200 bg-white p-3 shadow-xs sm:flex-row sm:items-center dark:border-zinc-800 dark:bg-zinc-900/80">
       {/* Status Pills */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
         {[
@@ -64,11 +66,13 @@ export function TaskFilters() {
           return (
             <button
               key={tab.value}
-              onClick={() => setFilter("status", tab.value === "active" ? null : tab.value)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer ${
+              onClick={() =>
+                setFilter("status", tab.value === "active" ? null : tab.value)
+              }
+              className={`cursor-pointer rounded-xl px-3 py-1.5 text-xs font-bold whitespace-nowrap transition-colors ${
                 isActive
-                  ? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-950 shadow-2xs"
-                  : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  ? "bg-zinc-900 text-white shadow-2xs dark:bg-zinc-100 dark:text-zinc-950"
+                  : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
               }`}
             >
               {tab.label}
@@ -78,17 +82,21 @@ export function TaskFilters() {
       </div>
 
       {/* Type Selector & Top 3 Toggle */}
-      <div className="flex items-center gap-3 self-end sm:self-auto min-w-[200px]">
+      <div className="flex min-w-[200px] items-center gap-3 self-end sm:self-auto">
         {/* Top 3 Focus Filter */}
         <button
-          onClick={() => setFilter("top_three", currentTopThree ? null : "true")}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer shrink-0 ${
+          onClick={() =>
+            setFilter("top_three", currentTopThree ? null : "true")
+          }
+          className={`flex shrink-0 cursor-pointer items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-bold transition-colors ${
             currentTopThree
-              ? "bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-800"
-              : "border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800"
+              ? "border-amber-300 bg-amber-50 text-amber-800 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300"
+              : "border-zinc-200 text-zinc-600 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800"
           }`}
         >
-          <Star className={`h-3.5 w-3.5 ${currentTopThree ? "fill-amber-500 text-amber-500" : ""}`} />
+          <Star
+            className={`h-3.5 w-3.5 ${currentTopThree ? "fill-amber-500 text-amber-500" : ""}`}
+          />
           <span>{t.tasks.topThree}</span>
         </button>
 

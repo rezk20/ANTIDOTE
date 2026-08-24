@@ -1,7 +1,11 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { TRANSLATIONS, type Locale, type TranslationSchema } from "@/lib/i18n/translations";
+import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
+import {
+  TRANSLATIONS,
+  type Locale,
+  type TranslationSchema,
+} from "@/lib/i18n/translations";
 
 interface LocaleContextType {
   locale: Locale;
@@ -12,26 +16,27 @@ interface LocaleContextType {
 
 const LocaleContext = createContext<LocaleContextType | null>(null);
 
-export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
+export function LocaleProvider({
+  children,
+  initialLocale = "ar",
+}: {
+  children: React.ReactNode;
+  initialLocale?: Locale;
+}) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale);
+
+  const setLocale = useCallback((newLocale: Locale) => {
+    setLocaleState(newLocale);
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("life_os_locale") as Locale | null;
-      if (saved === "en" || saved === "ar") return saved;
+      localStorage.setItem("life_os_locale", newLocale);
+      document.cookie = `life_os_locale=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
     }
-    return "ar";
-  });
+  }, []);
 
   useEffect(() => {
     document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
     document.documentElement.lang = locale;
   }, [locale]);
-
-  function setLocale(newLocale: Locale) {
-    setLocaleState(newLocale);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("life_os_locale", newLocale);
-    }
-  }
 
   const currentTranslations = TRANSLATIONS[locale] || TRANSLATIONS.ar;
   const isRtl = locale === "ar";
