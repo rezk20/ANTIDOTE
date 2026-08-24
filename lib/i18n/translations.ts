@@ -186,6 +186,88 @@ export interface TranslationSchema {
     projectDetails: string;
     linkedTasks: string;
   };
+  finances: {
+    title: string;
+    subtitle: string;
+    overviewTab: string;
+    transactionsTab: string;
+    walletsTab: string;
+    marriageTab: string;
+    totalIncome: string;
+    totalExpenses: string;
+    netSavings: string;
+    savingsRate: string;
+    wallets: string;
+    newWallet: string;
+    editWallet: string;
+    walletName: string;
+    walletKind: string;
+    startingBalance: string;
+    targetAmount: string;
+    currentBalance: string;
+    netChange: string;
+    transactions: string;
+    newTransaction: string;
+    editTransaction: string;
+    amount: string;
+    transactionKind: string;
+    income: string;
+    expense: string;
+    category: string;
+    date: string;
+    source: string;
+    note: string;
+    wallet: string;
+    selectWallet: string;
+    noWallet: string;
+    linkedProject: string;
+    linkedLead: string;
+    isRecurring: string;
+    month: string;
+    allCategories: string;
+    allKinds: string;
+    noTransactionsTitle: string;
+    noTransactionsDesc: string;
+    noWalletsTitle: string;
+    noWalletsDesc: string;
+    transactionDetails: string;
+    walletDetails: string;
+    incomeTargets: string;
+    minIncome: string;
+    comfortIncome: string;
+    stretchIncome: string;
+    marriageGoal: string;
+    marriageProgress: string;
+    targetGap: string;
+    requiredMonthly: string;
+    requiredWeekly: string;
+    requiredDaily: string;
+    monthsRemaining: string;
+    goalCompleted: string;
+  };
+  marriageExpenses: {
+    title: string;
+    subtitle: string;
+    newExpense: string;
+    editExpense: string;
+    item: string;
+    category: string;
+    estimatedCost: string;
+    actualCost: string;
+    paidAmount: string;
+    remaining: string;
+    deadline: string;
+    priority: string;
+    status: string;
+    notes: string;
+    totalBudget: string;
+    totalPaid: string;
+    recordPayment: string;
+    paymentAmount: string;
+    noExpensesTitle: string;
+    noExpensesDesc: string;
+    expenseDetails: string;
+  };
   capture: {
     title: string;
     placeholder: string;
@@ -422,6 +504,88 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       projectDetails: "Project Architecture & Scope",
       linkedTasks: "Associated Execution Tasks",
     },
+    finances: {
+      title: "Financial Engine & Wallets",
+      subtitle: "Track income streams, expenses, computed savings buckets, and marriage runway.",
+      overviewTab: "Overview & Analytics",
+      transactionsTab: "Transactions Ledger",
+      walletsTab: "Savings Buckets",
+      marriageTab: "Marriage Mission Fund",
+      totalIncome: "Total Income",
+      totalExpenses: "Total Expenses",
+      netSavings: "Net Savings",
+      savingsRate: "Savings Rate",
+      wallets: "Savings Buckets & Wallets",
+      newWallet: "New Bucket",
+      editWallet: "Edit Bucket",
+      walletName: "Bucket Name",
+      walletKind: "Bucket Kind",
+      startingBalance: "Starting Balance",
+      targetAmount: "Target Amount",
+      currentBalance: "Current Balance",
+      netChange: "Net Change",
+      transactions: "Transactions Ledger",
+      newTransaction: "New Transaction",
+      editTransaction: "Edit Transaction",
+      amount: "Amount",
+      transactionKind: "Transaction Type",
+      income: "Income (+)",
+      expense: "Expense (-)",
+      category: "Category",
+      date: "Date",
+      source: "Source / Payer / Method",
+      note: "Notes / Description",
+      wallet: "Savings Bucket",
+      selectWallet: "Select bucket...",
+      noWallet: "General Cash (No Bucket)",
+      linkedProject: "Linked Project",
+      linkedLead: "Linked Deal / Lead",
+      isRecurring: "Recurring Monthly",
+      month: "Month",
+      allCategories: "All Categories",
+      allKinds: "All Types",
+      noTransactionsTitle: "No Transactions Found",
+      noTransactionsDesc: "Log your income and expenses to track cashflow and savings.",
+      noWalletsTitle: "No Buckets Created",
+      noWalletsDesc: "Create savings buckets for Marriage, Emergency, Business, and Personal reserves.",
+      transactionDetails: "Transaction Dossier",
+      walletDetails: "Bucket Dossier & Cashflow",
+      incomeTargets: "Monthly Income Milestones",
+      minIncome: "Minimum Survival",
+      comfortIncome: "Comfort Living",
+      stretchIncome: "Stretch Target",
+      marriageGoal: "Marriage Runway (250,000 EGP)",
+      marriageProgress: "Marriage Fund Progress",
+      targetGap: "Remaining to Target",
+      requiredMonthly: "Required Monthly Savings",
+      requiredWeekly: "Required Weekly Savings",
+      requiredDaily: "Required Daily Savings",
+      monthsRemaining: "Months Remaining",
+      goalCompleted: "Target Fully Achieved! 🎉",
+    },
+    marriageExpenses: {
+      title: "Wedding Checklist & Budget Planner",
+      subtitle: "Plan and track costs for furniture, finishing, appliances, hall, and jewelry.",
+      newExpense: "New Expense Item",
+      editExpense: "Edit Item",
+      item: "Item Name",
+      category: "Category",
+      estimatedCost: "Estimated Cost",
+      actualCost: "Actual Cost",
+      paidAmount: "Paid Amount",
+      remaining: "Remaining to Pay",
+      deadline: "Target Deadline",
+      priority: "Priority",
+      status: "Status",
+      notes: "Specifications & Notes",
+      totalBudget: "Total Wedding Budget",
+      totalPaid: "Total Paid So Far",
+      recordPayment: "Record Payment",
+      paymentAmount: "Payment Amount",
+      noExpensesTitle: "No Wedding Items Logged",
+      noExpensesDesc: "Add items for furniture, finishing, rent deposit, hall, and jewelry.",
+      expenseDetails: "Wedding Expense Item Dossier",
+    },
     capture: {
       title: "Quick Capture",
       placeholder: "What's on your mind? Capture an idea, task, or thought instantly...",
@@ -655,6 +819,88 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       noProjectsDesc: "ابدأ مشروعاً جديداً أو حول فرصة فريلانس رابحة إلى مشروع تنفيذي.",
       projectDetails: "المواصفات والمتطلبات التقنية للمشروع",
       linkedTasks: "المهام التنفيذية المرتبطة",
+    },
+    finances: {
+      title: "محرك المالية والمحافظ (Financial Engine)",
+      subtitle: "تتبع مسارات الدخل، المصروفات، حساب أرصدة محافظ الادخار، ومسار الاستعداد المالي للزواج.",
+      overviewTab: "نظرة عامة والتحليلات",
+      transactionsTab: "سجل المعاملات المالية",
+      walletsTab: "محافظ الادخار (Buckets)",
+      marriageTab: "مستهدف الزواج (Marriage Fund)",
+      totalIncome: "إجمالي الدخل",
+      totalExpenses: "إجمالي المصروفات",
+      netSavings: "صافي الادخار",
+      savingsRate: "معدل الادخار (Savings Rate)",
+      wallets: "محافظ الادخار والسيولة (Buckets)",
+      newWallet: "محفظة جديدة (New Bucket)",
+      editWallet: "تعديل المحفظة",
+      walletName: "اسم المحفظة",
+      walletKind: "نوع المحفظة",
+      startingBalance: "الرصيد الابتدائي",
+      targetAmount: "المبلغ المستهدف",
+      currentBalance: "الرصيد الفعلي الحالي",
+      netChange: "صافي الحركة المالية",
+      transactions: "سجل المعاملات",
+      newTransaction: "معاملة جديدة (New Transaction)",
+      editTransaction: "تعديل المعاملة",
+      amount: "المبلغ (EGP)",
+      transactionKind: "نوع المعاملة",
+      income: "دخل وارد (+)",
+      expense: "مصروف خارج (-)",
+      category: "التصنيف (Category)",
+      date: "التاريخ",
+      source: "المصدر / جهة الدفع",
+      note: "ملاحظات وتفاصيل",
+      wallet: "المحفظة المرتبطة (Bucket)",
+      selectWallet: "اختر المحفظة...",
+      noWallet: "سيولة عامة (بدون محفظة)",
+      linkedProject: "المشروع المرتبط",
+      linkedLead: "الصفقة المرتبطة",
+      isRecurring: "مصروف / دخل شهري متكرر",
+      month: "الشهر",
+      allCategories: "كافة التصنيفات",
+      allKinds: "كافة الأنواع (دخل/مصروف)",
+      noTransactionsTitle: "لا توجد معاملات مسجلة",
+      noTransactionsDesc: "سجل حركات الدخل والمصروفات لتتبع تدفقاتك المالية بدقة.",
+      noWalletsTitle: "لا توجد محافظ ادخار",
+      noWalletsDesc: "أنشئ محافظ ادخار للزواج والطوارئ والبيزنس والاحتياطيات الشخصية.",
+      transactionDetails: "ملف تفاصيل المعاملة المالية",
+      walletDetails: "ملف المحفظة والتدفق المالي",
+      incomeTargets: "مستهدفات الدخل الشهري (Income Targets)",
+      minIncome: "الحد الأدنى للأمان (15k)",
+      comfortIncome: "المستوى المريح (30k)",
+      stretchIncome: "المستهدف الطموح (50k)",
+      marriageGoal: "مسار هدف الزواج (250,000 ج.م)",
+      marriageProgress: "نسبة إنجاز هدف الزواج",
+      targetGap: "المتبقي للوصول للمستهدف",
+      requiredMonthly: "معدل الادخار الشهري المطلوب",
+      requiredWeekly: "معدل الادخار الأسبوعي المطلوب",
+      requiredDaily: "معدل الادخار اليومي المطلوب",
+      monthsRemaining: "الشهور المتبقية للموعد",
+      goalCompleted: "تم تحقيق المستهدف بنجاح! 🎉",
+    },
+    marriageExpenses: {
+      title: "مخطط بنود وتكاليف الزواج (Wedding Planner)",
+      subtitle: "تخطيط وتتبع تكاليف الأثاث، التشطيب، القاعة، الأجهزة، والذهب.",
+      newExpense: "إضافة بند جديد",
+      editExpense: "تعديل البند",
+      item: "اسم البند / الغرض",
+      category: "التصنيف",
+      estimatedCost: "التكلفة التقديرية",
+      actualCost: "التكلفة الفعلية",
+      paidAmount: "المبلغ المدفوع",
+      remaining: "المتبقي للسداد",
+      deadline: "تاريخ الاستحقاق المستهدف",
+      priority: "الأولوية",
+      status: "الحالة",
+      notes: "المواصفات والملاحظات",
+      totalBudget: "إجمالي الميزانية التقديرية",
+      totalPaid: "إجمالي المدفوع حتى الآن",
+      recordPayment: "تسجيل دفعة",
+      paymentAmount: "قيمة الدفعة (EGP)",
+      noExpensesTitle: "لم تتم إضافة بنود بعد",
+      noExpensesDesc: "أضف بنود الأثاث والتشطيب والشقة والذهب لتتبع التكاليف.",
+      expenseDetails: "ملف تفاصيل بند الزواج",
     },
     capture: {
       title: "تسجيل سريع (Quick Capture)",

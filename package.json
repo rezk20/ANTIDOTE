@@ -1,6 +1,6 @@
 {
-  "name": "Life_OS",
-  "version": "0.1.0",
+  "name": "ANTIDOTE",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

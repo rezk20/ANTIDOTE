@@ -5,3 +5,4 @@ export * from "./tasks";
 export * from "./leads";
 export * from "./clients";
 export * from "./projects";
+export * from "./finance";
