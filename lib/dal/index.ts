@@ -6,3 +6,6 @@ export * from "./leads";
 export * from "./clients";
 export * from "./projects";
 export * from "./finance";
+export * from "./day-plan";
+export * from "./notes";
+export * from "./reviews";

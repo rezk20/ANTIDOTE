@@ -68,7 +68,7 @@ export function TaskItem({
       className={cn(
         "group flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 p-4 rounded-2xl border transition-all",
         isDone
-          ? "border-zinc-200 dark:border-zinc-850 bg-zinc-50/50 dark:bg-zinc-900/30 opacity-70"
+          ? "border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/30 opacity-70"
           : task.is_top_three
             ? "border-amber-300 dark:border-amber-900/80 bg-amber-50/20 dark:bg-amber-950/10 shadow-xs"
             : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/90 shadow-xs hover:border-zinc-300 dark:hover:border-zinc-700",

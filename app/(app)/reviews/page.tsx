@@ -1,16 +1,33 @@
-import { Clock } from "lucide-react";
-import { PhasePlaceholder } from "@/components/ui/phase-placeholder";
+import { getReviews, getCurrentWeekReview, getWeeklyAggregatedMetrics, getDailyReviewsHistory } from "@/lib/dal/reviews";
+import { ReviewsView } from "@/components/reviews/reviews-view";
 
 export const dynamic = "force-dynamic";
 
-export default function ReviewsPage() {
+export default async function ReviewsPage() {
+  const today = new Date();
+  const start = new Date(today);
+  start.setDate(today.getDate() - 6);
+
+  const periodStart = start.toISOString().slice(0, 10);
+  const periodEnd = today.toISOString().slice(0, 10);
+
+  const [reviews, currentWeekReview, metrics, dailyReflections] = await Promise.all([
+    getReviews("weekly"),
+    getCurrentWeekReview(periodStart),
+    getWeeklyAggregatedMetrics(periodStart, periodEnd),
+    getDailyReviewsHistory(),
+  ]);
+
   return (
-    <PhasePlaceholder
-      title="Weekly & Monthly Review Engine"
-      description="Reflect on weekly outcomes, multi-dimensional progress scores, and planning for the upcoming week."
-      phase="8"
-      icon={<Clock className="h-6 w-6 text-teal-500" />}
-      scheduledText="The Reviews framework and Weekly Review flow will be delivered in Phase 8 (MVP Checkpoint)."
-    />
+    <div className="max-w-6xl mx-auto space-y-6 pb-12">
+      <ReviewsView
+        reviews={reviews}
+        currentWeekReview={currentWeekReview}
+        metrics={metrics}
+        periodStart={periodStart}
+        periodEnd={periodEnd}
+        dailyReflections={dailyReflections}
+      />
+    </div>
   );
 }

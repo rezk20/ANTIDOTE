@@ -1,12 +1,10 @@
-import { verifySession, getProfile, getHomeSummary } from "@/lib/dal/auth";
-import { HomeView } from "@/components/home/home-view";
+import { getDashboardSummary } from "@/lib/dal/day-plan";
+import { DashboardView } from "@/components/dashboard/dashboard-view";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  await verifySession();
-  const profile = await getProfile();
-  const summary = await getHomeSummary();
+  const data = await getDashboardSummary();
 
-  return <HomeView profile={profile} summary={summary} />;
+  return <DashboardView data={data} />;
 }

@@ -327,6 +327,36 @@ export type BrainDumpRow = {
   updated_at: string;
 };
 
+export type DayPlanStatus = "draft" | "active" | "closed";
+
+export type DayPlanRow = {
+  id: string;
+  user_id: string;
+  plan_date: string;
+  available_hours: number;
+  energy: number;
+  focus_question_answer: string | null;
+  money_action_task_id: string | null;
+  personal_action_task_id: string | null;
+  relationship_action_task_id: string | null;
+  shutdown_time: string | null;
+  status: DayPlanStatus;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type WeekPlanRow = {
+  id: string;
+  user_id: string;
+  week_start: string;
+  outcomes: string[];
+  allocation: Json;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 export type ReviewRow = {
   id: string;
   user_id: string;
@@ -442,6 +472,18 @@ export type Database = {
         Row: BrainDumpRow;
         Insert: Partial<BrainDumpRow> & { user_id: string; content: string };
         Update: Partial<BrainDumpRow>;
+        Relationships: GenericRelationship[];
+      };
+      day_plans: {
+        Row: DayPlanRow;
+        Insert: Partial<DayPlanRow> & { user_id: string; plan_date: string };
+        Update: Partial<DayPlanRow>;
+        Relationships: GenericRelationship[];
+      };
+      week_plans: {
+        Row: WeekPlanRow;
+        Insert: Partial<WeekPlanRow> & { user_id: string; week_start: string };
+        Update: Partial<WeekPlanRow>;
         Relationships: GenericRelationship[];
       };
       reviews: {

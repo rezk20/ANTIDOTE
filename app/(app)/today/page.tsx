@@ -1,16 +1,21 @@
-import { Sun } from "lucide-react";
-import { PhasePlaceholder } from "@/components/ui/phase-placeholder";
+import { getTodayMissionData } from "@/lib/dal/day-plan";
+import { getGoals } from "@/lib/dal/goals";
+import { getProjects } from "@/lib/dal/projects";
+import { TodayView } from "@/components/today/today-view";
 
 export const dynamic = "force-dynamic";
 
-export default function TodayPage() {
-  return (
-    <PhasePlaceholder
-      title="Today's Mission & Execution"
-      description="Daily execution command: Top 3 priority actions, work block capacity guards, money/personal/relationship actions, and shutdown workflow."
-      phase="6"
-      icon={<Sun className="h-6 w-6 text-amber-500" />}
-      scheduledText="The Today engine will be implemented in Phase 6, synthesizing real data from Tasks, Leads, and Finance."
-    />
-  );
+export default async function TodayPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ date?: string }>;
+}) {
+  const { date } = await searchParams;
+  const [data, goals, projects] = await Promise.all([
+    getTodayMissionData(date),
+    getGoals(),
+    getProjects(),
+  ]);
+
+  return <TodayView data={data} goals={goals} projects={projects} />;
 }

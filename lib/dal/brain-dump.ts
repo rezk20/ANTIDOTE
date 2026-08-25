@@ -9,18 +9,26 @@ import type { BrainDumpRow } from "@/lib/supabase/types";
  * Memoized per render pass with cache().
  */
 export const getBrainDumps = cache(
-  async (status: "inbox" | "converted" | "archived" = "inbox"): Promise<
-    BrainDumpRow[]
-  > => {
+  async (
+    status?: "inbox" | "converted" | "archived" | "all",
+  ): Promise<BrainDumpRow[]> => {
     const session = await verifySession();
     const supabase = await createSupabaseServerClient();
 
-    const { data, error } = await supabase
+    let query = supabase
       .from("brain_dumps")
       .select("*")
-      .eq("user_id", session.userId)
-      .eq("status", status)
-      .order("created_at", { ascending: false });
+      .eq("user_id", session.userId);
+
+    if (status && status !== "all") {
+      query = query.eq("status", status);
+    } else if (!status) {
+      query = query.eq("status", "inbox");
+    }
+
+    const { data, error } = await query.order("created_at", {
+      ascending: false,
+    });
 
     if (error) {
       console.error("Failed to fetch brain dumps in DAL:", error.message);

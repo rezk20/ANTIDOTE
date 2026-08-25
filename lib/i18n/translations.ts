@@ -269,6 +269,89 @@ export interface TranslationSchema {
     noExpensesDesc: string;
     expenseDetails: string;
   };
+  todayPlan: {
+    title: string;
+    subtitle: string;
+    energyLevel: string;
+    energyLow: string;
+    energyHigh: string;
+    availableHours: string;
+    capacityGuard: string;
+    capacityOverload: string;
+    capacityOptimal: string;
+    hoursUnit: string;
+    fridayRule: string;
+    fridayRuleDesc: string;
+    focusQuestion: string;
+    focusQuestionPlaceholder: string;
+    topThreeTitle: string;
+    topThreeSubtitle: string;
+    topThreeEmpty: string;
+    actionTriad: string;
+    actionTriadSubtitle: string;
+    moneyAction: string;
+    moneyActionDesc: string;
+    personalAction: string;
+    personalActionDesc: string;
+    relationshipAction: string;
+    relationshipActionDesc: string;
+    selectTask: string;
+    noTaskAssigned: string;
+    scheduledTasks: string;
+    overdueTasks: string;
+    todayTasks: string;
+    completeTask: string;
+    incompleteTask: string;
+    shutdownDay: string;
+    shutdownTitle: string;
+    shutdownSubtitle: string;
+    shutdownConfirm: string;
+    dayClosed: string;
+    dayClosedDesc: string;
+    reopenDay: string;
+    reopeningDay: string;
+    tasksCompletedToday: string;
+    rolloverTasks: string;
+    tomorrowFocus: string;
+    tomorrowFocusPlaceholder: string;
+    shutdownNotes: string;
+    shutdownNotesPlaceholder: string;
+    generatePlan: string;
+    planSaved: string;
+  };
+  dashboard: {
+    greetingMorning: string;
+    greetingAfternoon: string;
+    greetingEvening: string;
+    commandSubtitle: string;
+    vitalFocus: string;
+    topThreeCardTitle: string;
+    topThreeCardSubtitle: string;
+    moneyCardTitle: string;
+    moneyCardSubtitle: string;
+    revenueCardTitle: string;
+    revenueCardSubtitle: string;
+    followupCardTitle: string;
+    followupCardSubtitle: string;
+    quickDumpCardTitle: string;
+    quickDumpCardSubtitle: string;
+    quickDumpPlaceholder: string;
+    quickDumpSubmit: string;
+    quickDumpSuccess: string;
+    noRevenueTask: string;
+    noFollowups: string;
+    noTopThree: string;
+    allDoneCelebration: string;
+    shutdownCountdown: string;
+    viewTodayPlan: string;
+    viewFinances: string;
+    viewTasks: string;
+    viewPipeline: string;
+    marriageTarget: string;
+    monthlyTarget: string;
+    hoursRemaining: string;
+    contactClient: string;
+  };
   capture: {
     title: string;
     placeholder: string;
@@ -278,6 +361,166 @@ export interface TranslationSchema {
     inboxSubtitle: string;
     noDumpsTitle: string;
     noDumpsDesc: string;
+  };
+  notesPage: {
+    title: string;
+    subtitle: string;
+    newNote: string;
+    editNote: string;
+    noteTitle: string;
+    noteTitlePlaceholder: string;
+    folder: string;
+    selectFolder: string;
+    allFolders: string;
+    tags: string;
+    tagsPlaceholder: string;
+    content: string;
+    contentPlaceholder: string;
+    pinnedNotes: string;
+    allNotes: string;
+    archivedNotes: string;
+    pinNote: string;
+    unpinNote: string;
+    archiveNote: string;
+    unarchiveNote: string;
+    deleteNote: string;
+    previewTab: string;
+    editTab: string;
+    readingTime: string;
+    wordCount: string;
+    noNotesTitle: string;
+    noNotesDesc: string;
+    noteDetails: string;
+    previousPage: string;
+    nextPage: string;
+    pageOf: string;
+    showingNotes: string;
+    folders: {
+      inbox: string;
+      businessStrategy: string;
+      freelanceClients: string;
+      discordBots: string;
+      productsSaas: string;
+      marriageHome: string;
+      financesInvestments: string;
+      learningGrowth: string;
+      habitsHealth: string;
+      systemsWorkflows: string;
+      decisionsLog: string;
+      templates: string;
+      archive: string;
+    };
+  };
+  conversions: {
+    convertTitle: string;
+    convertSubtitle: string;
+    convertToTask: string;
+    convertToNote: string;
+    convertToGoal: string;
+    convertToLead: string;
+    taskTitle: string;
+    taskArea: string;
+    taskPriority: string;
+    noteTitle: string;
+    noteFolder: string;
+    goalTitle: string;
+    goalCategory: string;
+    goalTimeframe: string;
+    leadTitle: string;
+    leadStage: string;
+    leadValue: string;
+    convertedBadge: string;
+    convertSuccess: string;
+    convertedTo: string;
+    tabs: {
+      inbox: string;
+      converted: string;
+      all: string;
+    };
+  };
+  reviewsPage: {
+    title: string;
+    subtitle: string;
+    weeklyTab: string;
+    dailyTab: string;
+    startWeeklyReview: string;
+    editReview: string;
+    resumeWeeklyReview: string;
+    reviewHistory: string;
+    noReviewsTitle: string;
+    noReviewsDesc: string;
+    dailyReflectionsTitle: string;
+    noDailyReflections: string;
+    weekOf: string;
+    overallBalance: string;
+    reviewDossier: string;
+    step1Title: string;
+    step1Subtitle: string;
+    step2Title: string;
+    step2Subtitle: string;
+    step3Title: string;
+    step3Subtitle: string;
+    step4Title: string;
+    step4Subtitle: string;
+    nextStep: string;
+    prevStep: string;
+    completeReview: string;
+    saveDraft: string;
+    savingReview: string;
+    reviewSavedSuccess: string;
+    autoMetrics: {
+      incomeThisWeek: string;
+      expensesThisWeek: string;
+      netSavings: string;
+      tasksDone: string;
+      highPriorityTasks: string;
+      proposalsSent: string;
+      daysPlanned: string;
+    };
+    dimensions: {
+      revenue: string;
+      revenueDesc: string;
+      career: string;
+      careerDesc: string;
+      financial: string;
+      financialDesc: string;
+      relationship: string;
+      relationshipDesc: string;
+      execution: string;
+      executionDesc: string;
+      routine: string;
+      routineDesc: string;
+    };
+    questions: {
+      q_wins: string;
+      q_wins_ph: string;
+      q_misses: string;
+      q_misses_ph: string;
+      q_revenue_reflection: string;
+      q_revenue_reflection_ph: string;
+      q_time_drain: string;
+      q_time_drain_ph: string;
+      q_client_health: string;
+      q_client_health_ph: string;
+      q_learning_growth: string;
+      q_learning_growth_ph: string;
+      q_relationship_check: string;
+      q_relationship_check_ph: string;
+      q_habits_energy: string;
+      q_habits_energy_ph: string;
+      q_start: string;
+      q_start_ph: string;
+      q_stop: string;
+      q_stop_ph: string;
+      q_continue: string;
+      q_continue_ph: string;
+      q_next_top_three: string;
+      q_next_top_three_ph: string;
+      q_system_tweak: string;
+      q_system_tweak_ph: string;
+    };
+    convertTopThree: string;
+    topThreeConvertedSuccess: string;
   };
   settings: {
     title: string;
@@ -605,6 +848,89 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         "Add items for furniture, finishing, rent deposit, hall, and jewelry.",
       expenseDetails: "Wedding Expense Item Dossier",
     },
+    todayPlan: {
+      title: "Today's Mission & Execution",
+      subtitle: "Align your daily capacity, execute your Top 3, and protect your revenue and personal priorities.",
+      energyLevel: "Energy Level",
+      energyLow: "Low Energy (Lighter load advised)",
+      energyHigh: "High Energy (Prime execution state)",
+      availableHours: "Available Work Hours",
+      capacityGuard: "Capacity Guard",
+      capacityOverload: "Overloaded! Planned tasks exceed available hours.",
+      capacityOptimal: "Optimal load aligned with available capacity.",
+      hoursUnit: "hours",
+      fridayRule: "Friday Rule Active",
+      fridayRuleDesc: "Lighter sprint load applied. Focus on reviews, admin, and weekly closeout.",
+      focusQuestion: "The One Thing That Makes Today a Win",
+      focusQuestionPlaceholder: "If I only accomplish one major milestone today, it must be...",
+      topThreeTitle: "Top 3 Daily Focus",
+      topThreeSubtitle: "The three highest-impact tasks to execute before anything else today.",
+      topThreeEmpty: "No Top 3 tasks selected yet. Pin critical tasks below.",
+      actionTriad: "Daily Action Triad",
+      actionTriadSubtitle: "Guaranteed balanced daily progress across money, personal, and relationship.",
+      moneyAction: "Revenue / Money Action",
+      moneyActionDesc: "A direct income-generating step (proposal, client delivery, or sales outreach).",
+      personalAction: "Personal / Health Action",
+      personalActionDesc: "A key personal habit, workout, or self-care priority.",
+      relationshipAction: "Relationship / Marriage Action",
+      relationshipActionDesc: "A meaningful touchpoint, conversation, or wedding planning step.",
+      selectTask: "Assign a task...",
+      noTaskAssigned: "No task assigned",
+      scheduledTasks: "Scheduled for Today",
+      overdueTasks: "Overdue & Carryover",
+      todayTasks: "Today's Candidate Tasks",
+      completeTask: "Mark Complete",
+      incompleteTask: "Revert to Incomplete",
+      shutdownDay: "Shutdown & Close Day",
+      shutdownTitle: "Evening Shutdown & Daily Review",
+      shutdownSubtitle: "Close out today's execution cleanly and set up tomorrow's starting point.",
+      shutdownConfirm: "Confirm Day Shutdown",
+      dayClosed: "Day Successfully Closed",
+      dayClosedDesc: "Great work today. Rest up and start fresh tomorrow.",
+      reopenDay: "Reopen Today's Plan",
+      reopeningDay: "Reopening...",
+      tasksCompletedToday: "Tasks Completed Today",
+      rolloverTasks: "Rollover Tasks for Tomorrow",
+      tomorrowFocus: "Tomorrow's Starting Point",
+      tomorrowFocusPlaceholder: "What is the very first task to tackle tomorrow morning?",
+      shutdownNotes: "Shutdown Reflection & Notes",
+      shutdownNotesPlaceholder: "Any quick thoughts, wins, or lessons from today...",
+      generatePlan: "Generate Day Plan",
+      planSaved: "Day plan updated successfully.",
+    },
+    dashboard: {
+      greetingMorning: "Good morning",
+      greetingAfternoon: "Good afternoon",
+      greetingEvening: "Good evening",
+      commandSubtitle: "Here is your 5-card daily execution command briefing.",
+      vitalFocus: "Today's Vital Focus",
+      topThreeCardTitle: "Top 3 Execution Priorities",
+      topThreeCardSubtitle: "Complete these three critical tasks to win today.",
+      moneyCardTitle: "Marriage Fund & Money",
+      moneyCardSubtitle: "Progress toward your 250,000 EGP marriage mission.",
+      revenueCardTitle: "Today's Revenue Action",
+      revenueCardSubtitle: "Direct cashflow generation milestone.",
+      followupCardTitle: "Next Client Follow-Up",
+      followupCardSubtitle: "Upcoming pipeline outreach touchpoint.",
+      quickDumpCardTitle: "Quick Brain Dump",
+      quickDumpCardSubtitle: "Capture raw thoughts instantly without leaving your dashboard.",
+      quickDumpPlaceholder: "Type an idea, task, or thought and press Enter...",
+      quickDumpSubmit: "Capture",
+      quickDumpSuccess: "Captured to Brain Dump inbox!",
+      noRevenueTask: "No active revenue action set for today.",
+      noFollowups: "All client follow-ups are up to date!",
+      noTopThree: "No Top 3 tasks selected for today.",
+      allDoneCelebration: "🎉 Outstanding! All Top 3 priorities are completed.",
+      shutdownCountdown: "Shutdown target",
+      viewTodayPlan: "Open Today's Plan",
+      viewFinances: "View Finance Engine",
+      viewTasks: "View All Tasks",
+      viewPipeline: "View Sales Pipeline",
+      marriageTarget: "Marriage Mission",
+      monthlyTarget: "Monthly Target",
+      hoursRemaining: "hours left",
+      contactClient: "Contact Client",
+    },
     capture: {
       title: "Quick Capture",
       placeholder:
@@ -617,6 +943,166 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       noDumpsTitle: "Inbox is Clean",
       noDumpsDesc:
         "Press B or use the quick capture bar to offload ideas and tasks immediately.",
+    },
+    notesPage: {
+      title: "Knowledge & Notes Engine",
+      subtitle: "Markdown notes, 13 structured folders, tags, and seamless knowledge organization.",
+      newNote: "Create Note",
+      editNote: "Edit Note",
+      noteTitle: "Note Title",
+      noteTitlePlaceholder: "e.g., Discord Bot Architecture & Pricing Model",
+      folder: "Folder",
+      selectFolder: "Select a folder...",
+      allFolders: "All Folders",
+      tags: "Tags",
+      tagsPlaceholder: "Type a tag and press Enter...",
+      content: "Markdown Content",
+      contentPlaceholder: "Write your note in Markdown. Supports # Headings, - Lists, - [ ] Checklists, ```code, > Quotes...",
+      pinnedNotes: "Pinned Notes",
+      allNotes: "All Active Notes",
+      archivedNotes: "Archived Notes",
+      pinNote: "Pin to Top",
+      unpinNote: "Unpin Note",
+      archiveNote: "Archive Note",
+      unarchiveNote: "Restore from Archive",
+      deleteNote: "Delete Note",
+      previewTab: "Markdown Preview",
+      editTab: "Edit Markdown",
+      readingTime: "min read",
+      wordCount: "words",
+      noNotesTitle: "No Notes in this Folder",
+      noNotesDesc: "Create a new note or convert an idea from your Brain Dump inbox.",
+      noteDetails: "Note Document Dossier",
+      previousPage: "Previous",
+      nextPage: "Next",
+      pageOf: "Page",
+      showingNotes: "Showing",
+      folders: {
+        inbox: "Inbox",
+        businessStrategy: "Business & Strategy",
+        freelanceClients: "Freelance & Clients",
+        discordBots: "Discord Bots & Services",
+        productsSaas: "Products & SaaS Lab",
+        marriageHome: "Marriage & Home",
+        financesInvestments: "Finances & Investments",
+        learningGrowth: "Learning & Growth",
+        habitsHealth: "Health & Habits",
+        systemsWorkflows: "Systems & Workflows",
+        decisionsLog: "Decisions Log",
+        templates: "Templates & Playbooks",
+        archive: "Archive",
+      },
+    },
+    conversions: {
+      convertTitle: "Convert Brain Dump",
+      convertSubtitle: "Transform this raw capture into an actionable entity.",
+      convertToTask: "Convert to Task",
+      convertToNote: "Convert to Note",
+      convertToGoal: "Convert to Goal",
+      convertToLead: "Convert to Client Lead",
+      taskTitle: "Task Title",
+      taskArea: "Life Area",
+      taskPriority: "Priority Tier",
+      noteTitle: "Note Title",
+      noteFolder: "Target Folder",
+      goalTitle: "Goal Title",
+      goalCategory: "Goal Category",
+      goalTimeframe: "Timeframe",
+      leadTitle: "Lead / Opportunity Name",
+      leadStage: "Pipeline Stage",
+      leadValue: "Estimated Deal Value (EGP)",
+      convertedBadge: "Converted",
+      convertSuccess: "Successfully converted and archived raw capture.",
+      convertedTo: "Converted into",
+      tabs: {
+        inbox: "Inbox (Unprocessed)",
+        converted: "Converted History",
+        all: "All Captures",
+      },
+    },
+    reviewsPage: {
+      title: "Reviews & Reflection Engine",
+      subtitle: "Weekly calibration, multi-dimensional progress scoring, and strategic blueprinting.",
+      weeklyTab: "Weekly Review",
+      dailyTab: "Daily Reflections",
+      startWeeklyReview: "Start Friday Weekly Review",
+      editReview: "Edit Weekly Review",
+      resumeWeeklyReview: "Resume Review",
+      reviewHistory: "Past Reviews Timeline",
+      noReviewsTitle: "No Completed Reviews Yet",
+      noReviewsDesc: "Complete your first Friday review to calibrate progress and establish historical momentum.",
+      dailyReflectionsTitle: "Daily Reflections History",
+      noDailyReflections: "No daily shutdown reflections found yet. Complete your daily shutdown in the Today Plan.",
+      weekOf: "Week of",
+      overallBalance: "Overall Balance",
+      reviewDossier: "Review Dossier",
+      step1Title: "1. Reality & Metrics",
+      step1Subtitle: "Review auto-aggregated financial and execution numbers and weekly wins/misses.",
+      step2Title: "2. Dimension Scoring",
+      step2Subtitle: "Rate progress across the 6 core pillars of life and business on a 1–5 scale.",
+      step3Title: "3. Strategy & Reflection",
+      step3Subtitle: "Examine client pipeline, learning insights, relationship harmony, and physical habits.",
+      step4Title: "4. Next Week Blueprint",
+      step4Subtitle: "Establish START/STOP/CONTINUE adjustments and select your Top 3 Non-Negotiable Priorities.",
+      nextStep: "Next Step",
+      prevStep: "Previous Step",
+      completeReview: "Complete & Finalize Review",
+      saveDraft: "Save Draft",
+      savingReview: "Saving Review...",
+      reviewSavedSuccess: "Weekly Review saved and archived successfully!",
+      autoMetrics: {
+        incomeThisWeek: "Income This Week",
+        expensesThisWeek: "Expenses This Week",
+        netSavings: "Net Savings",
+        tasksDone: "Tasks Completed",
+        highPriorityTasks: "High/Critical Tasks",
+        proposalsSent: "Proposals & Deals",
+        daysPlanned: "Days Planned",
+      },
+      dimensions: {
+        revenue: "Revenue & Cash",
+        revenueDesc: "Income generation, deal closing, and cash flow velocity",
+        career: "Career & Delivery",
+        careerDesc: "Client satisfaction, code delivery, and technical quality",
+        financial: "Financial Discipline",
+        financialDesc: "Controlling expenses, bucket savings, and investment consistency",
+        relationship: "Relationship & Home",
+        relationshipDesc: "Quality time with partner, wedding prep, and shared harmony",
+        execution: "Execution & Deep Work",
+        executionDesc: "Deep work blocks, non-negotiable tasks completion, and focus",
+        routine: "Energy & Habits",
+        routineDesc: "Sleep quality, morning/evening routine stability, and health",
+      },
+      questions: {
+        q_wins: "What were your biggest wins and breakthroughs this week?",
+        q_wins_ph: "E.g., Closed a new freelance client, hit savings milestone, completed core auth engine...",
+        q_misses: "What slipped through the cracks or fell behind schedule?",
+        q_misses_ph: "E.g., Delayed sending proposal by 2 days, missed gym twice...",
+        q_revenue_reflection: "Reflection on actual revenue vs weekly target:",
+        q_revenue_reflection_ph: "How did income perform relative to your EGP goals? What drove the numbers?",
+        q_time_drain: "Where was time or energy drained by friction or distractions?",
+        q_time_drain_ph: "E.g., Excessive context switching on Discord, unorganized task priorities...",
+        q_client_health: "Client Projects & Pipeline Health:",
+        q_client_health_ph: "Status of active client deliverables, pending proposals, and testimonials...",
+        q_learning_growth: "Strategic Learning & Skills Practiced:",
+        q_learning_growth_ph: "What technical or business concept did you master this week?",
+        q_relationship_check: "Relationship & Marriage Preparation:",
+        q_relationship_check_ph: "Shared moments, emotional support, and marriage checklist progress...",
+        q_habits_energy: "Energy, Sleep & Habit Stability:",
+        q_habits_energy_ph: "How was your physical energy, shutdown discipline, and sleep rhythm?",
+        q_start: "What should you START doing next week?",
+        q_start_ph: "E.g., Implement strict 2-hour morning deep work blocks before checking messages...",
+        q_stop: "What should you STOP doing immediately?",
+        q_stop_ph: "E.g., Stop answering non-urgent client pings after 8 PM...",
+        q_continue: "What worked exceptionally well that you should DOUBLE DOWN on?",
+        q_continue_ph: "E.g., Daily shutdown ritual created incredible clarity...",
+        q_next_top_three: "Top 3 Non-Negotiable Strategic Priorities for Next Week:",
+        q_next_top_three_ph: "1. Ship client MVP\n2. Transfer monthly marriage savings\n3. Send 3 new proposals",
+        q_system_tweak: "One concrete tweak to your workflow, tools, or schedule:",
+        q_system_tweak_ph: "E.g., Block Friday 3 PM specifically for Weekly Review...",
+      },
+      convertTopThree: "Create Top 3 Priorities as Actionable Tasks for Next Week",
+      topThreeConvertedSuccess: "Top 3 priorities created as tasks for next week!",
     },
     settings: {
       title: "Settings & System Configuration",
@@ -942,6 +1428,89 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       noExpensesDesc: "أضف بنود الأثاث والتشطيب والشقة والذهب لتتبع التكاليف.",
       expenseDetails: "ملف تفاصيل بند الزواج",
     },
+    todayPlan: {
+      title: "مهمة وخطة اليوم (Today's Mission)",
+      subtitle: "ضبط ساعات العمل المتاحة، حسم الأولويات الـ 3 الكبرى، وضمان التوازن بين الدخل والحياة الشخصية.",
+      energyLevel: "مستوى الطاقة والنشاط",
+      energyLow: "طاقة منخفضة (يُنصح بتخفيف الحمل)",
+      energyHigh: "طاقة عالية (جاهزية قصوى للعمل العميق)",
+      availableHours: "ساعات العمل المتاحة",
+      capacityGuard: "حارس السعة (Capacity Guard)",
+      capacityOverload: "تنبيه: حجم المهام المخططة يتجاوز الساعات المتاحة اليوم!",
+      capacityOptimal: "حجم المهام متوازن تماماً مع الساعات المتاحة.",
+      hoursUnit: "ساعات",
+      fridayRule: "قاعدة الجمعة مفعلة",
+      fridayRuleDesc: "يوم مخصص للمراجعات الأسبوعية والتنظيم وتصفية الذهن بدون ضغط مشاريع ثقيلة.",
+      focusQuestion: "الشيء الواحد الذي يجعل اليوم إنجازاً ناجحاً",
+      focusQuestionPlaceholder: "لو لم أنجز سوى شيء واحد رئيسي اليوم، يجب أن يكون...",
+      topThreeTitle: "الأولويات الثلاث الكبرى (Top 3)",
+      topThreeSubtitle: "أهم 3 مهام محورية يجب إتمامها قبل أي شيء آخر اليوم.",
+      topThreeEmpty: "لم يتم اختيار الـ Top 3 بعد. حدد أهم مهامك من القائمة بالأسفل.",
+      actionTriad: "ثالوث الإنجاز اليومي المتوازن",
+      actionTriadSubtitle: "خطوات محددة تضمن تقدماً يومياً في المال، والذات، والعلاقة.",
+      moneyAction: "إجراء العائد والمال (Revenue)",
+      moneyActionDesc: "خطوة مباشرة تدر دخلاً (بروبوزال، تسليم عميل، أو تواصل مبيعات).",
+      personalAction: "إجراء الذات والصحة (Personal)",
+      personalActionDesc: "عادة شخصية أساسية، تمرين رياضي، أو جلسة تعلم مركزة.",
+      relationshipAction: "إجراء العلاقة والزواج (Relationship)",
+      relationshipActionDesc: "تواصل مع الشريك، جلسة نقاش، أو خطوة في تجهيزات الزواج.",
+      selectTask: "تعيين مهمة...",
+      noTaskAssigned: "لم يتم تعيين مهمة",
+      scheduledTasks: "مجدولة لليوم",
+      overdueTasks: "مهام متأخرة ومرحلة",
+      todayTasks: "مهام اليوم المقترحة",
+      completeTask: "تعليم كمكتملة",
+      incompleteTask: "إعادة كغير مكتملة",
+      shutdownDay: "حسم وإغلاق اليوم (Shutdown)",
+      shutdownTitle: "الإغلاق المسائي والمراجعة اليومية",
+      shutdownSubtitle: "إنهاء اليوم بذهن صافٍ وتحديد نقطة الانطلاق لصباح الغد.",
+      shutdownConfirm: "تأكيد إغلاق اليوم",
+      dayClosed: "تم إغلاق اليوم بنجاح",
+      dayClosedDesc: "عمل رائع اليوم! استمتع بوقتك واستعد لصباح جديد.",
+      reopenDay: "إعادة فتح خطة اليوم",
+      reopeningDay: "جاري الفتح...",
+      tasksCompletedToday: "المهام المنجزة اليوم",
+      rolloverTasks: "المهام المرحلة للغد",
+      tomorrowFocus: "نقطة البداية لصباح الغد",
+      tomorrowFocusPlaceholder: "ما هي أول مهمة ستبدأ بها فور استيقاظك غداً؟",
+      shutdownNotes: "ملاحظات وانطباعات ختام اليوم",
+      shutdownNotesPlaceholder: "دروس مستفادة، انتصارات سريعة، أو أفكار ملهمة...",
+      generatePlan: "توليد خطة اليوم",
+      planSaved: "تم حفظ وتحديث خطة اليوم بنجاح.",
+    },
+    dashboard: {
+      greetingMorning: "صباح الخير والإنتاجية",
+      greetingAfternoon: "طاب مساؤك",
+      greetingEvening: "مساء الخير",
+      commandSubtitle: "إليك الإحاطة التنفيذية المركزة ليومك عبر بطاقات القيادة الـ 5.",
+      vitalFocus: "التركيز الحيوي لليوم",
+      topThreeCardTitle: "أولويات الـ Top 3 لليوم",
+      topThreeCardSubtitle: "إنجاز هذه المهام الثلاث يضمن فوزك باليوم.",
+      moneyCardTitle: "مسار الزواج والمال",
+      moneyCardSubtitle: "التقدم نحو مستهدف الـ 250,000 ج.م للزواج.",
+      revenueCardTitle: "إجراء الدخل لليوم",
+      revenueCardSubtitle: "الخطوة المباشرة لتحقيق التدفق المالي.",
+      followupCardTitle: "متابعة العميل القادمة",
+      followupCardSubtitle: "أقرب تواصل مطلوب في مسار المبيعات.",
+      quickDumpCardTitle: "تسجيل فوري (Brain Dump)",
+      quickDumpCardSubtitle: "سجل أفكارك ومهامك اللحظية دون مغادرة لوحة القيادة.",
+      quickDumpPlaceholder: "اكتب الفكرة أو المهمة واضغط Enter...",
+      quickDumpSubmit: "تسجيل",
+      quickDumpSuccess: "تم الإرسال لصندوق الأفكار بنجاح!",
+      noRevenueTask: "لا يوجد إجراء دخل محدد لليوم حتى الآن.",
+      noFollowups: "رائع! جميع متابعات العملاء منجزة ومحدثة.",
+      noTopThree: "لم تحدد أولويات الـ Top 3 لليوم بعد.",
+      allDoneCelebration: "🎉 إنجاز استثنائي! تم إتمام جميع أولويات الـ Top 3 لليوم.",
+      shutdownCountdown: "موعد الإغلاق المستهدف",
+      viewTodayPlan: "فتح خطة اليوم الكاملة",
+      viewFinances: "عرض محرك المالية",
+      viewTasks: "عرض كافة المهام",
+      viewPipeline: "عرض مسار الصفقات",
+      marriageTarget: "مستهدف الزواج",
+      monthlyTarget: "المستهدف الشهري",
+      hoursRemaining: "ساعات متبقية",
+      contactClient: "تواصل مع العميل",
+    },
     capture: {
       title: "تسجيل سريع",
       placeholder: "ما الذي يدور في ذهنك؟ سجل فكرة أو مهمة أو معلومة فوراً...",
@@ -952,6 +1521,166 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         "مساحة التفريغ الفوري لكتابة الأفكار والمهام الخام قبل تصنيفها.",
       noDumpsTitle: "الصندوق فارغ",
       noDumpsDesc: "اضغط B في أي وقت لتفريغ أفكارك ومهامك فور ظهورها.",
+    },
+    notesPage: {
+      title: "محرك الملاحظات والمعرفة (Knowledge Base)",
+      subtitle: "تدوين بمحرر Markdown غني، 13 مجلداً منظماً، ونظام وسوم ذكي للمشاريع والحياة.",
+      newNote: "ملاحظة جديدة",
+      editNote: "تعديل الملاحظة",
+      noteTitle: "عنوان الملاحظة",
+      noteTitlePlaceholder: "مثال: هيكلية بوت الديسكورد وخطة التسعير للعملاء",
+      folder: "المجلد والتصنيف",
+      selectFolder: "اختر المجلد...",
+      allFolders: "كافة المجلدات",
+      tags: "الوسوم (Tags)",
+      tagsPlaceholder: "اكتب الوسم واضغط Enter...",
+      content: "محتوى الملاحظة (Markdown)",
+      contentPlaceholder: "اكتب ملاحظتك بصيغة Markdown. يدعم العناوين #، القوائم -، القوائم التفاعلية - [ ]، الأكواد ```، والاقتباسات >...",
+      pinnedNotes: "الملاحظات المثبتة",
+      allNotes: "كافة الملاحظات النشطة",
+      archivedNotes: "الملاحظات المؤرشفة",
+      pinNote: "تثبيت بالأعلى",
+      unpinNote: "إلغاء التثبيت",
+      archiveNote: "أرشفة الملاحظة",
+      unarchiveNote: "استعادة من الأرشيف",
+      deleteNote: "حذف الملاحظة",
+      previewTab: "معاينة Markdown",
+      editTab: "محرر النصوص",
+      readingTime: "دقيقة قراءة",
+      wordCount: "كلمة",
+      noNotesTitle: "لا توجد ملاحظات في هذا المجلد",
+      noNotesDesc: "أضف ملاحظة جديدة أو قم بتحويل فكرة من صندوق الـ Brain Dump.",
+      noteDetails: "ملف تفاصيل الملاحظة",
+      previousPage: "السابق",
+      nextPage: "التالي",
+      pageOf: "صفحة",
+      showingNotes: "عرض",
+      folders: {
+        inbox: "صندوق الوارد (Inbox)",
+        businessStrategy: "استراتيجية العمل (Business)",
+        freelanceClients: "العملاء والمشاريع (Freelance)",
+        discordBots: "بوتات ديسكورد والخدمات",
+        productsSaas: "المنتجات ومختبر الـ SaaS",
+        marriageHome: "تجهيزات الزواج والمنزل",
+        financesInvestments: "المالية والاستثمارات",
+        learningGrowth: "التعلم والتطوير الذاتي",
+        habitsHealth: "الصحة والعادات اليومية",
+        systemsWorkflows: "الأنظمة وسير العمل",
+        decisionsLog: "سجل القرارات المحورية",
+        templates: "القوالب والنماذج الجاهزة",
+        archive: "الأرشيف",
+      },
+    },
+    conversions: {
+      convertTitle: "تحويل الفكرة الملتقطة",
+      convertSubtitle: "حوّل هذه الفكرة الخام إلى كيان تنفيذي واضح وملموس.",
+      convertToTask: "تحويل إلى مهمة تنفيذية (Task)",
+      convertToNote: "تحويل إلى ملاحظة منظمة (Note)",
+      convertToGoal: "تحويل إلى هدف استراتيجي (Goal)",
+      convertToLead: "تحويل إلى عميل / صفقة (Lead)",
+      taskTitle: "عنوان المهمة",
+      taskArea: "مسار الحياة",
+      taskPriority: "الأولوية",
+      noteTitle: "عنوان الملاحظة",
+      noteFolder: "المجلد المستهدف",
+      goalTitle: "عنوان الهدف",
+      goalCategory: "تصنيف الهدف",
+      goalTimeframe: "الإطار الزمني",
+      leadTitle: "اسم العميل / الصفقة",
+      leadStage: "مرحلة المسار",
+      leadValue: "القيمة التقديرية للصفقة (EGP)",
+      convertedBadge: "تم التحويل",
+      convertSuccess: "تم التحويل بنجاح وأرشفة الفكرة في سجل التحويلات.",
+      convertedTo: "تم التحويل إلى",
+      tabs: {
+        inbox: "الوارد (غير المعالج)",
+        converted: "المحولات سابقاً",
+        all: "كافة الأفكار",
+      },
+    },
+    reviewsPage: {
+      title: "محرك المراجعات والتأمل الاستراتيجي",
+      subtitle: "المراجعة الأسبوعية، قياس توازن الأبعاد الستة، وتخطيط أولويات الأسبوع القادم.",
+      weeklyTab: "المراجعة الأسبوعية",
+      dailyTab: "التأملات اليومية (Daily Reflections)",
+      startWeeklyReview: "بدء مراجعة يوم الجمعة الأسبوعية",
+      editReview: "تعديل المراجعة الأسبوعية",
+      resumeWeeklyReview: "استكمال المراجعة",
+      reviewHistory: "سجل المراجعات السابقة",
+      noReviewsTitle: "لا توجد مراجعات مكتملة بعد",
+      noReviewsDesc: "أكمل مراجعتك الأسبوعية الأولى يوم الجمعة لتقييم الأداء ورسم خطة الأسبوع الجديد.",
+      dailyReflectionsTitle: "سجل التأملات والإنهاء اليومي",
+      noDailyReflections: "لا توجد تأملات إغلاق يومي مسجلة بعد. أكمل إغلاق يومك من صفحة خطة اليوم (Today Plan).",
+      weekOf: "أسبوع",
+      overallBalance: "مؤشر التوازن العام",
+      reviewDossier: "ملف المراجعة الكامل",
+      step1Title: "١. الأرقام والواقع",
+      step1Subtitle: "مراجعة الأرقام والبيانات المجمعة تلقائياً وإنجازات/تحديات الأسبوع.",
+      step2Title: "٢. تقييم الأبعاد الستة",
+      step2Subtitle: "تقييم مستوى التقدم في أركان الحياة والعمل الستة على مقياس من ١ إلى ٥.",
+      step3Title: "٣. الاستراتيجية والدروس",
+      step3Subtitle: "تحليل مشاريع العملاء، التعلم والتطوير، التجهيزات المنزلية، والعادات.",
+      step4Title: "٤. خارطة الأسبوع القادم",
+      step4Subtitle: "تحديد قرارات (ابدأ / توقف / ضاعف) وتثبيت أهم ٣ أولويات استراتيجية حتمية.",
+      nextStep: "الخطوة التالية",
+      prevStep: "الخطوة السابقة",
+      completeReview: "إتمام واعتماد المراجعة",
+      saveDraft: "حفظ كمسودة",
+      savingReview: "جاري حفظ المراجعة...",
+      reviewSavedSuccess: "تم حفظ وأرشفة المراجعة الأسبوعية بنجاح!",
+      autoMetrics: {
+        incomeThisWeek: "الدخل المحقق هذا الأسبوع",
+        expensesThisWeek: "المصروفات هذا الأسبوع",
+        netSavings: "صافي الادخار",
+        tasksDone: "المهام المنجزة",
+        highPriorityTasks: "مهام حاسمة وعالية الأولوية",
+        proposalsSent: "العروض والصفقات",
+        daysPlanned: "الأيام المخططة والمنفذة",
+      },
+      dimensions: {
+        revenue: "الدخل والأرباح",
+        revenueDesc: "توليد الدخل وإغلاق الصفقات وسرعة التدفق النقدي",
+        career: "المهنة وتسليم المشاريع",
+        careerDesc: "رضا العملاء، تسليم البرمجيات، وجودة الأكواد والتنفيذ",
+        financial: "الانضباط المالي",
+        financialDesc: "التحكم بالنفقات، وتغذية صناديق الادخار والاستثمار",
+        relationship: "العلاقات والمنزل",
+        relationshipDesc: "الوقت المشترك مع شريكة الحياة وتجهيزات الزواج والانسجام",
+        execution: "التنفيذ والتركيز العميق",
+        executionDesc: "جلسات العمل العميق، إتمام المهام الحاسمة، وقوة التركيز",
+        routine: "الطاقة والعادات",
+        routineDesc: "جودة النوم، استقرار الروتين الصباحي/المسائي، واللياقة البدنية",
+      },
+      questions: {
+        q_wins: "ما هي أكبر إنجازاتك ونجاحاتك هذا الأسبوع؟",
+        q_wins_ph: "مثال: إغلاق صفقة عميل جديد، تحقيق مستهدف ادخار، إنهاء هيكل الـ Auth البرمجي...",
+        q_misses: "ما الذي تعثر أو تأخر عن موعده أو أفلت من الجدول؟",
+        q_misses_ph: "مثال: تأخر إرسال عرض سعر لمدة يومين، تفويت تمرين النادي مرتين...",
+        q_revenue_reflection: "تقييم الإيرادات والأرباح المحققة مقابل المستهدف:",
+        q_revenue_reflection_ph: "كيف كان أداء الدخل بالنسبة لمستهدفك المالي بالجنيه؟ ما الأسباب؟",
+        q_time_drain: "أين تسرب الوقت أو تشتت الطاقة الذهنية؟",
+        q_time_drain_ph: "مثال: التنقل المستمر بين المحادثات في ديسكورد، عدم وضوح أولويات اليوم...",
+        q_client_health: "حالة مشاريع العملاء والصفقات القائمة:",
+        q_client_health_ph: "حالة تسليمات العملاء النشطين، العروض المعلقة، والمتابعات المطلوبة...",
+        q_learning_growth: "التعلم الاستراتيجي والمهارات المكتسبة:",
+        q_learning_growth_ph: "ما المفهوم التقني أو العملي الذي أتقنته أو قرأته هذا الأسبوع؟",
+        q_relationship_check: "تجهيزات الزواج والعلاقات الأسرية:",
+        q_relationship_check_ph: "اللحظات المشتركة، الدعم المعنوي، والتقدم في قائمة تجهيزات الزواج...",
+        q_habits_energy: "مستوى الطاقة الجسدية والنوم واستقرار الروتين:",
+        q_habits_energy_ph: "كيف كان التزامك بموعد الإغلاق المسائي، ساعات النوم، ولياقتك البدنية؟",
+        q_start: "ما الذي يجب أن تبدأ بفعله (START) في الأسبوع القادم؟",
+        q_start_ph: "مثال: تخصيص أول ساعتين صباحاً للعمل العميق قبل قراءة الرسائل...",
+        q_stop: "ما الذي يجب أن تتوقف عنه تماماً (STOP) فوراً؟",
+        q_stop_ph: "مثال: التوقف عن الرد على رسائل العمل غير الطارئة بعد ٨ مساءً...",
+        q_continue: "ما الذي نجح بامتياز وتريد مضاعفته (DOUBLE DOWN)؟",
+        q_continue_ph: "مثال: طقس الإغلاق اليومي منحني صفاءً ذهنياً ممتازاً...",
+        q_next_top_three: "أهم ٣ أولويات استراتيجية حتمية للأسبوع القادم (Top 3 Priorities):",
+        q_next_top_three_ph: "١. إطلاق وتطبيق النسخة الأولى للعميل\n٢. تحويل دفعة الادخار للزواج\n٣. إرسال ٣ عروض لعملاء جدد",
+        q_system_tweak: "تعديل عملي واحد لتحسين نظام أو بيئة أو جدول عملك:",
+        q_system_tweak_ph: "مثال: حجز عصر كل جمعة في التقويم كموعد مقدس للمراجعة الأسبوعية...",
+      },
+      convertTopThree: "إنشاء الأولويات الثلاث كمهام تنفيذية في الأسبوع القادم",
+      topThreeConvertedSuccess: "تم إنشاء المهام الثلاث للأسبوع القادم بنجاح!",
     },
     settings: {
       title: "الإعدادات وضبط النظام",

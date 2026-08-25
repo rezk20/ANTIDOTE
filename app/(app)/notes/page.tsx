@@ -1,16 +1,24 @@
-import { FileText } from "lucide-react";
-import { PhasePlaceholder } from "@/components/ui/phase-placeholder";
+import {
+  getNotes,
+  getNoteFoldersWithCounts,
+  getNoteTagsWithCounts,
+} from "@/lib/dal/notes";
+import { NotesView } from "@/components/notes/notes-view";
 
 export const dynamic = "force-dynamic";
 
-export default function NotesPage() {
+export default async function NotesPage() {
+  const [notes, folderCounts, tags] = await Promise.all([
+    getNotes(),
+    getNoteFoldersWithCounts(),
+    getNoteTagsWithCounts(),
+  ]);
+
   return (
-    <PhasePlaceholder
-      title="Knowledge & Notes Engine"
-      description="Markdown notes, 13 seeded folders, tags, search, pinned notes, and Brain Dump conversions."
-      phase="7"
-      icon={<FileText className="h-6 w-6 text-amber-500" />}
-      scheduledText="The full Markdown Notes system and Brain Dump conversion flow will be delivered in Phase 7."
+    <NotesView
+      notes={notes}
+      folderCounts={folderCounts}
+      tags={tags}
     />
   );
 }
