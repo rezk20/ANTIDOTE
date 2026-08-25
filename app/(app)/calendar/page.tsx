@@ -1,16 +1,23 @@
-import { Calendar } from "lucide-react";
-import { PhasePlaceholder } from "@/components/ui/phase-placeholder";
+import { getCalendarData } from "@/lib/dal/calendar";
+import { CalendarView } from "@/components/calendar/calendar-view";
 
 export const dynamic = "force-dynamic";
 
-export default function CalendarPage() {
+export const metadata = {
+  title: "التقويم والجدول الزمني المحمي | ANTIDOTE",
+};
+
+export default async function CalendarPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ date?: string }>;
+}) {
+  const { date } = await searchParams;
+  const data = await getCalendarData(date);
+
   return (
-    <PhasePlaceholder
-      title="Calendar & Protected Schedule"
-      description="Day time blocks, week commitments, month deadlines, collision detection, and Friday protection."
-      phase="11"
-      icon={<Calendar className="h-6 w-6 text-sky-500" />}
-      scheduledText="The Calendar and Cash-flow projection schedule will be delivered in Phase 11."
-    />
+    <div className="p-4 md:p-8 max-w-7xl mx-auto">
+      <CalendarView data={data} />
+    </div>
   );
 }

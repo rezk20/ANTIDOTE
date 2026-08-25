@@ -730,6 +730,35 @@ export interface TranslationSchema {
       rest: string;
     };
   };
+  calendarPage: {
+    title: string;
+    subtitle: string;
+    modes: {
+      day: string;
+      week: string;
+      month: string;
+      year: string;
+    };
+    today: string;
+    prev: string;
+    next: string;
+    collisionsTitle: string;
+    collisionsBadge: string;
+    noCollisions: string;
+    fridayProtected: string;
+    cashflowTitle: string;
+    currentCash: string;
+    expectedIncome: string;
+    expectedExpenses: string;
+    marriagePayments: string;
+    projectedCash: string;
+    eventKinds: {
+      task: string;
+      projectDeadline: string;
+      marriagePayment: string;
+      routine: string;
+    };
+  };
   settings: {
     title: string;
     subtitle: string;
@@ -1520,6 +1549,35 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         rest: "Rest & Recovery",
       },
     },
+    calendarPage: {
+      title: "Calendar & Rhythm Hub",
+      subtitle: "Time blocks, weekly commitments, month deadlines, collision detection, and cash flow projections.",
+      modes: {
+        day: "Day (Time Blocks)",
+        week: "Week (Commitments)",
+        month: "Month (Deadlines)",
+        year: "Year (Milestones)",
+      },
+      today: "Today",
+      prev: "Previous",
+      next: "Next",
+      collisionsTitle: "Detected Schedule Collisions (§27)",
+      collisionsBadge: "Collisions",
+      noCollisions: "Your schedule is clean with zero collisions or overloads!",
+      fridayProtected: "Protected Friday (Family & Rest)",
+      cashflowTitle: "Cash Flow Strip & End-of-Month Projections (§116)",
+      currentCash: "Current Balance",
+      expectedIncome: "Expected Receivables",
+      expectedExpenses: "Recurring Expenses",
+      marriagePayments: "Marriage Payments Due",
+      projectedCash: "Projected End-of-Month Cash",
+      eventKinds: {
+        task: "Task Deadline",
+        projectDeadline: "Project Delivery",
+        marriagePayment: "Marriage Installment",
+        routine: "Daily Routine",
+      },
+    },
     settings: {
       title: "Settings & System Configuration",
       subtitle:
@@ -2304,6 +2362,35 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         admin: "إدارة وتنظيم",
         relationship: "العلاقات والأسرة",
         rest: "راحة واستشفاء",
+      },
+    },
+    calendarPage: {
+      title: "التقويم والجدول الزمني المحمي",
+      subtitle: "إدارة الكتل الزمنية اليومية، الالتزامات الأسبوعية، والمواعيد النهائية مع حماية يوم الجمعة والتدفق النقدي.",
+      modes: {
+        day: "اليوم (كتل زمنية)",
+        week: "الأسبوع (الالتزامات)",
+        month: "الشهر (المواعيد النهائية)",
+        year: "السنة (المحطات والأهداف)",
+      },
+      today: "اليوم",
+      prev: "السابق",
+      next: "التالي",
+      collisionsTitle: "التعارضات المكتشفة في الجدول (§27)",
+      collisionsBadge: "تعارضات",
+      noCollisions: "جدولك خالٍ تماماً من أي تعارضات أو ضغط زائد!",
+      fridayProtected: "يوم الجمعة المحمي (راحة وعلاقة)",
+      cashflowTitle: "شريط التدفق النقدي والسيولة المتوقعة لنهاية الشهر (§116)",
+      currentCash: "الرصيد الحالي بالمحافظ",
+      expectedIncome: "مستحقات مشاريع قادمة",
+      expectedExpenses: "مصروفات واشتراكات دورية",
+      marriagePayments: "أقساط زواج مستحقة",
+      projectedCash: "السيولة المتوقعة نهاية الشهر",
+      eventKinds: {
+        task: "موعد مهمة",
+        projectDeadline: "تسليم مشروع",
+        marriagePayment: "قسط / دفعة زواج",
+        routine: "روتين يومي",
       },
     },
     settings: {
