@@ -17,6 +17,8 @@ import {
   Clock,
   Heart,
   Users2,
+  Flame,
+  RotateCcw,
   BarChart3,
   Settings,
 } from "lucide-react";
@@ -66,6 +68,8 @@ export function Sidebar({
       items: [
         { label: t.nav.marriage, href: "/marriage", icon: Heart },
         { label: t.nav.relationship, href: "/relationship", icon: Users2 },
+        { label: t.nav.habits, href: "/habits", icon: Flame },
+        { label: t.nav.routines, href: "/routines", icon: RotateCcw },
         { label: t.nav.analytics, href: "/analytics", icon: BarChart3 },
         { label: t.nav.settings, href: "/settings", icon: Settings },
       ],

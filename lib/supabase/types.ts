@@ -416,6 +416,90 @@ export type RelationshipCheckinRow = {
   updated_at: string;
 };
 
+export type HabitCategory =
+  | "health_routine"
+  | "deep_work"
+  | "revenue"
+  | "learning"
+  | "relationship"
+  | "finance"
+  | "personal";
+
+export type RoutineTimeOfDay = "morning" | "workday" | "evening" | "night";
+
+export type TimeEntryKind =
+  | "deep_work"
+  | "delivery"
+  | "sales"
+  | "learning"
+  | "product"
+  | "admin"
+  | "relationship"
+  | "rest";
+
+export type HabitRow = {
+  id: string;
+  user_id: string;
+  name: string;
+  description: string | null;
+  category: HabitCategory;
+  target_per_week: number;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+};
+
+export type HabitLogRow = {
+  id: string;
+  user_id: string;
+  habit_id: string;
+  log_date: string;
+  note: string | null;
+  created_at: string;
+};
+
+export type RoutineRow = {
+  id: string;
+  user_id: string;
+  name: string;
+  time_of_day: RoutineTimeOfDay;
+  items: Json;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+};
+
+export type DailyLogRow = {
+  id: string;
+  user_id: string;
+  log_date: string;
+  sleep_at: string | null;
+  woke_at: string | null;
+  hours_slept: number | null;
+  energy: number | null;
+  focus: number | null;
+  note: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type TimeEntryRow = {
+  id: string;
+  user_id: string;
+  task_id: string | null;
+  project_id: string | null;
+  kind: TimeEntryKind;
+  started_at: string;
+  ended_at: string | null;
+  duration_min: number;
+  focus_rating: number | null;
+  note: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 export type GenericRelationship = {
   foreignKeyName: string;
   columns: string[];
@@ -559,6 +643,36 @@ export type Database = {
         Row: RelationshipCheckinRow;
         Insert: Partial<RelationshipCheckinRow> & { user_id: string };
         Update: Partial<RelationshipCheckinRow>;
+        Relationships: GenericRelationship[];
+      };
+      habits: {
+        Row: HabitRow;
+        Insert: Partial<HabitRow> & { user_id: string; name: string };
+        Update: Partial<HabitRow>;
+        Relationships: GenericRelationship[];
+      };
+      habit_logs: {
+        Row: HabitLogRow;
+        Insert: Partial<HabitLogRow> & { user_id: string; habit_id: string };
+        Update: Partial<HabitLogRow>;
+        Relationships: GenericRelationship[];
+      };
+      routines: {
+        Row: RoutineRow;
+        Insert: Partial<RoutineRow> & { user_id: string; name: string; time_of_day: RoutineTimeOfDay };
+        Update: Partial<RoutineRow>;
+        Relationships: GenericRelationship[];
+      };
+      daily_logs: {
+        Row: DailyLogRow;
+        Insert: Partial<DailyLogRow> & { user_id: string; log_date: string };
+        Update: Partial<DailyLogRow>;
+        Relationships: GenericRelationship[];
+      };
+      time_entries: {
+        Row: TimeEntryRow;
+        Insert: Partial<TimeEntryRow> & { user_id: string };
+        Update: Partial<TimeEntryRow>;
         Relationships: GenericRelationship[];
       };
     };

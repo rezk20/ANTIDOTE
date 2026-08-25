@@ -8,22 +8,39 @@ import { TopThreeSlots } from "./top-three-slots";
 import { ActionTriadSlots } from "./action-triad-slots";
 import { TodayTaskList } from "./today-task-list";
 import { ShutdownModal } from "./shutdown-modal";
+import { DailyLogWidget } from "./daily-log-widget";
+import { DeepWorkTimer } from "./deep-work-timer";
 import { TaskDetailModal } from "@/components/tasks/task-detail-modal";
 import { TaskModal } from "@/components/tasks/task-modal";
 import { Button } from "@/components/ui/button";
 import { useLocale } from "@/components/providers/locale-provider";
 import { Moon, CheckCircle2, RotateCcw } from "lucide-react";
 import type { TodayMissionData } from "@/lib/dal/day-plan";
-import type { TaskRow, GoalRow, ProjectRow } from "@/lib/supabase/types";
+import type { TaskRow, GoalRow, ProjectRow, DailyLogRow } from "@/lib/supabase/types";
+import type { CapacityAdvice } from "@/lib/logic/daily-log";
+import { calculateWeeklyTimeDistribution, type WeeklyTimeDistribution } from "@/lib/logic/time-tracking";
+
+const DEFAULT_WEEKLY_DISTRIBUTION = calculateWeeklyTimeDistribution([]);
 
 export function TodayView({
   data,
   goals = [],
   projects = [],
+  dailyLog = null,
+  capacityAdvice = {
+    capacity: "normal",
+    maxCoreTasks: 2,
+    messageAr: "طاقة متوازنة",
+    messageEn: "Balanced energy",
+  },
+  weeklyTimeDistribution = DEFAULT_WEEKLY_DISTRIBUTION,
 }: {
   data: TodayMissionData;
   goals?: GoalRow[];
   projects?: ProjectRow[];
+  dailyLog?: DailyLogRow | null;
+  capacityAdvice?: CapacityAdvice;
+  weeklyTimeDistribution?: WeeklyTimeDistribution;
 }) {
   const { t, isRtl } = useLocale();
   const [isPending, startTransition] = useTransition();
@@ -100,6 +117,13 @@ export function TodayView({
         selectedDate={data.selectedDate}
       />
 
+      {/* Daily Sleep & Energy Log Widget */}
+      <DailyLogWidget
+        initialLog={dailyLog}
+        advice={capacityAdvice}
+        todayDate={data.selectedDate}
+      />
+
       {/* "The One Thing" Focus Question Card */}
       <FocusQuestionCard
         dayPlan={data.dayPlan}
@@ -111,6 +135,12 @@ export function TodayView({
         topThreeTasks={data.topThreeTasks}
         onViewDetails={handleViewDetails}
         onOpenTaskPicker={handleAddTask}
+      />
+
+      {/* Deep Work Timer Session */}
+      <DeepWorkTimer
+        plannedTasks={data.todayTasks}
+        weeklyDistribution={weeklyTimeDistribution}
       />
 
       {/* Action Triad Slots */}

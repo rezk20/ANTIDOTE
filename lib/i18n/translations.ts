@@ -19,6 +19,8 @@ export interface TranslationSchema {
     reviews: string;
     marriage: string;
     relationship: string;
+    habits: string;
+    routines: string;
     calendar: string;
     analytics: string;
     settings: string;
@@ -632,6 +634,102 @@ export interface TranslationSchema {
       other: string;
     };
   };
+  habitsPage: {
+    title: string;
+    subtitle: string;
+    todayHabits: string;
+    allHabits: string;
+    weeklyProgress: string;
+    newHabit: string;
+    editHabit: string;
+    habitName: string;
+    description: string;
+    category: string;
+    targetPerWeek: string;
+    restartTodayTitle: string;
+    restartTodayDesc: string;
+    restartButton: string;
+    streakDays: string;
+    completedDays: string;
+    categories: {
+      healthRoutine: string;
+      deepWork: string;
+      revenue: string;
+      learning: string;
+      relationship: string;
+      finance: string;
+      personal: string;
+    };
+    saveSuccess: string;
+    deleteConfirm: string;
+  };
+  routinesPage: {
+    title: string;
+    subtitle: string;
+    tabs: {
+      morning: string;
+      workday: string;
+      evening: string;
+      night: string;
+    };
+    routineItems: string;
+    newItem: string;
+    itemTitle: string;
+    durationMin: string;
+    totalDuration: string;
+    resetDefaults: string;
+    resetConfirm: string;
+    saveSuccess: string;
+    resetSuccess: string;
+  };
+  dailyLog: {
+    title: string;
+    subtitle: string;
+    sleepAt: string;
+    wokeAt: string;
+    hoursSlept: string;
+    energy: string;
+    focus: string;
+    morningLog: string;
+    nightLog: string;
+    capacityNotice: string;
+    energyRatings: {
+      1: string;
+      2: string;
+      3: string;
+      4: string;
+      5: string;
+    };
+    saveLog: string;
+    savedSuccess: string;
+  };
+  timeTracking: {
+    timerTitle: string;
+    selectTask: string;
+    kind: string;
+    start: string;
+    pause: string;
+    resume: string;
+    stop: string;
+    focusPrompt: string;
+    focusRating: string;
+    sessionSaved: string;
+    weeklyTotal: string;
+    deepWork: string;
+    revenue: string;
+    learning: string;
+    relationship: string;
+    kinds: {
+      deepWork: string;
+      delivery: string;
+      sales: string;
+      learning: string;
+      product: string;
+      admin: string;
+      relationship: string;
+      rest: string;
+    };
+  };
   settings: {
     title: string;
     subtitle: string;
@@ -691,6 +789,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       reviews: "Weekly Reviews",
       marriage: "Marriage Mission",
       relationship: "Relationship",
+      habits: "Habits & Streaks",
+      routines: "Daily Routines",
       calendar: "Rhythm & Calendar",
       analytics: "System Analytics",
       settings: "Settings",
@@ -1324,6 +1424,102 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         other: "Other",
       },
     },
+    habitsPage: {
+      title: "Habits & Consistency",
+      subtitle: "Build core life and business habits with the 'Restart Today' anti-guilt philosophy.",
+      todayHabits: "Today's Habits Check-off",
+      allHabits: "All Active Habits",
+      weeklyProgress: "Weekly Consistency",
+      newHabit: "Add Habit",
+      editHabit: "Edit Habit",
+      habitName: "Habit Name",
+      description: "Description / Purpose",
+      category: "Category",
+      targetPerWeek: "Target Days / Week",
+      restartTodayTitle: "Restart Today Philosophy (§30)",
+      restartTodayDesc: "Missed a day? No broken streaks or guilt. Just restart today with calm clarity.",
+      restartButton: "Restart Today",
+      streakDays: "Days Streak",
+      completedDays: "Days Done",
+      categories: {
+        healthRoutine: "Health & Routine",
+        deepWork: "Deep Work",
+        revenue: "Sales & Revenue",
+        learning: "Technical Learning",
+        relationship: "Relationship & Us",
+        finance: "Finance Tracking",
+        personal: "Personal Growth",
+      },
+      saveSuccess: "Habit saved successfully!",
+      deleteConfirm: "Are you sure you want to delete this habit?",
+    },
+    routinesPage: {
+      title: "Daily Routines",
+      subtitle: "Structured morning, workday, evening, and night anchors to eliminate decision fatigue (§28).",
+      tabs: {
+        morning: "Morning Anchor",
+        workday: "Workday Flow",
+        evening: "Evening Shutdown",
+        night: "Night Wind-down",
+      },
+      routineItems: "Routine Checklist Items",
+      newItem: "Add Routine Item",
+      itemTitle: "Item Name",
+      durationMin: "Estimated Duration (min)",
+      totalDuration: "Total Routine Duration",
+      resetDefaults: "Reset to Default Templates",
+      resetConfirm: "Reset this routine to the system default template?",
+      saveSuccess: "Routine updated successfully!",
+      resetSuccess: "Routines reset to default templates successfully!",
+    },
+    dailyLog: {
+      title: "Sleep & Energy Logger",
+      subtitle: "Track physical energy and sleep rhythm to dynamically adapt daily planning capacity (§29).",
+      sleepAt: "Bedtime",
+      wokeAt: "Wake Time",
+      hoursSlept: "Hours Slept",
+      energy: "Energy Level (1–5)",
+      focus: "Mental Focus (1–5)",
+      morningLog: "Morning Wake & Energy Check",
+      nightLog: "Night Log & Reflection",
+      capacityNotice: "Adaptive Day Capacity",
+      energyRatings: {
+        1: "1 - Exhausted (Light mode advised)",
+        2: "2 - Low energy",
+        3: "3 - Moderate & steady",
+        4: "4 - High energy & focused",
+        5: "5 - Peak flow state!",
+      },
+      saveLog: "Save Daily Energy Log",
+      savedSuccess: "Sleep & Energy log saved!",
+    },
+    timeTracking: {
+      timerTitle: "Deep Work Task Timer",
+      selectTask: "Select Task to Focus On",
+      kind: "Session Type",
+      start: "Start Focus Session",
+      pause: "Pause",
+      resume: "Resume",
+      stop: "Finish & Log Session",
+      focusPrompt: "How was your focus during this session?",
+      focusRating: "Focus Quality (1–5)",
+      sessionSaved: "Time session logged successfully!",
+      weeklyTotal: "Total Focused Hours This Week",
+      deepWork: "Deep Work",
+      revenue: "Sales & Delivery",
+      learning: "Learning",
+      relationship: "Relationship",
+      kinds: {
+        deepWork: "Deep Work",
+        delivery: "Client Delivery",
+        sales: "Sales & Outreach",
+        learning: "Technical Learning",
+        product: "Product Lab",
+        admin: "Admin & Operations",
+        relationship: "Relationship & Us",
+        rest: "Rest & Recovery",
+      },
+    },
     settings: {
       title: "Settings & System Configuration",
       subtitle:
@@ -1383,6 +1579,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       reviews: "المراجعة الأسبوعية",
       marriage: "خطة الزواج",
       relationship: "العلاقة",
+      habits: "العادات والاستمرارية",
+      routines: "الروتين اليومي",
       calendar: "التقويم والروتين",
       analytics: "التحليلات والإحصائيات",
       settings: "الإعدادات",
@@ -2010,6 +2208,102 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         home: "مستلزمات منزل",
         experience: "تجربة مشتركة",
         other: "أخرى",
+      },
+    },
+    habitsPage: {
+      title: "العادات والاستمرارية اليومية",
+      subtitle: "بناء وتثبيت عادات الحياة والعمل مع فلسفة 'Restart Today' الخالية من جلد الذات.",
+      todayHabits: "تسجيل عادات اليوم",
+      allHabits: "كافة العادات النشطة",
+      weeklyProgress: "الالتزام الأسبوعي",
+      newHabit: "إضافة عادة جديدة",
+      editHabit: "تعديل العادة",
+      habitName: "اسم العادة",
+      description: "الوصف والهدف",
+      category: "التصنيف",
+      targetPerWeek: "المستهدف (أيام / أسبوع)",
+      restartTodayTitle: "فلسفة ابدأ اليوم من جديد (§30)",
+      restartTodayDesc: "فاتك يوم؟ لا توجد سلاسل تفشل أو جلد ذات. ابدأ اليوم من جديد بكل هدوء ووضوح.",
+      restartButton: "ابدأ من جديد اليوم",
+      streakDays: "أيام متتالية",
+      completedDays: "أيام منجزة",
+      categories: {
+        healthRoutine: "الصحة والروتين",
+        deepWork: "العمل العميق",
+        revenue: "المبيعات والدخل",
+        learning: "التعلم والتطوير",
+        relationship: "العلاقات والأسرة",
+        finance: "الانضباط المالي",
+        personal: "النمو الشخصي",
+      },
+      saveSuccess: "تم حفظ العادة بنجاح!",
+      deleteConfirm: "هل أنت متأكد من رغبتك في حذف هذه العادة؟",
+    },
+    routinesPage: {
+      title: "الروتين اليومي (Routines)",
+      subtitle: "محطات اليوم الأساسية (الصباح، العمل، المساء، وقبل النوم) لإلغاء إرهاق اتخاذ القرار (§28).",
+      tabs: {
+        morning: "روتين الصباح",
+        workday: "روتين العمل",
+        evening: "روتين المساء والإغلاق",
+        night: "روتين قبل النوم",
+      },
+      routineItems: "بنود وخطوات الروتين",
+      newItem: "إضافة بند للروتين",
+      itemTitle: "عنوان الخطوة / النشاط",
+      durationMin: "المدة التقديرية (دقيقة)",
+      totalDuration: "إجمالي مدة الروتين",
+      resetDefaults: "استعادة القوالب الافتراضية",
+      resetConfirm: "هل تريد استعادة قالب هذا الروتين إلى الإعدادات الافتراضية للنظام؟",
+      saveSuccess: "تم تحديث الروتين بنجاح!",
+      resetSuccess: "تمت استعادة قوالب الروتين الافتراضية بنجاح!",
+    },
+    dailyLog: {
+      title: "مسجل النوم والطاقة اليومي",
+      subtitle: "متابعة ساعات النوم ومستوى الطاقة للتكييف التلقائي لسعة تخطيط اليوم (§29).",
+      sleepAt: "وقت النوم",
+      wokeAt: "وقت الاستيقاظ",
+      hoursSlept: "ساعات النوم",
+      energy: "مستوى الطاقة (1–5)",
+      focus: "مستوى التركيز الذهني (1–5)",
+      morningLog: "تسجيل بداية اليوم والطاقة الصباحية",
+      nightLog: "تسجيل الإغلاق المسائي وساعات النوم",
+      capacityNotice: "السعة التكيفية لليوم",
+      energyRatings: {
+        1: "1 - إرهاق شديد (ينصح بالوضع الخفيف)",
+        2: "2 - طاقة منخفضة",
+        3: "3 - طاقة معتدلة ومستقرة",
+        4: "4 - طاقة وتركيز عالي",
+        5: "5 - قمة النشاط والتركيز!",
+      },
+      saveLog: "حفظ سجل الطاقة والنوم",
+      savedSuccess: "تم حفظ سجل الطاقة والنوم بنجاح!",
+    },
+    timeTracking: {
+      timerTitle: "مؤقت العمل العميق الذكي",
+      selectTask: "اختر المهمة للتركيز عليها",
+      kind: "نوع الجلسة",
+      start: "بدء جلسة التركيز",
+      pause: "إيقاف مؤقت",
+      resume: "استئناف",
+      stop: "إنهاء وحفظ الجلسة",
+      focusPrompt: "كيف كان مستوى تركيزك خلال هذه الجلسة؟",
+      focusRating: "جودة التركيز (1–5)",
+      sessionSaved: "تم تسجيل جلسة العمل العميق بنجاح!",
+      weeklyTotal: "إجمالي ساعات التركيز هذا الأسبوع",
+      deepWork: "العمل العميق",
+      revenue: "المبيعات والتسليم",
+      learning: "التعلم",
+      relationship: "العلاقات",
+      kinds: {
+        deepWork: "عمل عميق",
+        delivery: "تسليم مشاريع العملاء",
+        sales: "مبيعات وتواصل",
+        learning: "تعلم تقني",
+        product: "مختبر المنتجات",
+        admin: "إدارة وتنظيم",
+        relationship: "العلاقات والأسرة",
+        rest: "راحة واستشفاء",
       },
     },
     settings: {
