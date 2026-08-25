@@ -54,6 +54,7 @@ export function CalendarView({ data }: CalendarViewProps) {
           projects={data.projects}
           marriageExpenses={data.marriageExpenses}
           timeEntries={data.timeEntries}
+          dayPlans={data.dayPlans}
         />
       )}
 
@@ -74,6 +75,7 @@ export function CalendarView({ data }: CalendarViewProps) {
           tasks={data.tasks}
           projects={data.projects}
           marriageExpenses={data.marriageExpenses}
+          dayPlans={data.dayPlans}
         />
       )}
 

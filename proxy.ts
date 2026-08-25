@@ -8,7 +8,6 @@ import { NextResponse, type NextRequest } from "next/server";
  * Data Access Layer (lib/dal/auth.ts) and within Server Actions.
  */
 
-// Routes that require an authenticated session
 const PROTECTED_PREFIXES = [
   "/home",
   "/dashboard",
@@ -31,40 +30,32 @@ const PROTECTED_PREFIXES = [
   "/analytics",
   "/opportunities",
   "/decisions",
-  "/discord-bots",
-  "/products",
+  "/agent",
+  "/guide",
 ];
-
-const AUTH_ROUTES = ["/login"];
 
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Check for Supabase auth cookie presence (optimistic check)
+  // Check for actual Supabase session tokens (excluding temporary code verifier)
   const allCookies = request.cookies.getAll();
   const hasAuthCookie = allCookies.some(
     (c) =>
       c.name.startsWith("sb-") &&
       (c.name.endsWith("-auth-token") ||
         c.name.endsWith("-auth-token.0") ||
-        c.name.endsWith("-auth-token-code-verifier")),
+        c.name.endsWith("-auth-token.1")) &&
+      !c.name.includes("code-verifier"),
   );
 
   const isProtectedRoute = PROTECTED_PREFIXES.some(
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
   );
-  const isAuthRoute = AUTH_ROUTES.includes(pathname);
 
   // 1. Unauthenticated user trying to access a protected route -> redirect to /login
   if (isProtectedRoute && !hasAuthCookie) {
     const loginUrl = new URL("/login", request.url);
     return NextResponse.redirect(loginUrl);
-  }
-
-  // 2. Authenticated user visiting /login -> redirect to /home
-  if (isAuthRoute && hasAuthCookie) {
-    const homeUrl = new URL("/home", request.url);
-    return NextResponse.redirect(homeUrl);
   }
 
   return NextResponse.next();

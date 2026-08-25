@@ -7,6 +7,7 @@ import { MarriageReadinessChecklist } from "./marriage-readiness-checklist";
 import { MarriageExpensesTable } from "./marriage-expenses-table";
 import { MarriageExpenseModal } from "./marriage-expense-modal";
 import { MarriagePaymentModal } from "./marriage-payment-modal";
+import { MarriageTargetModal } from "./marriage-target-modal";
 import type { MarriagePageData } from "@/lib/dal/marriage";
 import type { MarriageExpenseRow } from "@/lib/supabase/types";
 
@@ -20,6 +21,7 @@ export function MarriageView({ data }: MarriageViewProps) {
   const [expenseToEdit, setExpenseToEdit] = useState<MarriageExpenseRow | null>(null);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [paymentExpense, setPaymentExpense] = useState<MarriageExpenseRow | null>(null);
+  const [isTargetModalOpen, setIsTargetModalOpen] = useState(false);
 
   const handleAddExpense = () => {
     setExpenseToEdit(null);
@@ -48,8 +50,11 @@ export function MarriageView({ data }: MarriageViewProps) {
         </p>
       </div>
 
-      {/* 1. Hero 250k Progress */}
-      <MarriageHeroProgress metrics={data.goalMetrics} />
+      {/* 1. Hero Progress */}
+      <MarriageHeroProgress
+        metrics={data.goalMetrics}
+        onEditTarget={() => setIsTargetModalOpen(true)}
+      />
 
       {/* 2. Readiness Dimensions Checklist */}
       <MarriageReadinessChecklist readiness={data.readiness} />
@@ -64,6 +69,13 @@ export function MarriageView({ data }: MarriageViewProps) {
       />
 
       {/* Modals */}
+      <MarriageTargetModal
+        isOpen={isTargetModalOpen}
+        onClose={() => setIsTargetModalOpen(false)}
+        currentTargetBudget={data.targetBudget}
+        currentTargetDate={data.targetDate}
+      />
+
       <MarriageExpenseModal
         isOpen={isExpenseModalOpen}
         onClose={() => setIsExpenseModalOpen(false)}

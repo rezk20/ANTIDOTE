@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { verifySession } from "./auth";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getTasks } from "./tasks";
 import { getProjects } from "./projects";
 import { getMarriageExpenses, getBuckets, getAllTransactions } from "./finance";
@@ -15,6 +16,7 @@ import type {
   RoutineRow,
   GoalRow,
   TimeEntryRow,
+  DayPlanRow,
 } from "@/lib/supabase/types";
 
 export interface CalendarPageData {
@@ -26,13 +28,15 @@ export interface CalendarPageData {
   routines: RoutineRow[];
   goals: GoalRow[];
   timeEntries: TimeEntryRow[];
+  dayPlans: DayPlanRow[];
   collisions: ScheduleCollision[];
   cashFlowProjection: CashFlowProjection;
 }
 
 export const getCalendarData = cache(
   async (dateStr?: string): Promise<CalendarPageData> => {
-    await verifySession();
+    const session = await verifySession();
+    const supabase = await createSupabaseServerClient();
     const today = new Date().toISOString().slice(0, 10);
     const selectedDate = dateStr || today;
     const currentMonth = selectedDate.slice(0, 7);
@@ -50,6 +54,7 @@ export const getCalendarData = cache(
       timeEntries,
       buckets,
       transactions,
+      dayPlansResult,
     ] = await Promise.all([
       getTasks(),
       getProjects(),
@@ -59,7 +64,13 @@ export const getCalendarData = cache(
       getTimeEntriesForRange(startOfMonth, endOfMonth),
       getBuckets(),
       getAllTransactions(),
+      supabase
+        .from("day_plans")
+        .select("*")
+        .eq("user_id", session.userId),
     ]);
+
+    const dayPlans = (dayPlansResult.data as DayPlanRow[]) || [];
 
     // Detect Collisions
     const collisions = detectScheduleCollisions({
@@ -87,6 +98,7 @@ export const getCalendarData = cache(
       routines,
       goals,
       timeEntries,
+      dayPlans,
       collisions,
       cashFlowProjection,
     };

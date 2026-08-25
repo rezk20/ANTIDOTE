@@ -6,7 +6,11 @@ import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
-  const origin = requestUrl.origin;
+  const forwardedHost = request.headers.get("x-forwarded-host");
+  const forwardedProto = request.headers.get("x-forwarded-proto") || "https";
+  const origin = forwardedHost
+    ? `${forwardedProto}://${forwardedHost}`
+    : (process.env.NEXT_PUBLIC_SITE_URL || requestUrl.origin);
 
   if (code) {
     const supabase = await createSupabaseServerClient();

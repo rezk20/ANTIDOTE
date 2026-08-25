@@ -61,6 +61,7 @@ export async function saveDayPlan(
   revalidatePath("/today");
   revalidatePath("/home");
   revalidatePath("/dashboard");
+  revalidatePath("/calendar");
   return { ok: true, message: "Day plan saved successfully." };
 }
 
@@ -229,5 +230,6 @@ export async function reopenDayPlan(
 
   revalidatePath("/today");
   revalidatePath("/home");
+  revalidatePath("/calendar");
   return { ok: true };
 }

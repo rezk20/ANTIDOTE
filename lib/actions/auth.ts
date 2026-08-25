@@ -75,7 +75,10 @@ export async function logout(): Promise<void> {
 export async function signInWithGoogle(originUrl?: string): Promise<{ url?: string; error?: string }> {
   try {
     const supabase = await createSupabaseServerClient();
-    const origin = originUrl || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const origin =
+      originUrl ||
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
     
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",

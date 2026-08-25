@@ -164,3 +164,66 @@ export async function recordExpensePayment(
     return { ok: false, error: "حدث خطأ أثناء تسجيل السداد." };
   }
 }
+
+export async function updateMarriageTarget(
+  targetBudget: number,
+  targetDate?: string,
+): Promise<ActionResponse<{ targetBudget: number; targetDate?: string }>> {
+  try {
+    const session = await verifySession();
+    if (targetBudget <= 0) {
+      return { ok: false, error: "المستهدف المالي يجب أن يكون أكبر من 0." };
+    }
+
+    const supabase = await createSupabaseServerClient();
+
+    // 1. Update profiles settings
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("settings")
+      .eq("id", session.userId)
+      .single();
+
+    const currentSettings = (profile?.settings as Record<string, unknown>) || {};
+    const marriageSettings = (currentSettings.marriage as Record<string, unknown>) || {};
+    const finalTargetDate: string =
+      targetDate ||
+      (typeof marriageSettings.targetDate === "string"
+        ? marriageSettings.targetDate
+        : "2027-12-31");
+
+    const updatedSettings = {
+      ...currentSettings,
+      marriage: {
+        ...marriageSettings,
+        targetBudget,
+        targetDate: finalTargetDate,
+      },
+    };
+
+    await supabase
+      .from("profiles")
+      .update({
+        settings: updatedSettings as unknown as import("@/lib/supabase/types").Json,
+      })
+      .eq("id", session.userId);
+
+    // 2. Update marriage bucket target_amount
+    await supabase
+      .from("buckets")
+      .update({ target_amount: targetBudget })
+      .eq("user_id", session.userId)
+      .eq("kind", "marriage");
+
+    revalidatePath("/marriage");
+    revalidatePath("/finances");
+    revalidatePath("/dashboard");
+    revalidatePath("/home");
+
+    return { ok: true, data: { targetBudget, targetDate } };
+  } catch (error) {
+    console.error("updateMarriageTarget error:", error);
+    return { ok: false, error: "فشل تحديث مستهدف الزواج." };
+  }
+}
+

@@ -4,6 +4,7 @@ import {
   recordPaymentSchema,
 } from "@/lib/schemas/marriage";
 import { evaluateMarriageReadiness } from "@/lib/logic/marriage";
+import { calculateMarriageGoalMetrics } from "@/lib/logic/finance";
 import type { MarriageExpenseRow } from "@/lib/supabase/types";
 
 describe("Marriage Schemas & Logic", () => {
@@ -114,6 +115,37 @@ describe("Marriage Schemas & Logic", () => {
       expect(furnitureDim?.progressPercent).toBe(50);
 
       expect(assessment.antiChaosTip.length).toBeGreaterThan(10);
+    });
+  });
+
+  describe("calculateMarriageGoalMetrics with dynamic targets", () => {
+    it("dynamically computes metrics for custom target budget and months", () => {
+      const customMetrics = calculateMarriageGoalMetrics({
+        targetAmount: 360000,
+        currentSaved: 120000,
+        targetMonths: 18,
+      });
+
+      expect(customMetrics.targetAmount).toBe(360000);
+      expect(customMetrics.currentSaved).toBe(120000);
+      expect(customMetrics.targetGap).toBe(240000);
+      expect(customMetrics.progressPercent).toBe(33.3);
+      expect(customMetrics.monthsRemaining).toBe(18);
+      expect(customMetrics.requiredMonthlySavings).toBe(13333);
+      expect(customMetrics.isCompleted).toBe(false);
+    });
+
+    it("marks completion when currentSaved >= targetAmount", () => {
+      const completedMetrics = calculateMarriageGoalMetrics({
+        targetAmount: 300000,
+        currentSaved: 310000,
+        targetMonths: 6,
+      });
+
+      expect(completedMetrics.isCompleted).toBe(true);
+      expect(completedMetrics.targetGap).toBe(0);
+      expect(completedMetrics.progressPercent).toBe(100);
+      expect(completedMetrics.requiredMonthlySavings).toBe(0);
     });
   });
 });

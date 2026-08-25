@@ -20,6 +20,7 @@ import {
   Scale,
   TrendingUp,
   Bot,
+  BookOpen,
   Heart,
   Users2,
   Briefcase,
@@ -173,6 +174,14 @@ export function CommandPalette() {
         icon: Bot,
         group: "navigation",
         action: () => navigate("/agent"),
+      },
+      {
+        id: "nav-guide",
+        title: t.nav.guide,
+        subtitle: isRtl ? "دليل الاستخدام والتشغيل الشامل" : "User handbook & onboarding guide",
+        icon: BookOpen,
+        group: "navigation",
+        action: () => navigate("/guide"),
       },
       {
         id: "nav-tasks",

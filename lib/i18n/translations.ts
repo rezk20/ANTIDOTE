@@ -26,6 +26,7 @@ export interface TranslationSchema {
     decisions: string;
     opportunities: string;
     agent: string;
+    guide: string;
     settings: string;
     logout: string;
     capture: string;
@@ -1055,6 +1056,31 @@ export interface TranslationSchema {
     esc: string;
     escDesc: string;
   };
+  guidePage: {
+    title: string;
+    subtitle: string;
+    checklistTitle: string;
+    checklistSubtitle: string;
+    steps: {
+      step1: string;
+      step1Desc: string;
+      step2: string;
+      step2Desc: string;
+      step3: string;
+      step3Desc: string;
+      step4: string;
+      step4Desc: string;
+      step5: string;
+      step5Desc: string;
+      step6: string;
+      step6Desc: string;
+    };
+    modulesTitle: string;
+    modulesSubtitle: string;
+    openModule: string;
+    proTipsTitle: string;
+    proTipsSubtitle: string;
+  };
 }
 
 export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
@@ -1084,6 +1110,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       decisions: "Decision Desk",
       opportunities: "Opportunity Prioritization",
       agent: "AI Agent (Hermes)",
+      guide: "User Guide & Onboarding",
       settings: "Settings",
       logout: "Sign Out",
       capture: "Quick Capture",
@@ -2177,7 +2204,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       hideKey: "Hide Key",
       copyKey: "Copy API Key",
       rotateKey: "Regenerate / Rotate Key",
-      rotateConfirm: "Are you sure you want to regenerate your API key? Any existing agent scripts using the old key will need to be updated.",
+      rotateConfirm:
+        "Are you sure you want to regenerate your API key? Any existing agent scripts using the old key will need to be updated.",
       authNotice:
         "Security & Authentication: Requests from outside the dashboard must include the 'Authorization: Bearer <API_KEY>' header. When called from the browser dashboard, your active session cookie is automatically validated.",
       codeExamples: "Integration Quickstart Code Snippets",
@@ -2241,6 +2269,41 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       esc: "ESC",
       escDesc: "Close any modal, dialog, or search palette",
     },
+    guidePage: {
+      title: "Mastering ANTIDOTE (LIFE OS)",
+      subtitle:
+        "The complete, step-by-step user handbook for operating your personal command center.",
+      checklistTitle: "5-Minute Quick Launch Checklist",
+      checklistSubtitle:
+        "Follow these 6 steps to calibrate your operating system for maximum velocity.",
+      steps: {
+        step1: "1. Calibrate Profile & Income Target",
+        step1Desc:
+          "Head to Settings to set your monthly income target, timezone, and preferred weekly off-day.",
+        step2: "2. Plan Your First Day in Today's Rhythm",
+        step2Desc:
+          "Open Today's Plan (/today), set your energy rating and available hours, then select 1-3 core focus tasks.",
+        step3: "3. Set Marriage & Financial Targets",
+        step3Desc:
+          "Open Marriage Mission (/marriage) to customize your budget (e.g. 250k EGP) and completion timeline.",
+        step4: "4. Populate Your Freelance Pipeline",
+        step4Desc:
+          "Add prospective client leads in Freelance CRM (/freelance) and track deal stages from discovery to won.",
+        step5: "5. Practice Single-Key Quick Capture",
+        step5Desc:
+          "Press 'B' anytime outside input fields to triage fleeting ideas directly into your Brain Dump Inbox.",
+        step6: "6. Connect Autonomous AI (Hermes)",
+        step6Desc:
+          "Visit AI Agent (/agent), copy your Bearer API key and system prompt to let Hermes automate tasks & logs.",
+      },
+      modulesTitle: "Deep-Dive Module Manuals",
+      modulesSubtitle:
+        "Understand the philosophy, rules, and operations behind every core engine.",
+      openModule: "Open Module",
+      proTipsTitle: "High-Agency Operating Principles",
+      proTipsSubtitle:
+        "Key psychological and strategic foundations built into LIFE OS.",
+    },
   },
   ar: {
     nav: {
@@ -2265,9 +2328,10 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       routines: "الروتين اليومي",
       calendar: "التقويم والروتين",
       analytics: "التحليلات والرؤى الاستراتيجية",
-      decisions: "غرفة القرارات (Decision Desk)",
-      opportunities: "ترتيب الفرص (Opportunities)",
+      decisions: "غرفة القرارات",
+      opportunities: "ترتيب الفرص",
       agent: "الوكيل الذكي (Hermes)",
+      guide: "دليل الاستخدام والتشغيل",
       settings: "الإعدادات",
       logout: "تسجيل الخروج",
       capture: "تسجيل فكرة سريعة",
@@ -2918,7 +2982,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     marriagePage: {
       title: "مهمة الزواج (Marriage Mission)",
       subtitle:
-        "متابعة مستهدف الـ ٢٥٠,٠٠٠ ج.م، المصروفات التفصيلية ومواعيد السداد، والأبعاد السبعة للجاهزية الشاملة.",
+        "متابعة مستهدف، المصروفات التفصيلية ومواعيد السداد، والأبعاد السبعة للجاهزية الشاملة.",
       targetAmount: "المستهدف الإجمالي",
       savedSoFar: "المدخر في صندوق الزواج",
       remainingGap: "المتبقي للوصول للمستهدف",
@@ -3351,7 +3415,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       hideKey: "إخفاء المفتاح",
       copyKey: "نسخ مفتاح الـ API",
       rotateKey: "إعادة توليد وتدوير المفتاح",
-      rotateConfirm: "هل أنت متأكد من إعادة توليد المفتاح؟ سيتعين عليك تحديث أي سكريبتات أو وكلاء خارجيين يستخدمون المفتاح القديم.",
+      rotateConfirm:
+        "هل أنت متأكد من إعادة توليد المفتاح؟ سيتعين عليك تحديث أي سكريبتات أو وكلاء خارجيين يستخدمون المفتاح القديم.",
       authNotice:
         "قواعد الأمان والتحقق: تتطلب الطلبات القادمة من خارج لوحة التحكم إرفاق ترويسة 'Authorization: Bearer <API_KEY>'. عند الاستدعاء من المتصفح أثناء تسجيل الدخول، يتم التحقق تلقائياً من جلسة المستخدم (Cookie Session).",
       codeExamples: "أمثلة سريعة للأكواد والربط البرمجي",
@@ -3414,6 +3479,41 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       keySlashDesc: "فتح هذا الدليل التفاعلي للاختصارات",
       esc: "ESC",
       escDesc: "إغلاق أي نافذة منبثقة أو شريط بحث مفتوح",
+    },
+    guidePage: {
+      title: "دليل تشغيل وإتقان ANTIDOTE (LIFE OS)",
+      subtitle:
+        "الدليل العملي الشامل خطوة بخطوة للتحكم في كافة محركات النظام وتحقيق أقصى إنتاجية.",
+      checklistTitle: "قائمة الإطلاق السريع (5 دقائق للبدء)",
+      checklistSubtitle:
+        "اتبع هذه الخطوات الـ 6 لتهيئة النظام بالكامل وضبط إيقاعك اليومي والمالي.",
+      steps: {
+        step1: "1. ضبط البروفايل ومستهدف الدخل الشهري",
+        step1Desc:
+          "انتقل إلى الإعدادات (/settings) لتحديد مستهدف دخلك الشهري، ومنطقتك الزمنية، ويوم إجازتك الأسبوعي.",
+        step2: "2. تخطيط أول يوم في غرفة القيادة اليومية",
+        step2Desc:
+          "افتح خطة اليوم (/today)، وحدد طاقتك وساعاتك المتاحة، ثم اختر من 1 إلى 3 مهام أساسية للتركيز عليها (P1).",
+        step3: "3. تخصيص مستهدف وميزانية الزواج",
+        step3Desc:
+          "ادخل على خطة الزواج (/marriage) لتحديد المستهدف المالي وتاريخ الإنجاز، وسيقوم النظام بحساب الفائض الشهري المطلوب تلقائياً.",
+        step4: "4. ملء مسار ومبيعات الفريلانس",
+        step4Desc:
+          "سجل صفقاتك المحتملة وعملاءك في مسار الفريلانس (/freelance) وتتبع معدل العائد الحقيقي لكل ساعة عمل.",
+        step5: "5. تجربة التقاط الأفكار السريعة بمفتاح واحد",
+        step5Desc:
+          "اضغط على حرف 'B' في أي وقت لتفريغ أي فكرة أو مهمة فوراً في صندوق الأفكار (Brain Dump) بدون تشتيت تركيزك.",
+        step6: "6. ربط وكيل الذكاء الاصطناعي الخارجي (Hermes)",
+        step6Desc:
+          "افتح صفحة الوكيل الذكي (/agent)، وانسخ مفتاح الـ API والبرومبت لتمكين Hermes من تسجيل ومتابعة أعمالك تلقائياً.",
+      },
+      modulesTitle: "كتالوج المحركات الاستراتيجية للنظام",
+      modulesSubtitle:
+        "شرح معمق للفلسفة وقواعد التشغيل لكل قسم من أقسام الـ Dashboard.",
+      openModule: "فتح القسم",
+      proTipsTitle: "مبادئ العمل الاستراتيجي عالي الكفاءة",
+      proTipsSubtitle:
+        "قواعد نفسية وتنفيذية مدمجة في صميم النظام لحمايتك من التشتت والاحتراق النفسي.",
     },
   },
 };

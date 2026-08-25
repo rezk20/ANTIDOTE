@@ -1,7 +1,6 @@
-"use client";
-
+import Link from "next/link";
 import { generateDayTimeBlocks } from "@/lib/logic/schedule";
-import type { RoutineRow, TaskRow, TimeEntryRow, ProjectRow, MarriageExpenseRow } from "@/lib/supabase/types";
+import type { RoutineRow, TaskRow, TimeEntryRow, ProjectRow, MarriageExpenseRow, DayPlanRow } from "@/lib/supabase/types";
 import {
   CheckCircle2,
   Sun,
@@ -19,6 +18,7 @@ interface DayViewProps {
   projects?: ProjectRow[];
   marriageExpenses?: MarriageExpenseRow[];
   timeEntries: TimeEntryRow[];
+  dayPlans?: DayPlanRow[];
 }
 
 export function DayView({
@@ -28,12 +28,14 @@ export function DayView({
   projects = [],
   marriageExpenses = [],
   timeEntries,
+  dayPlans = [],
 }: DayViewProps) {
   const dayTasks = tasks.filter(
     (t) => t.scheduled_date === selectedDate || t.deadline === selectedDate,
   );
   const dayProjects = projects.filter((p) => p.deadline === selectedDate);
   const dayMarriage = marriageExpenses.filter((m) => m.deadline === selectedDate);
+  const dayPlan = dayPlans.find((dp) => dp.plan_date === selectedDate);
 
   const timeBlocks = generateDayTimeBlocks({
     routines,
@@ -53,12 +55,18 @@ export function DayView({
   return (
     <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 shadow-xs space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-100 dark:border-zinc-800">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <h3 className="text-sm font-black text-zinc-900 dark:text-zinc-100">
               الجدول الزمني والكتل اليومية لـ {selectedDate}
             </h3>
+            {dayPlan && (
+              <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 flex items-center gap-1">
+                <Sun className="h-3 w-3 text-amber-500" />
+                خطة جاهزة ({dayPlan.available_hours}h)
+              </span>
+            )}
             {isFriday ? (
               <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-pink-100 dark:bg-pink-950/60 text-pink-700 dark:text-pink-300 flex items-center gap-1">
                 <Heart className="h-3 w-3 fill-pink-500" />
@@ -81,20 +89,29 @@ export function DayView({
           </p>
         </div>
 
-        <div className="flex items-center gap-3 text-xs font-bold text-zinc-500 flex-wrap">
-          <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-purple-500" />
-            روتين
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-            مهام عمل
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-pink-500" />
-            زواج والتزامات
-          </span>
-        </div>
+        <Link
+          href={`/today?date=${selectedDate}`}
+          className="flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-600 active:scale-95 text-white font-black text-xs transition-all shadow-md shadow-amber-500/10 cursor-pointer w-fit"
+        >
+          <Sun className="h-4 w-4" />
+          <span>{dayPlan ? "عرض وتعديل خطة هذا اليوم" : "تخطيط هذا اليوم مسبقاً"}</span>
+        </Link>
+      </div>
+
+      {/* Legend & Summary */}
+      <div className="flex items-center gap-3 text-xs font-bold text-zinc-500 flex-wrap">
+        <span className="flex items-center gap-1">
+          <span className="w-2.5 h-2.5 rounded-full bg-purple-500" />
+          روتين
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+          مهام عمل
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="w-2.5 h-2.5 rounded-full bg-pink-500" />
+          زواج والتزامات
+        </span>
       </div>
 
       {/* Time Blocks Timeline */}

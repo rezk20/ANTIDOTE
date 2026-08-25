@@ -1,7 +1,7 @@
 "use client";
 
-import type { TaskRow, ProjectRow, MarriageExpenseRow } from "@/lib/supabase/types";
-import { Briefcase, Heart } from "lucide-react";
+import type { TaskRow, ProjectRow, MarriageExpenseRow, DayPlanRow } from "@/lib/supabase/types";
+import { Briefcase, Heart, Sun } from "lucide-react";
 
 interface MonthViewProps {
   selectedDate: string;
@@ -9,6 +9,7 @@ interface MonthViewProps {
   tasks: TaskRow[];
   projects: ProjectRow[];
   marriageExpenses: MarriageExpenseRow[];
+  dayPlans?: DayPlanRow[];
 }
 
 export function MonthView({
@@ -17,6 +18,7 @@ export function MonthView({
   tasks,
   projects,
   marriageExpenses,
+  dayPlans = [],
 }: MonthViewProps) {
   const d = new Date(selectedDate);
   const year = d.getFullYear();
@@ -76,11 +78,13 @@ export function MonthView({
           const cellDate = new Date(dateStr);
           const isFriday = cellDate.getDay() === 5;
 
+          const dayPlan = dayPlans.find((dp) => dp.plan_date === dateStr);
           const dayTasks = tasks.filter((t) => t.deadline === dateStr);
           const dayProjects = projects.filter((p) => p.deadline === dateStr);
           const dayMarriage = marriageExpenses.filter((m) => m.deadline === dateStr);
 
-          const totalItems = dayTasks.length + dayProjects.length + dayMarriage.length;
+          const totalItems =
+            (dayPlan ? 1 : 0) + dayTasks.length + dayProjects.length + dayMarriage.length;
 
           return (
             <div
@@ -116,6 +120,17 @@ export function MonthView({
 
               {/* Event Mini Chips */}
               <div className="space-y-1 my-1 overflow-hidden">
+                {/* Day Plan Chip */}
+                {dayPlan && (
+                  <div
+                    className="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 text-[9px] font-black truncate flex items-center gap-0.5"
+                    title={`خطة يوم جاهزة (${dayPlan.available_hours}h)`}
+                  >
+                    <Sun className="h-2.5 w-2.5 shrink-0 text-amber-600 dark:text-amber-400" />
+                    <span>خطة جاهزة ({dayPlan.available_hours}h)</span>
+                  </div>
+                )}
+
                 {dayProjects.map((p) => (
                   <div
                     key={p.id}

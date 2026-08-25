@@ -8,14 +8,16 @@ import {
   Calendar,
   TrendingUp,
   Sparkles,
+  Edit3,
 } from "lucide-react";
 
 interface MarriageHeroProgressProps {
   metrics: MarriageGoalMetrics;
+  onEditTarget?: () => void;
 }
 
-export function MarriageHeroProgress({ metrics }: MarriageHeroProgressProps) {
-  const { t } = useLocale();
+export function MarriageHeroProgress({ metrics, onEditTarget }: MarriageHeroProgressProps) {
+  const { t, isRtl } = useLocale();
 
   return (
     <div className="relative overflow-hidden p-6 sm:p-8 rounded-3xl border border-rose-200 dark:border-rose-900/40 bg-gradient-to-br from-rose-500/10 via-rose-500/5 to-transparent shadow-xs space-y-6">
@@ -39,12 +41,24 @@ export function MarriageHeroProgress({ metrics }: MarriageHeroProgressProps) {
           </h2>
         </div>
 
-        <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 px-4 py-2 rounded-2xl border border-rose-200 dark:border-rose-900/40 shadow-xs">
-          <Sparkles className="h-5 w-5 text-rose-500" />
-          <div>
-            <div className="text-[10px] font-bold text-zinc-400">نسبة الإنجاز</div>
-            <div className="text-base font-black text-rose-600 dark:text-rose-400">
-              {metrics.progressPercent}%
+        <div className="flex items-center gap-2.5">
+          {onEditTarget && (
+            <button
+              onClick={onEditTarget}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl border border-rose-200 dark:border-rose-900/40 bg-white/80 dark:bg-zinc-900/80 hover:bg-rose-50 dark:hover:bg-rose-950/40 text-xs font-bold text-rose-700 dark:text-rose-300 transition-all cursor-pointer shadow-xs"
+            >
+              <Edit3 className="h-3.5 w-3.5" />
+              <span>{isRtl ? "تعديل المستهدف والتاريخ" : "Edit Target & Date"}</span>
+            </button>
+          )}
+
+          <div className="flex items-center gap-2 bg-white dark:bg-zinc-900 px-4 py-2 rounded-2xl border border-rose-200 dark:border-rose-900/40 shadow-xs">
+            <Sparkles className="h-5 w-5 text-rose-500" />
+            <div>
+              <div className="text-[10px] font-bold text-zinc-400">نسبة الإنجاز</div>
+              <div className="text-base font-black text-rose-600 dark:text-rose-400">
+                {metrics.progressPercent}%
+              </div>
             </div>
           </div>
         </div>

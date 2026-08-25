@@ -24,6 +24,7 @@ import {
   Scale,
   TrendingUp,
   Bot,
+  BookOpen,
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { useLocale } from "@/components/providers/locale-provider";
@@ -49,6 +50,7 @@ export function Sidebar({
         { label: t.nav.calendar, href: "/calendar", icon: Calendar },
         { label: t.nav.decisions, href: "/decisions", icon: Scale },
         { label: t.nav.agent, href: "/agent", icon: Bot },
+        { label: t.nav.guide, href: "/guide", icon: BookOpen },
       ],
     },
     {
@@ -58,7 +60,11 @@ export function Sidebar({
         { label: t.nav.clients, href: "/clients", icon: Users },
         { label: t.nav.projects, href: "/projects", icon: FolderKanban },
         { label: t.nav.finances, href: "/finances", icon: Wallet },
-        { label: t.nav.opportunities, href: "/opportunities", icon: TrendingUp },
+        {
+          label: t.nav.opportunities,
+          href: "/opportunities",
+          icon: TrendingUp,
+        },
       ],
     },
     {
@@ -108,7 +114,7 @@ export function Sidebar({
           </div>
           <div>
             <div className="text-sm font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
-              LIFE OS
+              ANTIDOTE
             </div>
             <div className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">
               Command Center
@@ -162,7 +168,15 @@ export function Sidebar({
         {/* Footer info */}
         <div className="border-t border-zinc-100 p-4 text-center dark:border-zinc-800">
           <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">
-            LIFE OS v0.1 • Phase 3 Ready
+            Made with ❤️ by{" "}
+            <Link
+              href="https://razook.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-zinc-900 underline underline-offset-2 dark:text-zinc-50"
+            >
+              Razook
+            </Link>
           </p>
         </div>
       </aside>
