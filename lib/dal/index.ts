@@ -9,3 +9,5 @@ export * from "./finance";
 export * from "./day-plan";
 export * from "./notes";
 export * from "./reviews";
+export * from "./marriage";
+export * from "./relationship";

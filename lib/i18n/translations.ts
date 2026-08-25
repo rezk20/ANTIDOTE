@@ -522,6 +522,116 @@ export interface TranslationSchema {
     convertTopThree: string;
     topThreeConvertedSuccess: string;
   };
+  marriagePage: {
+    title: string;
+    subtitle: string;
+    targetAmount: string;
+    savedSoFar: string;
+    remainingGap: string;
+    monthlyNeeded: string;
+    weeklyNeeded: string;
+    dailyNeeded: string;
+    monthsRemaining: string;
+    readinessScore: string;
+    readinessTitle: string;
+    readinessSubtitle: string;
+    antiChaosTitle: string;
+    expensesTitle: string;
+    expensesSubtitle: string;
+    newExpense: string;
+    editExpense: string;
+    recordPayment: string;
+    paymentAmount: string;
+    expenseItem: string;
+    category: string;
+    estimated: string;
+    actual: string;
+    paid: string;
+    remaining: string;
+    deadline: string;
+    priority: string;
+    status: string;
+    categories: {
+      furniture: string;
+      finishing: string;
+      rentDeposit: string;
+      hall: string;
+      clothing: string;
+      photography: string;
+      transport: string;
+      appliances: string;
+      jewelry: string;
+      misc: string;
+    };
+    statuses: {
+      planned: string;
+      inProgress: string;
+      paid: string;
+      dropped: string;
+    };
+    saveSuccess: string;
+    paymentSuccess: string;
+    deleteConfirm: string;
+  };
+  relationshipPage: {
+    title: string;
+    subtitle: string;
+    tabs: {
+      ideas: string;
+      wishlist: string;
+      checkin: string;
+    };
+    budgetBannerTitle: string;
+    ideasTitle: string;
+    ideasSubtitle: string;
+    newIdea: string;
+    editIdea: string;
+    randomIdea: string;
+    randomIdeaPicked: string;
+    wishlistTitle: string;
+    wishlistSubtitle: string;
+    newWishlistItem: string;
+    bought: string;
+    pending: string;
+    checkinTitle: string;
+    checkinSubtitle: string;
+    checkinHistory: string;
+    saveCheckin: string;
+    checkinSavedSuccess: string;
+    privacyBadge: string;
+    privacyNotice: string;
+    questions: {
+      q_appreciation: string;
+      q_appreciation_ph: string;
+      q_connection: string;
+      q_connection_ph: string;
+      q_stressors: string;
+      q_stressors_ph: string;
+      q_marriage_talk: string;
+      q_marriage_talk_ph: string;
+      q_next_shared_time: string;
+      q_next_shared_time_ph: string;
+    };
+    budgetTiers: {
+      free: string;
+      low: string;
+      medium: string;
+      high: string;
+    };
+    categories: {
+      date: string;
+      homeActivity: string;
+      conversation: string;
+      trip: string;
+      surprise: string;
+    };
+    wishlistCategories: {
+      gift: string;
+      home: string;
+      experience: string;
+      other: string;
+    };
+  };
   settings: {
     title: string;
     subtitle: string;
@@ -1104,6 +1214,116 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       convertTopThree: "Create Top 3 Priorities as Actionable Tasks for Next Week",
       topThreeConvertedSuccess: "Top 3 priorities created as tasks for next week!",
     },
+    marriagePage: {
+      title: "Marriage Mission",
+      subtitle: "250,000 EGP readiness tracker, itemized expense checklists, deadlines, and holistic readiness dimensions.",
+      targetAmount: "Target Fund",
+      savedSoFar: "Saved in Marriage Bucket",
+      remainingGap: "Remaining to Target",
+      monthlyNeeded: "Required Monthly",
+      weeklyNeeded: "Required Weekly",
+      dailyNeeded: "Required Daily",
+      monthsRemaining: "Months Remaining",
+      readinessScore: "Holistic Readiness",
+      readinessTitle: "7 Dimensions of Marriage Readiness",
+      readinessSubtitle: "A complete framework ensuring financial, housing, and relationship harmony without chaos.",
+      antiChaosTitle: "Anti-Chaos Principle (§10)",
+      expensesTitle: "Itemized Expense Management & Deadlines",
+      expensesSubtitle: "Track furniture, appliances, hall, and payment schedules with zero stress.",
+      newExpense: "Add Marriage Expense",
+      editExpense: "Edit Expense Item",
+      recordPayment: "Record Payment",
+      paymentAmount: "Payment Amount (EGP)",
+      expenseItem: "Item / Expense Name",
+      category: "Category",
+      estimated: "Estimated (EGP)",
+      actual: "Actual (EGP)",
+      paid: "Paid So Far (EGP)",
+      remaining: "Remaining (EGP)",
+      deadline: "Payment Deadline",
+      priority: "Priority Tier",
+      status: "Payment Status",
+      categories: {
+        furniture: "Furniture & Decor",
+        finishing: "Finishing & Apartment",
+        rentDeposit: "Rent Deposit & Insurance",
+        hall: "Wedding Hall & Event",
+        clothing: "Clothing & Outfits",
+        photography: "Photography & Media",
+        transport: "Transportation & Car",
+        appliances: "Home Appliances",
+        jewelry: "Gold & Jewelry",
+        misc: "Miscellaneous & Contingency",
+      },
+      statuses: {
+        planned: "Planned",
+        inProgress: "In Progress",
+        paid: "Fully Paid",
+        dropped: "Dropped",
+      },
+      saveSuccess: "Expense item saved successfully!",
+      paymentSuccess: "Payment recorded successfully!",
+      deleteConfirm: "Are you sure you want to delete this expense item?",
+    },
+    relationshipPage: {
+      title: "Relationship Engine (Us)",
+      subtitle: "Shared ideas library, budget-aware recommendations, shared wishlist, and private weekly check-in.",
+      tabs: {
+        ideas: "Shared Ideas Library",
+        wishlist: "Shared Wishlist",
+        checkin: "Weekly Check-In",
+      },
+      budgetBannerTitle: "Budget-Aware Activity Recommendation",
+      ideasTitle: "Shared Activities & Outing Ideas",
+      ideasSubtitle: "A curated collection of quality time activities categorized by budget and style.",
+      newIdea: "Add Shared Idea",
+      editIdea: "Edit Idea",
+      randomIdea: "Surprise Me (Random Picker)",
+      randomIdeaPicked: "Here is your suggested activity for this week!",
+      wishlistTitle: "Shared Wishlist & Gifts",
+      wishlistSubtitle: "Special gifts and home items we want to get over time.",
+      newWishlistItem: "Add Wishlist Item",
+      bought: "Purchased",
+      pending: "Pending",
+      checkinTitle: "Private Weekly Reflection Check-In",
+      checkinSubtitle: "5 reflection questions designed to nurture connection and reduce stress (§81).",
+      checkinHistory: "Previous Check-Ins History",
+      saveCheckin: "Save Weekly Reflection",
+      checkinSavedSuccess: "Weekly relationship reflection saved securely!",
+      privacyBadge: "Strict Privacy Enforced",
+      privacyNotice: "Relationship data is strictly private and isolated from AI and general analytics (§83).",
+      questions: {
+        q_appreciation: "What did you deeply appreciate about your partner this week?",
+        q_appreciation_ph: "E.g., Her encouragement during the tough deadline, the warm message...",
+        q_connection: "How was the quality of our shared time and emotional closeness?",
+        q_connection_ph: "E.g., Great walk on Friday, felt deeply connected and relaxed...",
+        q_stressors: "What current stressors or pressures can we help each other with?",
+        q_stressors_ph: "E.g., Wedding hall search is feeling overwhelming, let's divide the calls...",
+        q_marriage_talk: "Do we need a calm conversation about wedding preparations?",
+        q_marriage_talk_ph: "E.g., Review the budget for appliances next Saturday morning...",
+        q_next_shared_time: "What is our planned shared activity or date for the coming week?",
+        q_next_shared_time_ph: "E.g., Friday sunset walk + home dinner together...",
+      },
+      budgetTiers: {
+        free: "Free (0 EGP)",
+        low: "Low (< 300 EGP)",
+        medium: "Medium (300–800 EGP)",
+        high: "High (> 800 EGP)",
+      },
+      categories: {
+        date: "Date & Outing",
+        homeActivity: "Home & Cooking",
+        conversation: "Deep Conversation",
+        trip: "Trip & Travel",
+        surprise: "Gift & Surprise",
+      },
+      wishlistCategories: {
+        gift: "Personal Gift",
+        home: "Home Item",
+        experience: "Shared Experience",
+        other: "Other",
+      },
+    },
     settings: {
       title: "Settings & System Configuration",
       subtitle:
@@ -1681,6 +1901,116 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       },
       convertTopThree: "إنشاء الأولويات الثلاث كمهام تنفيذية في الأسبوع القادم",
       topThreeConvertedSuccess: "تم إنشاء المهام الثلاث للأسبوع القادم بنجاح!",
+    },
+    marriagePage: {
+      title: "مهمة الزواج (Marriage Mission)",
+      subtitle: "متابعة مستهدف الـ ٢٥٠,٠٠٠ ج.م، المصروفات التفصيلية ومواعيد السداد، والأبعاد السبعة للجاهزية الشاملة.",
+      targetAmount: "المستهدف الإجمالي",
+      savedSoFar: "المدخر في صندوق الزواج",
+      remainingGap: "المتبقي للوصول للمستهدف",
+      monthlyNeeded: "المطلوب شهرياً",
+      weeklyNeeded: "المطلوب أسبوعياً",
+      dailyNeeded: "المطلوب يومياً",
+      monthsRemaining: "أشهر متبقية للموعد",
+      readinessScore: "مؤشر الجاهزية الشاملة",
+      readinessTitle: "أبعاد الجاهزية السبعة للزواج",
+      readinessSubtitle: "منهجية متكاملة لضمان الاستعداد المالي والسكني والعاطفي بهدوء ووضوح.",
+      antiChaosTitle: "قاعدة منع الفوضى والتشتت (§10)",
+      expensesTitle: "سجل المصروفات ومواعيد السداد",
+      expensesSubtitle: "جدولة وتتبع تكاليف الأثاث والأجهزة والقاعة ومقدم الإيجار بدون ضغوط.",
+      newExpense: "إضافة مصروف جديد",
+      editExpense: "تعديل بند المصروف",
+      recordPayment: "تسجيل دفعة مسددة",
+      paymentAmount: "المبلغ المسدد (EGP)",
+      expenseItem: "اسم البند / المصروف",
+      category: "التصنيف",
+      estimated: "التقديري (EGP)",
+      actual: "الفعلي (EGP)",
+      paid: "المسدد حتى الآن (EGP)",
+      remaining: "المتبقي للسداد (EGP)",
+      deadline: "موعد الاستحقاق",
+      priority: "الأولوية",
+      status: "حالة السداد",
+      categories: {
+        furniture: "الأثاث والعفش",
+        finishing: "التشطيبات والديكور",
+        rentDeposit: "مقدم وتأمين الإيجار",
+        hall: "القاعة وحفل الزفاف",
+        clothing: "الملابس ومستلزمات الفرح",
+        photography: "التصوير والميديا",
+        transport: "الانتقالات والسيارة",
+        appliances: "الأجهزة الكهربائية",
+        jewelry: "الذهب والشبكة",
+        misc: "نثريات وطوارئ التجهيز",
+      },
+      statuses: {
+        planned: "مخطط",
+        inProgress: "قيد السداد",
+        paid: "تم السداد بالكامل",
+        dropped: "ملغي",
+      },
+      saveSuccess: "تم حفظ بند المصروف بنجاح!",
+      paymentSuccess: "تم تسجيل الدفعة المسددة بنجاح!",
+      deleteConfirm: "هل أنت متأكد من رغبتك في حذف هذا المصروف؟",
+    },
+    relationshipPage: {
+      title: "محرك العلاقات (Us)",
+      subtitle: "بنك الأفكار المشتركة، مقترحات تراعي الميزانية، قائمة الرغبات، والتقييم الأسبوعي الخاص.",
+      tabs: {
+        ideas: "بنك الأفكار المشتركة",
+        wishlist: "قائمة الرغبات والهدايا",
+        checkin: "التقييم الأسبوعي المشترك",
+      },
+      budgetBannerTitle: "اقتراح الأنشطة وفقاً للوضع المالي الحالي",
+      ideasTitle: "أفكار الخروجات والأنشطة المشتركة",
+      ideasSubtitle: "مجموعة منتقاة لقضاء أوقات نوعية مميزة مصنفة حسب التكلفة والأسلوب.",
+      newIdea: "إضافة فكرة جديدة",
+      editIdea: "تعديل الفكرة",
+      randomIdea: "اقترح نشاطاً عشوائياً (Surprise Me)",
+      randomIdeaPicked: "إليك النشاط المقترح لقضاء وقت رائع هذا الأسبوع!",
+      wishlistTitle: "قائمة الرغبات والهدايا المشتركة",
+      wishlistSubtitle: "الهدايا ومستلزمات المنزل التي نخطط لاقتنائها بمرور الوقت.",
+      newWishlistItem: "إضافة رغبة / هدية",
+      bought: "تم الاقتناء",
+      pending: "قيد الانتظار",
+      checkinTitle: "التقييم الأسبوعي الخاص والاتصال الإنساني",
+      checkinSubtitle: "٥ أسئلة تأملية لتعزيز الترابط والتخفيف من ضغوطات التجهيز (§81).",
+      checkinHistory: "سجل التقييمات الأسبوعية السابقة",
+      saveCheckin: "حفظ التقييم الأسبوعي",
+      checkinSavedSuccess: "تم حفظ التقييم الأسبوعي بأمان وخصوصية تامة!",
+      privacyBadge: "خصوصية مشددة ومحمية برمجياً",
+      privacyNotice: "بيانات العلاقة مشفرة ومستثناة برمجياً من الـ AI والتحليلات العامة (§83).",
+      questions: {
+        q_appreciation: "ما الذي قدّرته وشعرت بالامتنان تجاهه من شريكتك هذا الأسبوع؟",
+        q_appreciation_ph: "مثال: دعمها لي في ضغط العمل، رسالتها الصباحية الجميلة...",
+        q_connection: "كيف كانت جودة وقتنا المشترك ومستوى القرب والانسجام؟",
+        q_connection_ph: "مثال: تمشية يوم الجمعة كانت رائعة وشعرنا براحة وصفاء...",
+        q_stressors: "ما هي الضغوطات الحالية التي يمكننا مساعدة بعضنا فيها؟",
+        q_stressors_ph: "مثال: البحث عن القاعة يسبب بعض التوتر، دعنا نقسم التواصل...",
+        q_marriage_talk: "هل نحتاج إلى جلسة هادئة لمناقشة أي تفاصيل في تجهيزات الزواج؟",
+        q_marriage_talk_ph: "مثال: مراجعة ميزانية الأجهزة الكهربائية صباح السبت القادم...",
+        q_next_shared_time: "ما هو النشاط أو الموعد المشترك المخطط له للأسبوع القادم؟",
+        q_next_shared_time_ph: "مثال: تمشية وقت الغروب يوم الجمعة + عشاء منزلي معاً...",
+      },
+      budgetTiers: {
+        free: "مجاني (0 ج.م)",
+        low: "بسيط (< 300 ج.م)",
+        medium: "متوسط (300–800 ج.م)",
+        high: "مميز (> 800 ج.م)",
+      },
+      categories: {
+        date: "خروجة وموعد",
+        homeActivity: "نشاط منزلي وطبخ",
+        conversation: "جلسة حوار عميق",
+        trip: "سفر وتجربة جديدة",
+        surprise: "مفاجأة وهدية",
+      },
+      wishlistCategories: {
+        gift: "هدية شخصية",
+        home: "مستلزمات منزل",
+        experience: "تجربة مشتركة",
+        other: "أخرى",
+      },
     },
     settings: {
       title: "الإعدادات وضبط النظام",

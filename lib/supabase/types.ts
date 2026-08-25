@@ -369,6 +369,53 @@ export type ReviewRow = {
   updated_at: string;
 };
 
+export type RelationshipIdeaCategory =
+  | "date"
+  | "home_activity"
+  | "conversation"
+  | "trip"
+  | "surprise";
+export type RelationshipBudgetTier = "free" | "low" | "medium" | "high";
+export type RelationshipWishlistCategory = "gift" | "home" | "experience" | "other";
+
+export type RelationshipIdeaRow = {
+  id: string;
+  user_id: string;
+  title: string;
+  category: RelationshipIdeaCategory;
+  budget_tier: RelationshipBudgetTier;
+  estimated_cost: number;
+  notes: string | null;
+  is_completed: boolean;
+  last_done_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type RelationshipWishlistRow = {
+  id: string;
+  user_id: string;
+  title: string;
+  category: RelationshipWishlistCategory;
+  estimated_price: number | null;
+  url: string | null;
+  priority: TaskPriority;
+  is_bought: boolean;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type RelationshipCheckinRow = {
+  id: string;
+  user_id: string;
+  checkin_date: string;
+  answers: Json;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 export type GenericRelationship = {
   foreignKeyName: string;
   columns: string[];
@@ -494,6 +541,24 @@ export type Database = {
           period_start: string;
         };
         Update: Partial<ReviewRow>;
+        Relationships: GenericRelationship[];
+      };
+      relationship_ideas: {
+        Row: RelationshipIdeaRow;
+        Insert: Partial<RelationshipIdeaRow> & { user_id: string; title: string };
+        Update: Partial<RelationshipIdeaRow>;
+        Relationships: GenericRelationship[];
+      };
+      relationship_wishlist: {
+        Row: RelationshipWishlistRow;
+        Insert: Partial<RelationshipWishlistRow> & { user_id: string; title: string };
+        Update: Partial<RelationshipWishlistRow>;
+        Relationships: GenericRelationship[];
+      };
+      relationship_checkins: {
+        Row: RelationshipCheckinRow;
+        Insert: Partial<RelationshipCheckinRow> & { user_id: string };
+        Update: Partial<RelationshipCheckinRow>;
         Relationships: GenericRelationship[];
       };
     };

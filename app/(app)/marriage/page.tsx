@@ -1,16 +1,14 @@
-import { Heart } from "lucide-react";
-import { PhasePlaceholder } from "@/components/ui/phase-placeholder";
+import { getMarriageDashboardData } from "@/lib/dal/marriage";
+import { MarriageView } from "@/components/marriage/marriage-view";
 
 export const dynamic = "force-dynamic";
 
-export default function MarriagePage() {
+export default async function MarriagePage() {
+  const data = await getMarriageDashboardData();
+
   return (
-    <PhasePlaceholder
-      title="Marriage Mission"
-      description="250,000 EGP readiness tracker, itemized expense checklists, deadlines, housing strategy, and holistic readiness."
-      phase="9"
-      icon={<Heart className="h-6 w-6 text-rose-500" />}
-      scheduledText="The Marriage Mission comprehensive tracking module will be delivered in Phase 9."
-    />
+    <div className="max-w-6xl mx-auto space-y-6 pb-12">
+      <MarriageView data={data} />
+    </div>
   );
 }

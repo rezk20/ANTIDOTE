@@ -1,16 +1,14 @@
-import { Users2 } from "lucide-react";
-import { PhasePlaceholder } from "@/components/ui/phase-placeholder";
+import { getRelationshipDashboardData } from "@/lib/dal/relationship";
+import { RelationshipView } from "@/components/relationship/relationship-view";
 
 export const dynamic = "force-dynamic";
 
-export default function RelationshipPage() {
+export default async function RelationshipPage() {
+  const data = await getRelationshipDashboardData();
+
   return (
-    <PhasePlaceholder
-      title="Relationship Engine (Us)"
-      description="Shared activity ideas, budget-aware outing suggestions, shared wishlist, and private weekly check-in."
-      phase="9"
-      icon={<Users2 className="h-6 w-6 text-pink-500" />}
-      scheduledText="The Us & Relationship engine with strict code-enforced privacy gates will be delivered in Phase 9."
-    />
+    <div className="max-w-6xl mx-auto space-y-6 pb-12">
+      <RelationshipView data={data} />
+    </div>
   );
 }

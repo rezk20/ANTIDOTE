@@ -89,11 +89,19 @@ export function MoneyProgressCard({
         </div>
       </div>
 
-      {/* Footer Link */}
-      <div className="border-t border-zinc-100 pt-2 dark:border-zinc-800/80">
+      {/* Footer Links */}
+      <div className="flex items-center justify-between border-t border-zinc-100 pt-2 dark:border-zinc-800/80 text-xs font-bold">
+        <Link
+          href="/marriage"
+          className="flex items-center gap-1 text-rose-600 hover:underline dark:text-rose-400"
+        >
+          <span>{isRtl ? "مهمة الزواج (Mission)" : "Marriage Mission"}</span>
+          <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
+        </Link>
+
         <Link
           href="/finances"
-          className="flex items-center justify-between text-xs font-bold text-blue-600 hover:underline dark:text-blue-400"
+          className="flex items-center gap-1 text-blue-600 hover:underline dark:text-blue-400"
         >
           <span>{t.dashboard.viewFinances}</span>
           <ArrowRight className="h-3.5 w-3.5 rtl:rotate-180" />
