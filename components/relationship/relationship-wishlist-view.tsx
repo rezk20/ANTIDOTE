@@ -185,7 +185,7 @@ export function RelationshipWishlistView({ wishlist }: RelationshipWishlistViewP
       )}
 
       {/* Add / Edit Wishlist Item Modal */}
-      <WishlistModal
+      <RelationshipWishlistModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         itemToEdit={itemToEdit}
@@ -194,12 +194,30 @@ export function RelationshipWishlistView({ wishlist }: RelationshipWishlistViewP
   );
 }
 
-function WishlistModal({
+function RelationshipWishlistModal({
   isOpen,
   onClose,
   itemToEdit,
 }: {
   isOpen: boolean;
+  onClose: () => void;
+  itemToEdit?: RelationshipWishlistRow | null;
+}) {
+  if (!isOpen) return null;
+
+  return (
+    <RelationshipWishlistModalInner
+      key={itemToEdit?.id || "new"}
+      itemToEdit={itemToEdit}
+      onClose={onClose}
+    />
+  );
+}
+
+function RelationshipWishlistModalInner({
+  onClose,
+  itemToEdit,
+}: {
   onClose: () => void;
   itemToEdit?: RelationshipWishlistRow | null;
 }) {
@@ -216,8 +234,6 @@ function WishlistModal({
   );
   const [url, setUrl] = useState(itemToEdit?.url || "");
   const [notes, setNotes] = useState(itemToEdit?.notes || "");
-
-  if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,0 +1,122 @@
+[
+  {
+    "title": "ساعة يد كلاسيكية أنيقة (جلد / ستانلس ستيل)",
+    "category": "gift",
+    "estimated_price": 2400,
+    "url": "https://amazon.eg",
+    "priority": "high",
+    "notes": "هدية تذكارية راقية للمناسبات الخاصة أو الخطوبة ذات قيمة تدوم لسنوات."
+  },
+  {
+    "title": "ماكينة قهوة إسبريسو منزلية للمطبخ الجديد",
+    "category": "home",
+    "estimated_price": 3800,
+    "url": "https://amazon.eg",
+    "priority": "high",
+    "notes": "لتحضير القهوة واللاتيه الصباحي المشترك في شقة الزوجية برغوة مثالية."
+  },
+  {
+    "title": "باقة عطرية فرنسية فاخرة (العطر المفضل)",
+    "category": "gift",
+    "estimated_price": 1850,
+    "url": "https://amazon.eg",
+    "priority": "medium",
+    "notes": "عطر مميز يدوم طويلاً لإهدائه في مناسبة خاصة أو ذكرى مميزة."
+  },
+  {
+    "title": "بروجكتور سينمائي محمول ذكي لغرفة المعيشة",
+    "category": "home",
+    "estimated_price": 4200,
+    "url": "https://amazon.eg",
+    "priority": "medium",
+    "notes": "لليالي السينما المنزلية والأفلام الوثائقية وسماع المحاضرات بدقة عالية."
+  },
+  {
+    "title": "طقم مجات فخارية مصنوعة يدوياً باسمينا (Handmade Pottery)",
+    "category": "home",
+    "estimated_price": 450,
+    "url": null,
+    "priority": "medium",
+    "notes": "صنع مخصص من جاليري روح بالمنصورة لتناول الشاي والقهوة اليومية معاً."
+  },
+  {
+    "title": "ألبوم صور جلدي مخصص لطباعة ذكريات الخطوبة وتجهيزات الزواج",
+    "category": "gift",
+    "estimated_price": 550,
+    "url": null,
+    "priority": "high",
+    "notes": "حفظ الصور المطبوعة والتواريخ المميزة في ألبوم عائلي فاخر للذكرى."
+  },
+  {
+    "title": "باقة ورد طبيعي وشوكولاتة بلجيكية فاخرة مع كارت إهداء",
+    "category": "gift",
+    "estimated_price": 700,
+    "url": null,
+    "priority": "medium",
+    "notes": "مفاجأة رومانسية كلاسيكية مع رسالة مكتوبة بخط اليد من القلب."
+  },
+  {
+    "title": "جلسة تصوير فوتوسيشن تذكارية خارجية على النيل بالمنصورة",
+    "category": "experience",
+    "estimated_price": 1200,
+    "url": null,
+    "priority": "medium",
+    "notes": "توثيق لحظات الخطوبة والذكريات الجميلة بكاميرا احترافية في أجواء الغروب."
+  },
+  {
+    "title": "طقم شعلات وشموع معطرة للمنزل بروائح اللافندر والفانيليا",
+    "category": "home",
+    "estimated_price": 320,
+    "url": null,
+    "priority": "low",
+    "notes": "إضفاء جو من الاسترخاء والهدوء والرائحة الزكية في الأمسيات المنزلية."
+  },
+  {
+    "title": "كتاب / مفكرة يوميات الامتنان المشتركة للزوجين",
+    "category": "gift",
+    "estimated_price": 250,
+    "url": null,
+    "priority": "low",
+    "notes": "تدوين لحظات السعادة الأسبوعية والأشياء التي نقدّرها في بعضنا."
+  },
+  {
+    "title": "سماعات لاسلكية عازلة للضوضاء (Earbuds)",
+    "category": "gift",
+    "estimated_price": 1500,
+    "url": "https://amazon.eg",
+    "priority": "medium",
+    "notes": "هدية عملية للاستماع للبودكاست والمكالمات اليومية بوضوح تام."
+  },
+  {
+    "title": "طقم لحاف سرير ناعم ومريح بألوان هادئة للبيت الجديد",
+    "category": "home",
+    "estimated_price": 2200,
+    "url": null,
+    "priority": "medium",
+    "notes": "مستلزم منزلي أساسي لغرفة النوم يجمع بين الدفء والمظهر الجمالي الراقي."
+  },
+  {
+    "title": "سلسلة فضة عيار 925 بتصميم ناعم ومخصص",
+    "category": "gift",
+    "estimated_price": 850,
+    "url": null,
+    "priority": "high",
+    "notes": "قطعة حلي رقيقة ذات قيمة رمزية جميلة لارتدائها بشكل يومي."
+  },
+  {
+    "title": "قلاية هوائية ذكية (Air Fryer) لتجهيز الوجبات الصحية بسرعة",
+    "category": "home",
+    "estimated_price": 3200,
+    "url": "https://amazon.eg",
+    "priority": "medium",
+    "notes": "جهاز مطبخ أساسي لتوفير الوقت وتحضير طعام صحي ولذيذ."
+  },
+  {
+    "title": "صندوق ذكريات خشبي محفور عليه تاريخ الخطوبة (Keepsake Box)",
+    "category": "gift",
+    "estimated_price": 380,
+    "url": null,
+    "priority": "low",
+    "notes": "لحفظ تذاكر الخروجات، الكروت، والمقتنيات الصغيرة التي تحمل ذكريات خاصة."
+  }
+]

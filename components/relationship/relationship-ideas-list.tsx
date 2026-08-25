@@ -3,7 +3,6 @@
 import { useState, useTransition } from "react";
 import { useLocale } from "@/components/providers/locale-provider";
 import { toggleIdeaCompleted, deleteRelationshipIdea } from "@/lib/actions/relationship";
-import { pickRandomIdea } from "@/lib/logic/relationship";
 import { RELATIONSHIP_BUDGET_TIERS, RELATIONSHIP_IDEA_CATEGORIES } from "@/lib/schemas/relationship";
 import type { RelationshipIdeaRow } from "@/lib/supabase/types";
 import { Button } from "@/components/ui/button";
@@ -16,6 +15,9 @@ import {
   Circle,
   Edit,
   Trash2,
+  RotateCcw,
+  X,
+  MapPin,
 } from "lucide-react";
 
 interface RelationshipIdeasListProps {
@@ -29,10 +31,10 @@ export function RelationshipIdeasList({
   onAddIdea,
   onEditIdea,
 }: RelationshipIdeasListProps) {
-  const { t } = useLocale();
+  const { t, isRtl } = useLocale();
   const [selectedBudget, setSelectedBudget] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [randomPickedIdea, setRandomPickedIdea] = useState<RelationshipIdeaRow | null>(null);
+  const [suggestedDeckIds, setSuggestedDeckIds] = useState<string[]>([]);
   const [isPending, startTransition] = useTransition();
 
   const filteredIdeas = ideas.filter((item) => {
@@ -55,9 +57,32 @@ export function RelationshipIdeasList({
     }
   };
 
-  const handleSurpriseMe = () => {
-    const picked = pickRandomIdea(ideas);
-    setRandomPickedIdea(picked);
+  // Helper: Get random items from uncompleted pool without repetition
+  const pickFreshIdeas = (count: number, excludeIds: string[] = []): string[] => {
+    const uncompleted = ideas.filter(
+      (i) => !i.is_completed && !excludeIds.includes(i.id),
+    );
+    // Shuffle
+    const shuffled = [...uncompleted].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count).map((i) => i.id);
+  };
+
+  // 1. Suggest 6 Random Activities
+  const handleRollAllSix = () => {
+    const picked = pickFreshIdeas(6);
+    setSuggestedDeckIds(picked);
+  };
+
+  // 2. Replace only completed items in the 6-tray
+  const handleReplaceCompletedOnly = () => {
+    const activeKeptIds = suggestedDeckIds.filter((id) => {
+      const found = ideas.find((i) => i.id === id);
+      return found && !found.is_completed;
+    });
+
+    const neededCount = 6 - activeKeptIds.length;
+    const freshIds = pickFreshIdeas(neededCount, activeKeptIds);
+    setSuggestedDeckIds([...activeKeptIds, ...freshIds]);
   };
 
   const budgetTierBadges: Record<string, string> = {
@@ -66,6 +91,13 @@ export function RelationshipIdeasList({
     medium: "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300 border-amber-200 dark:border-amber-800",
     high: "bg-purple-50 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300 border-purple-200 dark:border-purple-800",
   };
+
+  // Items currently inside the 6-suggestion tray
+  const suggestedIdeasInDeck = suggestedDeckIds
+    .map((id) => ideas.find((i) => i.id === id))
+    .filter(Boolean) as RelationshipIdeaRow[];
+
+  const completedInDeckCount = suggestedIdeasInDeck.filter((i) => i.is_completed).length;
 
   return (
     <div className="space-y-6">
@@ -83,11 +115,11 @@ export function RelationshipIdeasList({
         <div className="flex items-center gap-2">
           <Button
             variant="outline"
-            onClick={handleSurpriseMe}
+            onClick={handleRollAllSix}
             className="rounded-2xl text-xs font-bold gap-2 cursor-pointer text-pink-600 border-pink-200 dark:border-pink-800 hover:bg-pink-50 dark:hover:bg-pink-950/30"
           >
             <Dices className="h-4 w-4 text-pink-500" />
-            <span>{t.relationshipPage.randomIdea}</span>
+            <span>{isRtl ? "اقتراح 6 أنشطة مميزة 🎲" : "Suggest 6 Random Activities"}</span>
           </Button>
 
           <Button
@@ -100,29 +132,160 @@ export function RelationshipIdeasList({
         </div>
       </div>
 
-      {/* Random Picked Notification Banner */}
-      {randomPickedIdea && (
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-pink-500/10 via-rose-500/10 to-amber-500/10 border border-pink-200 dark:border-pink-800 flex items-center justify-between gap-3 animate-in fade-in">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-pink-500 text-white">
-              <Sparkles className="h-4 w-4" />
+      {/* 6-Random Suggestion Elevated Tray Deck */}
+      {suggestedIdeasInDeck.length > 0 && (
+        <div className="p-6 rounded-3xl bg-gradient-to-br from-pink-500/10 via-purple-500/5 to-amber-500/10 border-2 border-pink-300 dark:border-pink-800/80 shadow-lg space-y-4 animate-in fade-in duration-200">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-pink-200/60 dark:border-pink-800/50 pb-3">
+            <div className="flex items-center gap-2.5">
+              <div className="p-2 rounded-xl bg-pink-500 text-white shadow-xs">
+                <Sparkles className="h-4 w-4" />
+              </div>
+              <div>
+                <h4 className="text-sm font-black text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                  <span>{isRtl ? "صينية الاقتراحات المختارة (6 أنشطة مقترحة لكما)" : "Curated 6-Activity Suggestion Deck"}</span>
+                  <span className="text-[10px] font-mono font-bold bg-pink-100 dark:bg-pink-950 text-pink-700 dark:text-pink-300 px-2 py-0.5 rounded-full">
+                    {completedInDeckCount} / 6 {isRtl ? "منجز" : "done"}
+                  </span>
+                </h4>
+                <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
+                  {isRtl
+                    ? "أنشطة منتقاة عشوائياً بدون تكرار لتجديد الطاقة وقضاء وقت ممتع معاً."
+                    : "Fresh hand-picked experiences generated without repetition."}
+                </p>
+              </div>
             </div>
-            <div>
-              <span className="text-[10px] font-bold text-pink-600 dark:text-pink-400 uppercase">
-                {t.relationshipPage.randomIdeaPicked}
-              </span>
-              <p className="text-xs font-black text-zinc-900 dark:text-zinc-100">
-                {randomPickedIdea.title} ({randomPickedIdea.estimated_cost} ج.م)
-              </p>
+
+            {/* Smart Refresh Modes */}
+            <div className="flex items-center gap-2 flex-wrap">
+              {completedInDeckCount > 0 && (
+                <button
+                  type="button"
+                  onClick={handleReplaceCompletedOnly}
+                  className="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+                >
+                  <RotateCcw className="h-3.5 w-3.5" />
+                  <span>{isRtl ? "استبدال الأنشطة المنجزة فقط" : "Replace Completed Only"}</span>
+                </button>
+              )}
+
+              <button
+                type="button"
+                onClick={handleRollAllSix}
+                className="px-3 py-1.5 rounded-xl bg-pink-600 hover:bg-pink-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer"
+              >
+                <Dices className="h-3.5 w-3.5" />
+                <span>{isRtl ? "تجديد كافة الـ 6 أفكار" : "Roll 6 New Ideas"}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSuggestedDeckIds([])}
+                className="p-1.5 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors cursor-pointer"
+                title={isRtl ? "إغلاق الصينية" : "Dismiss"}
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
           </div>
 
-          <button
-            onClick={() => setRandomPickedIdea(null)}
-            className="text-xs font-bold text-zinc-400 hover:text-zinc-700 cursor-pointer px-2 py-1"
-          >
-            إغلاق
-          </button>
+          {/* 6 Deck Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            {suggestedIdeasInDeck.map((idea) => {
+              const isCompleted = idea.is_completed;
+              const categoryName =
+                t.relationshipPage.categories[
+                  idea.category as keyof typeof t.relationshipPage.categories
+                ] || idea.category;
+              const tierBadge = budgetTierBadges[idea.budget_tier] || "";
+              const isMansouraSpot =
+                idea.title.includes("المنصورة") ||
+                idea.title.includes("المشاية") ||
+                idea.title.includes("النيل") ||
+                idea.notes?.includes("المنصورة");
+
+              return (
+                <div
+                  key={`deck_${idea.id}`}
+                  className={`p-4 rounded-2xl border transition-all space-y-2.5 flex flex-col justify-between shadow-xs ${
+                    isCompleted
+                      ? "bg-emerald-50/60 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-800"
+                      : "bg-white/95 dark:bg-zinc-900/95 border-pink-200 dark:border-pink-900/60 hover:border-pink-400"
+                  }`}
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span
+                          className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md border ${tierBadge}`}
+                        >
+                          {t.relationshipPage.budgetTiers[
+                            idea.budget_tier as keyof typeof t.relationshipPage.budgetTiers
+                          ] || idea.budget_tier}
+                        </span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                          {categoryName}
+                        </span>
+                        {isMansouraSpot && (
+                          <span className="text-[10px] font-black px-1.5 py-0.5 rounded-md bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 flex items-center gap-0.5">
+                            <MapPin className="h-2.5 w-2.5 text-amber-600" />
+                            المنصورة
+                          </span>
+                        )}
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => handleToggle(idea)}
+                        disabled={isPending}
+                        className="p-1 rounded-full text-zinc-400 hover:text-emerald-600 transition-colors cursor-pointer shrink-0"
+                        title={isCompleted ? "إلغاء الإتمام" : "تعليم كمنجز"}
+                      >
+                        {isCompleted ? (
+                          <CheckCircle2 className="h-5 w-5 text-emerald-500 fill-emerald-50" />
+                        ) : (
+                          <Circle className="h-5 w-5" />
+                        )}
+                      </button>
+                    </div>
+
+                    <h4
+                      className={`text-xs font-bold leading-relaxed ${
+                        isCompleted
+                          ? "line-through text-zinc-400 dark:text-zinc-500"
+                          : "text-zinc-900 dark:text-zinc-100"
+                      }`}
+                    >
+                      {idea.title}
+                    </h4>
+
+                    {idea.notes && (
+                      <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed line-clamp-2">
+                        {idea.notes}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800/80 text-[11px]">
+                    <span className="font-mono font-bold text-zinc-600 dark:text-zinc-300">
+                      {idea.estimated_cost > 0
+                        ? `${idea.estimated_cost} ج.م`
+                        : isRtl
+                        ? "مجاني (Free)"
+                        : "Free"}
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={() => onEditIdea(idea)}
+                      className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 text-[10px] font-bold cursor-pointer"
+                    >
+                      {isRtl ? "تعديل" : "Edit"}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
 
@@ -205,8 +368,16 @@ export function RelationshipIdeasList({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
           {filteredIdeas.map((idea) => {
             const isCompleted = idea.is_completed;
-            const categoryName = t.relationshipPage.categories[idea.category as keyof typeof t.relationshipPage.categories] || idea.category;
+            const categoryName =
+              t.relationshipPage.categories[
+                idea.category as keyof typeof t.relationshipPage.categories
+              ] || idea.category;
             const tierBadge = budgetTierBadges[idea.budget_tier] || "";
+            const isMansouraSpot =
+              idea.title.includes("المنصورة") ||
+              idea.title.includes("المشاية") ||
+              idea.title.includes("النيل") ||
+              idea.notes?.includes("المنصورة");
 
             return (
               <div
@@ -219,19 +390,25 @@ export function RelationshipIdeasList({
               >
                 <div className="space-y-2.5">
                   <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1.5 flex-wrap">
                       <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md border ${tierBadge}`}>
                         {t.relationshipPage.budgetTiers[idea.budget_tier as keyof typeof t.relationshipPage.budgetTiers] || idea.budget_tier}
                       </span>
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
                         {categoryName}
                       </span>
+                      {isMansouraSpot && (
+                        <span className="text-[10px] font-black px-1.5 py-0.5 rounded-md bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 flex items-center gap-0.5">
+                          <MapPin className="h-2.5 w-2.5 text-amber-600" />
+                          المنصورة
+                        </span>
+                      )}
                     </div>
 
                     <button
                       onClick={() => handleToggle(idea)}
                       disabled={isPending}
-                      className="p-1 rounded-full text-zinc-400 hover:text-emerald-600 transition-colors cursor-pointer"
+                      className="p-1 rounded-full text-zinc-400 hover:text-emerald-600 transition-colors cursor-pointer shrink-0"
                       title={isCompleted ? "إلغاء الإتمام" : "تعليم كمنجز"}
                     >
                       {isCompleted ? (
@@ -253,24 +430,22 @@ export function RelationshipIdeasList({
                   )}
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800/60 text-xs">
-                  <span className="font-extrabold text-zinc-700 dark:text-zinc-300">
-                    {Number(idea.estimated_cost) > 0 ? `${Number(idea.estimated_cost).toLocaleString()} ج.م` : "مجاني"}
+                <div className="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800 text-[11px]">
+                  <span className="font-mono font-bold text-zinc-600 dark:text-zinc-300">
+                    {idea.estimated_cost > 0 ? `${idea.estimated_cost} ج.م` : isRtl ? "مجاني (Free)" : "Free"}
                   </span>
 
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => onEditIdea(idea)}
-                      className="p-1.5 rounded-xl text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                      className="p-1 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors cursor-pointer"
                       title="تعديل"
                     >
                       <Edit className="h-3.5 w-3.5" />
                     </button>
-
                     <button
                       onClick={() => handleDelete(idea.id)}
-                      disabled={isPending}
-                      className="p-1.5 rounded-xl text-zinc-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer disabled:opacity-50"
+                      className="p-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/40 text-zinc-400 hover:text-rose-600 transition-colors cursor-pointer"
                       title="حذف"
                     >
                       <Trash2 className="h-3.5 w-3.5" />

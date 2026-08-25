@@ -21,6 +21,27 @@ export function RoutineItemModal({
   itemToEdit,
   onSave,
 }: RoutineItemModalProps) {
+  if (!isOpen) return null;
+
+  return (
+    <RoutineItemModalInner
+      key={itemToEdit?.id || "new"}
+      itemToEdit={itemToEdit}
+      onClose={onClose}
+      onSave={onSave}
+    />
+  );
+}
+
+function RoutineItemModalInner({
+  onClose,
+  itemToEdit,
+  onSave,
+}: {
+  onClose: () => void;
+  itemToEdit?: RoutineItem | null;
+  onSave: (item: RoutineItem) => void;
+}) {
   const { t } = useLocale();
 
   const [title, setTitle] = useState(itemToEdit?.title || "");
@@ -28,8 +49,6 @@ export function RoutineItemModal({
     itemToEdit?.duration_min ? String(itemToEdit.duration_min) : "15",
   );
   const [notes, setNotes] = useState(itemToEdit?.notes || "");
-
-  if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

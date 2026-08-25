@@ -33,11 +33,29 @@ export function OpportunityModal({
   onClose,
   opportunity,
 }: OpportunityModalProps) {
+  if (!isOpen) return null;
+
+  return (
+    <OpportunityModalInner
+      key={opportunity?.id || "new"}
+      opportunity={opportunity}
+      onClose={onClose}
+    />
+  );
+}
+
+function OpportunityModalInner({
+  opportunity,
+  onClose,
+}: {
+  opportunity?: OpportunityRow | null;
+  onClose: () => void;
+}) {
   const { t } = useLocale();
   const [isPending, startTransition] = useTransition();
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // Form State
+  // Form State initialized with passed opportunity
   const [title, setTitle] = useState(opportunity?.title || "");
   const [kind, setKind] = useState<OpportunityKind>(opportunity?.kind || "freelance");
   const [expectedValue, setExpectedValue] = useState<string>(
@@ -52,8 +70,6 @@ export function OpportunityModal({
   const [risk, setRisk] = useState<OpportunityRisk>(opportunity?.risk || "medium");
   const [nextAction, setNextAction] = useState(opportunity?.next_action || "");
   const [status, setStatus] = useState<OpportunityStatus>(opportunity?.status || "open");
-
-  if (!isOpen) return null;
 
   const evNum = Number(expectedValue) || 0;
   const hrsNum = Math.max(1, Number(timeHours) || 1);

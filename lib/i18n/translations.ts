@@ -650,6 +650,7 @@ export interface TranslationSchema {
     subtitle: string;
     tabs: {
       ideas: string;
+      revival: string;
       wishlist: string;
       checkin: string;
     };
@@ -1826,6 +1827,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         "Shared ideas library, budget-aware recommendations, shared wishlist, and private weekly check-in.",
       tabs: {
         ideas: "Shared Ideas Library",
+        revival: "Spark & Connection Guide",
         wishlist: "Shared Wishlist",
         checkin: "Weekly Check-In",
       },
@@ -3038,7 +3040,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       subtitle:
         "بنك الأفكار المشتركة، مقترحات تراعي الميزانية، قائمة الرغبات، والتقييم الأسبوعي الخاص.",
       tabs: {
-        ideas: "بنك الأفكار المشتركة",
+        ideas: "بنك الأفكار والخروجات",
+        revival: "تجديد الشغف وتحسين العلاقة 🔥",
         wishlist: "قائمة الرغبات والهدايا",
         checkin: "التقييم الأسبوعي المشترك",
       },
@@ -3341,7 +3344,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       },
     },
     decisionsPage: {
-      title: "غرفة القرارات الكبرى (Decision Desk §34)",
+      title: "غرفة القرارات الكبرى",
       subtitle:
         "نموذج تفكير هيكلي للقرارات المفصلية، لتقييم التكلفة، المخاطر، أسوأ وأفضل السيناريوهات، وقابلية التراجع.",
       newDecision: "تسجيل قرار جديد",
@@ -3405,7 +3408,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         "نقطة اتصال برمجية (API Endpoint) مؤمّنة ومحمية بالكامل، مع برومبت رئيسي شامل ومواصفات أدوات متوافقة مع معايير OpenAI للوكلاء المستقلين.",
       tabs: {
         credentials: "نقطة الاتصال والـ API",
-        prompt: "البرومبت الرئيسي (Master Prompt)",
+        prompt: "البرومبت الرئيسي",
         tools: "مواصفات الأدوات (JSON Specs)",
         playground: "كونسول الاختبار التفاعلي",
       },

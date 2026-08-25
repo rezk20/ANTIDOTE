@@ -8,19 +8,25 @@ import { LanguageToggle } from "@/components/layout/language-toggle";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import type { LoginState } from "@/lib/schemas/auth";
 
-function SubmitButton({ text, loadingText }: { text: string; loadingText: string }) {
+function SubmitButton({
+  text,
+  loadingText,
+}: {
+  text: string;
+  loadingText: string;
+}) {
   const { pending } = useFormStatus();
 
   return (
     <button
       type="submit"
       disabled={pending}
-      className="w-full py-3 px-4 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-zinc-950 font-bold text-sm transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md cursor-pointer"
+      className="w-full cursor-pointer rounded-xl bg-zinc-900 px-4 py-3 text-sm font-bold text-white shadow-md transition-all duration-150 hover:bg-zinc-800 focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-zinc-200"
     >
       {pending ? (
         <span className="inline-flex items-center gap-2">
           <svg
-            className="animate-spin h-4 w-4 text-current"
+            className="h-4 w-4 animate-spin text-current"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -57,35 +63,35 @@ export function LoginCard() {
   const [oauthError, setOauthError] = useState<string | null>(null);
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4 bg-zinc-50 dark:bg-zinc-950">
+    <main className="flex min-h-screen items-center justify-center bg-zinc-50 p-4 dark:bg-zinc-950">
       <div className="w-full max-w-md">
         {/* Top controls: Language & Theme */}
-        <div className="flex items-center justify-between mb-6 px-1">
+        <div className="mb-6 flex items-center justify-between px-1">
           <LanguageToggle />
           <ThemeToggle />
         </div>
 
         {/* Header Branding */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-extrabold text-2xl mb-3 shadow-lg shadow-zinc-900/10 dark:shadow-none">
+        <div className="mb-8 text-center">
+          <div className="mb-3 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-900 text-2xl font-extrabold text-white shadow-lg shadow-zinc-900/10 dark:bg-zinc-100 dark:text-zinc-900 dark:shadow-none">
             L
           </div>
           <h1 className="text-2xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
             {t.auth.welcome}
           </h1>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+          <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
             {t.auth.subtitle}
           </p>
         </div>
 
         {/* Login Card */}
-        <div className="bg-white dark:bg-zinc-900 rounded-3xl p-7 border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-200/50 dark:shadow-none">
+        <div className="rounded-3xl border border-zinc-200 bg-white p-7 shadow-xl shadow-zinc-200/50 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
           <form action={formAction} className="space-y-5">
             {/* Server Error Message */}
             {(state?.message || oauthError) && (
               <div
                 role="alert"
-                className="p-3.5 rounded-xl text-sm bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60"
+                className="rounded-xl border border-rose-200 bg-rose-50 p-3.5 text-sm text-rose-700 dark:border-rose-800/60 dark:bg-rose-950/40 dark:text-rose-300"
               >
                 {state?.message || oauthError}
               </div>
@@ -105,9 +111,8 @@ export function LoginCard() {
                 type="email"
                 autoComplete="email"
                 required
-                defaultValue="rezkgmal25@gmail.com"
                 placeholder="name@example.com"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 text-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-500 dark:focus:ring-zinc-400 focus:border-transparent transition-all"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-3.5 py-2.5 text-sm text-zinc-900 placeholder-zinc-400 transition-all focus:border-transparent focus:ring-2 focus:ring-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:ring-zinc-400"
               />
               {state?.errors?.email && (
                 <p className="text-xs text-rose-600 dark:text-rose-400">
@@ -131,7 +136,7 @@ export function LoginCard() {
                 autoComplete="current-password"
                 required
                 placeholder="••••••••"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 text-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-500 dark:focus:ring-zinc-400 focus:border-transparent transition-all"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-3.5 py-2.5 text-sm text-zinc-900 placeholder-zinc-400 transition-all focus:border-transparent focus:ring-2 focus:ring-zinc-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:focus:ring-zinc-400"
               />
               {state?.errors?.password && (
                 <p className="text-xs text-rose-600 dark:text-rose-400">
@@ -142,7 +147,10 @@ export function LoginCard() {
 
             {/* Submit */}
             <div className="pt-2">
-              <SubmitButton text={t.auth.signIn} loadingText={t.auth.signingIn} />
+              <SubmitButton
+                text={t.auth.signIn}
+                loadingText={t.auth.signingIn}
+              />
             </div>
           </form>
 
@@ -152,7 +160,7 @@ export function LoginCard() {
               <div className="w-full border-t border-zinc-200 dark:border-zinc-800" />
             </div>
             <div className="relative flex justify-center text-[11px] uppercase">
-              <span className="bg-white dark:bg-zinc-900 px-3 text-zinc-400 font-bold tracking-wider">
+              <span className="bg-white px-3 font-bold tracking-wider text-zinc-400 dark:bg-zinc-900">
                 {isRtl ? "أو المتابعة باستخدام" : "Or continue with"}
               </span>
             </div>
@@ -175,7 +183,7 @@ export function LoginCard() {
                 );
               }
             }}
-            className="w-full py-3 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/60 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 font-bold text-xs flex items-center justify-center gap-2.5 transition-all shadow-xs cursor-pointer"
+            className="flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-xs font-bold text-zinc-800 shadow-xs transition-all hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-800/60 dark:text-zinc-200 dark:hover:bg-zinc-800"
           >
             <svg className="h-4 w-4" viewBox="0 0 24 24">
               <path
@@ -195,13 +203,19 @@ export function LoginCard() {
                 fill="#EA4335"
               />
             </svg>
-            <span>{isRtl ? "تسجيل الدخول بحساب Google" : "Sign in with Google Account"}</span>
+            <span>
+              {isRtl
+                ? "تسجيل الدخول بحساب Google"
+                : "Sign in with Google Account"}
+            </span>
           </button>
         </div>
 
         {/* Footer Note */}
-        <p className="text-center text-[11px] text-zinc-400 dark:text-zinc-600 mt-6 font-medium">
-          {isRtl ? "نظام قيادة شخصي مشفر وآمن بالكامل • RLS Enforced" : "Private single-owner system • RLS Protected"}
+        <p className="mt-6 text-center text-[11px] font-medium text-zinc-400 dark:text-zinc-600">
+          {isRtl
+            ? "نظام قيادة شخصي مشفر وآمن بالكامل • RLS Enforced"
+            : "Private single-owner system • RLS Protected"}
         </p>
       </div>
     </main>

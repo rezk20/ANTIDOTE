@@ -31,11 +31,29 @@ export function DecisionModal({
   onClose,
   decision,
 }: DecisionModalProps) {
+  if (!isOpen) return null;
+
+  return (
+    <DecisionModalInner
+      key={decision?.id || "new"}
+      decision={decision}
+      onClose={onClose}
+    />
+  );
+}
+
+function DecisionModalInner({
+  decision,
+  onClose,
+}: {
+  decision?: DecisionRow | null;
+  onClose: () => void;
+}) {
   const { t } = useLocale();
   const [isPending, startTransition] = useTransition();
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // Form State
+  // Form State initialized with passed decision
   const [title, setTitle] = useState(decision?.title || "");
   const [whyNow, setWhyNow] = useState(decision?.why_now || "");
   const [options, setOptions] = useState<DecisionOptionInput[]>(() => {
@@ -60,8 +78,6 @@ export function DecisionModal({
   const [decisionText, setDecisionText] = useState(decision?.decision || "");
   const [reviewDate, setReviewDate] = useState(decision?.review_date || "");
   const [status, setStatus] = useState<DecisionStatus>(decision?.status || "open");
-
-  if (!isOpen) return null;
 
   const handleAddOption = () => {
     setOptions((prev) => [

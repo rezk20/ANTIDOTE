@@ -59,6 +59,7 @@ export function RelationshipIdeaModal({
         </div>
 
         <RelationshipIdeaForm
+          key={ideaToEdit?.id || "new"}
           ideaToEdit={ideaToEdit}
           onClose={onClose}
           isPending={isPending}

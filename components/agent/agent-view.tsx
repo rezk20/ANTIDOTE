@@ -52,18 +52,29 @@ export function AgentView({ initialApiKey }: AgentViewProps) {
   const [isRotating, startRotating] = useTransition();
 
   // Playground State
-  const [selectedAction, setSelectedAction] = useState<string>("capture_thought");
+  const [selectedAction, setSelectedAction] =
+    useState<string>("capture_thought");
   const [playgroundPayloadText, setPlaygroundPayloadText] = useState<string>(
-    JSON.stringify({ action: "capture_thought", text: "New priority note via Hermes agent." }, null, 2),
+    JSON.stringify(
+      {
+        action: "capture_thought",
+        text: "New priority note via Hermes agent.",
+      },
+      null,
+      2,
+    ),
   );
-  const [playgroundResponse, setPlaygroundResponse] = useState<string | null>(null);
+  const [playgroundResponse, setPlaygroundResponse] = useState<string | null>(
+    null,
+  );
   const [isExecuting, startExecuting] = useTransition();
   const [contextData, setContextData] = useState<string | null>(null);
   const [isFetchingContext, setIsFetchingContext] = useState(false);
 
-  const endpointUrl = typeof window !== "undefined"
-    ? `${window.location.origin}/api/agent/hermes`
-    : "/api/agent/hermes";
+  const endpointUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/api/agent/hermes`
+      : "/api/agent/hermes";
 
   const handleCopy = (text: string, setter: (val: boolean) => void) => {
     navigator.clipboard.writeText(text);
@@ -75,7 +86,12 @@ export function AgentView({ initialApiKey }: AgentViewProps) {
     if (!window.confirm(t.agentPage.rotateConfirm)) return;
     startRotating(async () => {
       const res = await regenerateAgentApiKeyAction();
-      if (res.ok && res.data && typeof res.data === "object" && "apiKey" in res.data) {
+      if (
+        res.ok &&
+        res.data &&
+        typeof res.data === "object" &&
+        "apiKey" in res.data
+      ) {
         setApiKey((res.data as { apiKey: string }).apiKey);
       }
     });
@@ -87,25 +103,64 @@ export function AgentView({ initialApiKey }: AgentViewProps) {
 
     switch (actionName) {
       case "capture_thought":
-        sample = { action: "capture_thought", text: "Follow up with client regarding proposal", source: "hermes_chat" };
+        sample = {
+          action: "capture_thought",
+          text: "Follow up with client regarding proposal",
+          source: "hermes_chat",
+        };
         break;
       case "create_task":
-        sample = { action: "create_task", title: "Review architecture design", priority: "P1", estimated_minutes: 45 };
+        sample = {
+          action: "create_task",
+          title: "Review architecture design",
+          priority: "P1",
+          estimated_minutes: 45,
+        };
         break;
       case "log_time_entry":
-        sample = { action: "log_time_entry", duration_min: 60, kind: "deep_work", focus_rating: 5, note: "API optimization sprint" };
+        sample = {
+          action: "log_time_entry",
+          duration_min: 60,
+          kind: "deep_work",
+          focus_rating: 5,
+          note: "API optimization sprint",
+        };
         break;
       case "log_lead":
-        sample = { action: "log_lead", title: "Enterprise Automation Client", expected_value: 20000, stage: "lead" };
+        sample = {
+          action: "log_lead",
+          title: "Enterprise Automation Client",
+          expected_value: 20000,
+          stage: "lead",
+        };
         break;
       case "add_note":
-        sample = { action: "add_note", title: "Agent Strategy Notes", content: "Hermes system integration notes...", folder: "tech", tags: ["ai", "hermes"] };
+        sample = {
+          action: "add_note",
+          title: "Agent Strategy Notes",
+          content: "Hermes system integration notes...",
+          folder: "tech",
+          tags: ["ai", "hermes"],
+        };
         break;
       case "create_decision":
-        sample = { action: "create_decision", title: "Adopt new automated pipeline", upside: "2x efficiency", downside: "Setup time", reversible: true, risk: "medium" };
+        sample = {
+          action: "create_decision",
+          title: "Adopt new automated pipeline",
+          upside: "2x efficiency",
+          downside: "Setup time",
+          reversible: true,
+          risk: "medium",
+        };
         break;
       case "save_debrief":
-        sample = { action: "save_debrief", date: new Date().toISOString().split("T")[0], energy_rating: 5, accomplishments: "Completed agent endpoint.", tomorrow_focus: "Polish UI" };
+        sample = {
+          action: "save_debrief",
+          date: new Date().toISOString().split("T")[0],
+          energy_rating: 5,
+          accomplishments: "Completed agent endpoint.",
+          tomorrow_focus: "Polish UI",
+        };
         break;
     }
 
@@ -124,7 +179,9 @@ export function AgentView({ initialApiKey }: AgentViewProps) {
       const json = await res.json();
       setContextData(JSON.stringify(json, null, 2));
     } catch (err) {
-      setContextData(JSON.stringify({ error: (err as Error).message }, null, 2));
+      setContextData(
+        JSON.stringify({ error: (err as Error).message }, null, 2),
+      );
     } finally {
       setIsFetchingContext(false);
     }
@@ -137,7 +194,16 @@ export function AgentView({ initialApiKey }: AgentViewProps) {
         const res = await runAgentPlaygroundAction(parsed);
         setPlaygroundResponse(JSON.stringify(res, null, 2));
       } catch (err) {
-        setPlaygroundResponse(JSON.stringify({ error: "Invalid JSON or execution error: " + (err as Error).message }, null, 2));
+        setPlaygroundResponse(
+          JSON.stringify(
+            {
+              error:
+                "Invalid JSON or execution error: " + (err as Error).message,
+            },
+            null,
+            2,
+          ),
+        );
       }
     });
   };
@@ -167,18 +233,18 @@ console.log("LIFE OS Context:", context);`;
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <div className="flex items-center gap-2.5">
-            <div className="p-2.5 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+            <div className="rounded-2xl bg-indigo-500/10 p-2.5 text-indigo-600 dark:text-indigo-400">
               <Bot className="h-6 w-6" />
             </div>
             <div>
-              <h1 className="text-xl font-black tracking-tight text-zinc-900 sm:text-2xl dark:text-zinc-100 flex items-center gap-2.5">
+              <h1 className="flex items-center gap-2.5 text-xl font-black tracking-tight text-zinc-900 sm:text-2xl dark:text-zinc-100">
                 <span>{t.agentPage.title}</span>
-                <span className="inline-flex items-center gap-1 text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
+                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-extrabold text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
                   <ShieldCheck className="h-3 w-3" />
                   <span>{t.agentPage.statusSecured}</span>
                 </span>
               </h1>
-              <p className="text-xs text-zinc-500 sm:text-sm dark:text-zinc-400 mt-0.5">
+              <p className="mt-0.5 text-xs text-zinc-500 sm:text-sm dark:text-zinc-400">
                 {t.agentPage.subtitle}
               </p>
             </div>
@@ -187,13 +253,13 @@ console.log("LIFE OS Context:", context);`;
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto border-b border-zinc-200 dark:border-zinc-800 pb-2 text-xs font-bold">
+      <div className="flex items-center gap-2 overflow-x-auto border-b border-zinc-200 pb-2 text-xs font-bold dark:border-zinc-800">
         <button
           onClick={() => setActiveTab("credentials")}
-          className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-2 ${
+          className={`flex cursor-pointer items-center gap-2 rounded-xl px-4 py-2 transition-all ${
             activeTab === "credentials"
-              ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-xs"
-              : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+              ? "bg-zinc-900 text-white shadow-xs dark:bg-zinc-100 dark:text-zinc-900"
+              : "bg-zinc-100 text-zinc-600 hover:text-zinc-900 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
           }`}
         >
           <Key className="h-3.5 w-3.5" />
@@ -202,10 +268,10 @@ console.log("LIFE OS Context:", context);`;
 
         <button
           onClick={() => setActiveTab("prompt")}
-          className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-2 ${
+          className={`flex cursor-pointer items-center gap-2 rounded-xl px-4 py-2 transition-all ${
             activeTab === "prompt"
-              ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-xs"
-              : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+              ? "bg-zinc-900 text-white shadow-xs dark:bg-zinc-100 dark:text-zinc-900"
+              : "bg-zinc-100 text-zinc-600 hover:text-zinc-900 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
           }`}
         >
           <FileText className="h-3.5 w-3.5" />
@@ -214,10 +280,10 @@ console.log("LIFE OS Context:", context);`;
 
         <button
           onClick={() => setActiveTab("tools")}
-          className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-2 ${
+          className={`flex cursor-pointer items-center gap-2 rounded-xl px-4 py-2 transition-all ${
             activeTab === "tools"
-              ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-xs"
-              : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+              ? "bg-zinc-900 text-white shadow-xs dark:bg-zinc-100 dark:text-zinc-900"
+              : "bg-zinc-100 text-zinc-600 hover:text-zinc-900 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
           }`}
         >
           <Wrench className="h-3.5 w-3.5" />
@@ -226,10 +292,10 @@ console.log("LIFE OS Context:", context);`;
 
         <button
           onClick={() => setActiveTab("playground")}
-          className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-2 ${
+          className={`flex cursor-pointer items-center gap-2 rounded-xl px-4 py-2 transition-all ${
             activeTab === "playground"
               ? "bg-indigo-600 text-white shadow-xs"
-              : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+              : "bg-zinc-100 text-zinc-600 hover:text-zinc-900 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
           }`}
         >
           <Terminal className="h-3.5 w-3.5" />
@@ -241,19 +307,19 @@ console.log("LIFE OS Context:", context);`;
       {activeTab === "credentials" && (
         <div className="space-y-6">
           {/* Endpoint & Key Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {/* Endpoint URL Card */}
-            <div className="p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 space-y-3">
+            <div className="space-y-3 rounded-3xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400">
+                  <div className="rounded-xl bg-indigo-50 p-2 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400">
                     <Code className="h-4 w-4" />
                   </div>
                   <h3 className="text-xs font-black text-zinc-900 dark:text-zinc-100">
                     {t.agentPage.endpointUrl}
                   </h3>
                 </div>
-                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+                <span className="rounded-md bg-zinc-100 px-2 py-0.5 text-[10px] font-extrabold text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
                   GET / POST
                 </span>
               </div>
@@ -262,13 +328,17 @@ console.log("LIFE OS Context:", context);`;
                 <Input
                   readOnly
                   value={endpointUrl}
-                  className="h-10 text-xs font-mono bg-zinc-50 dark:bg-zinc-800 rounded-xl"
+                  className="h-10 rounded-xl bg-zinc-50 font-mono text-xs dark:bg-zinc-800"
                 />
                 <Button
                   onClick={() => handleCopy(endpointUrl, setCopiedUrl)}
-                  className="h-10 px-3.5 rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 cursor-pointer"
+                  className="h-10 cursor-pointer rounded-xl bg-zinc-900 px-3.5 text-white dark:bg-zinc-100 dark:text-zinc-900"
                 >
-                  {copiedUrl ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
+                  {copiedUrl ? (
+                    <Check className="h-4 w-4 text-emerald-400" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
                 </Button>
               </div>
               <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
@@ -277,10 +347,10 @@ console.log("LIFE OS Context:", context);`;
             </div>
 
             {/* API Key Card */}
-            <div className="p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 space-y-3">
+            <div className="space-y-3 rounded-3xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="p-2 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400">
+                  <div className="rounded-xl bg-amber-50 p-2 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400">
                     <Key className="h-4 w-4" />
                   </div>
                   <h3 className="text-xs font-black text-zinc-900 dark:text-zinc-100">
@@ -291,9 +361,11 @@ console.log("LIFE OS Context:", context);`;
                   onClick={handleRotateKey}
                   disabled={isRotating}
                   variant="outline"
-                  className="h-7 text-[10px] font-bold rounded-lg gap-1 border-zinc-200 dark:border-zinc-700 cursor-pointer"
+                  className="h-7 cursor-pointer gap-1 rounded-lg border-zinc-200 text-[10px] font-bold dark:border-zinc-700"
                 >
-                  <RotateCw className={`h-3 w-3 ${isRotating ? "animate-spin" : ""}`} />
+                  <RotateCw
+                    className={`h-3 w-3 ${isRotating ? "animate-spin" : ""}`}
+                  />
                   <span>{t.agentPage.rotateKey}</span>
                 </Button>
               </div>
@@ -303,67 +375,78 @@ console.log("LIFE OS Context:", context);`;
                   readOnly
                   type={showKey ? "text" : "password"}
                   value={apiKey}
-                  className="h-10 text-xs font-mono bg-zinc-50 dark:bg-zinc-800 rounded-xl"
+                  className="h-10 rounded-xl bg-zinc-50 font-mono text-xs dark:bg-zinc-800"
                 />
                 <Button
                   onClick={() => setShowKey(!showKey)}
                   variant="outline"
-                  className="h-10 px-3 rounded-xl border-zinc-200 dark:border-zinc-700 cursor-pointer"
+                  className="h-10 cursor-pointer rounded-xl border-zinc-200 px-3 dark:border-zinc-700"
                 >
-                  {showKey ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showKey ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
                 </Button>
                 <Button
                   onClick={() => handleCopy(apiKey, setCopiedKey)}
-                  className="h-10 px-3.5 rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 cursor-pointer"
+                  className="h-10 cursor-pointer rounded-xl bg-zinc-900 px-3.5 text-white dark:bg-zinc-100 dark:text-zinc-900"
                 >
-                  {copiedKey ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
+                  {copiedKey ? (
+                    <Check className="h-4 w-4 text-emerald-400" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
                 </Button>
               </div>
               <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
-                Bearer Token Header: <code className="font-mono text-[10px] bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">Authorization: Bearer lsk_...</code>
+                Bearer Token Header:{" "}
+                <code className="rounded bg-zinc-100 px-1 py-0.5 font-mono text-[10px] dark:bg-zinc-800">
+                  Authorization: Bearer lsk_...
+                </code>
               </p>
             </div>
           </div>
 
           {/* Security Notice */}
-          <div className="p-4 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800/60 flex items-start gap-3">
-            <ShieldCheck className="h-5 w-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
-            <p className="text-xs text-indigo-900 dark:text-indigo-200 leading-relaxed">
+          <div className="flex items-start gap-3 rounded-2xl border border-indigo-200 bg-indigo-50/70 p-4 dark:border-indigo-800/60 dark:bg-indigo-950/30">
+            <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-indigo-600 dark:text-indigo-400" />
+            <p className="text-xs leading-relaxed text-indigo-900 dark:text-indigo-200">
               {t.agentPage.authNotice}
             </p>
           </div>
 
           {/* Code Snippets Card */}
-          <div className="p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 space-y-4">
-            <h3 className="text-xs font-black text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+          <div className="space-y-4 rounded-3xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+            <h3 className="flex items-center gap-2 text-xs font-black text-zinc-900 dark:text-zinc-100">
               <Code className="h-4 w-4 text-zinc-500" />
               <span>{t.agentPage.codeExamples}</span>
             </h3>
 
-            <div className="space-y-3">
+            <div className="space-y-3" dir="ltr">
               <div>
-                <Label className="text-[11px] font-bold text-zinc-500 mb-1 block">
+                <Label className="mb-1 block text-[11px] font-bold text-zinc-500">
                   cURL (GET Context)
                 </Label>
-                <pre className="p-4 rounded-2xl bg-zinc-950 text-zinc-200 font-mono text-xs overflow-x-auto border border-zinc-800">
+                <pre className="overflow-x-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-4 font-mono text-xs text-zinc-200">
                   {curlSnippet}
                 </pre>
               </div>
 
               <div>
-                <Label className="text-[11px] font-bold text-zinc-500 mb-1 block">
+                <Label className="mb-1 block text-[11px] font-bold text-zinc-500">
                   cURL (POST Execute Action)
                 </Label>
-                <pre className="p-4 rounded-2xl bg-zinc-950 text-zinc-200 font-mono text-xs overflow-x-auto border border-zinc-800">
+                <pre className="overflow-x-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-4 font-mono text-xs text-zinc-200">
                   {curlPostSnippet}
                 </pre>
               </div>
 
               <div>
-                <Label className="text-[11px] font-bold text-zinc-500 mb-1 block">
+                <Label className="mb-1 block text-[11px] font-bold text-zinc-500">
                   Node.js / JavaScript Fetch
                 </Label>
-                <pre className="p-4 rounded-2xl bg-zinc-950 text-zinc-200 font-mono text-xs overflow-x-auto border border-zinc-800">
+                <pre className="overflow-x-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-4 font-mono text-xs text-zinc-200">
                   {jsFetchSnippet}
                 </pre>
               </div>
@@ -375,8 +458,8 @@ console.log("LIFE OS Context:", context);`;
       {/* TAB 2: MASTER SYSTEM PROMPT */}
       {activeTab === "prompt" && (
         <div className="space-y-4">
-          <div className="p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="space-y-4 rounded-3xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+            <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
               <div>
                 <h3 className="text-sm font-black text-zinc-900 dark:text-zinc-100">
                   {t.agentPage.promptTitle}
@@ -387,20 +470,29 @@ console.log("LIFE OS Context:", context);`;
               </div>
 
               <Button
-                onClick={() => handleCopy(HERMES_MASTER_SYSTEM_PROMPT, setCopiedPrompt)}
-                className="gap-2 rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 cursor-pointer text-xs font-bold shrink-0"
+                onClick={() =>
+                  handleCopy(HERMES_MASTER_SYSTEM_PROMPT, setCopiedPrompt)
+                }
+                className="shrink-0 cursor-pointer gap-2 rounded-xl bg-zinc-900 text-xs font-bold text-white dark:bg-zinc-100 dark:text-zinc-900"
               >
-                {copiedPrompt ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
+                {copiedPrompt ? (
+                  <Check className="h-4 w-4 text-emerald-400" />
+                ) : (
+                  <Copy className="h-4 w-4" />
+                )}
                 <span>{t.agentPage.copyPrompt}</span>
               </Button>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-xs text-amber-800 dark:text-amber-300 flex items-start gap-2">
-              <Sparkles className="h-4 w-4 shrink-0 mt-0.5" />
+            <div className="flex items-start gap-2 rounded-2xl border border-amber-200 bg-amber-50 p-3.5 text-xs text-amber-800 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-300">
+              <Sparkles className="mt-0.5 h-4 w-4 shrink-0" />
               <span>{t.agentPage.promptUsageNotice}</span>
             </div>
 
-            <pre className="p-5 rounded-2xl bg-zinc-950 text-zinc-200 font-mono text-xs leading-relaxed overflow-x-auto whitespace-pre-wrap border border-zinc-800 max-h-[500px]">
+            <pre
+              dir="ltr"
+              className="max-h-[500px] overflow-x-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-5 font-mono text-xs leading-relaxed whitespace-pre-wrap text-zinc-200"
+            >
               {HERMES_MASTER_SYSTEM_PROMPT}
             </pre>
           </div>
@@ -410,8 +502,8 @@ console.log("LIFE OS Context:", context);`;
       {/* TAB 3: TOOL CALLING SPECS */}
       {activeTab === "tools" && (
         <div className="space-y-4">
-          <div className="p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="space-y-4 rounded-3xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+            <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
               <div>
                 <h3 className="text-sm font-black text-zinc-900 dark:text-zinc-100">
                   {t.agentPage.toolsTitle}
@@ -428,14 +520,21 @@ console.log("LIFE OS Context:", context);`;
                     setCopiedTools,
                   )
                 }
-                className="gap-2 rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 cursor-pointer text-xs font-bold shrink-0"
+                className="shrink-0 cursor-pointer gap-2 rounded-xl bg-zinc-900 text-xs font-bold text-white dark:bg-zinc-100 dark:text-zinc-900"
               >
-                {copiedTools ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
+                {copiedTools ? (
+                  <Check className="h-4 w-4 text-emerald-400" />
+                ) : (
+                  <Copy className="h-4 w-4" />
+                )}
                 <span>{t.agentPage.copyTools}</span>
               </Button>
             </div>
 
-            <pre className="p-5 rounded-2xl bg-zinc-950 text-emerald-400 font-mono text-xs leading-relaxed overflow-x-auto border border-zinc-800 max-h-[550px]">
+            <pre
+              dir="ltr"
+              className="max-h-[550px] overflow-x-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-5 font-mono text-xs leading-relaxed text-emerald-400"
+            >
               {JSON.stringify(HERMES_TOOL_DEFINITIONS, null, 2)}
             </pre>
           </div>
@@ -445,7 +544,7 @@ console.log("LIFE OS Context:", context);`;
       {/* TAB 4: INTERACTIVE TEST PLAYGROUND */}
       {activeTab === "playground" && (
         <div className="space-y-6">
-          <div className="p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 space-y-5">
+          <div className="space-y-5 rounded-3xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
             <div>
               <h3 className="text-sm font-black text-zinc-900 dark:text-zinc-100">
                 {t.agentPage.playgroundTitle}
@@ -456,7 +555,10 @@ console.log("LIFE OS Context:", context);`;
             </div>
 
             {/* Quick Context Inspector */}
-            <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 space-y-3">
+            <div
+              dir="ltr"
+              className="space-y-3 rounded-2xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-800/40"
+            >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
                   1. Live Context Retrieval (GET /api/agent/hermes)
@@ -465,15 +567,19 @@ console.log("LIFE OS Context:", context);`;
                   onClick={handleTestContextFetch}
                   disabled={isFetchingContext}
                   size="sm"
-                  className="rounded-xl gap-2 text-xs font-bold cursor-pointer bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                  className="cursor-pointer gap-2 rounded-xl bg-zinc-900 text-xs font-bold text-white dark:bg-zinc-100 dark:text-zinc-900"
                 >
                   <Play className="h-3.5 w-3.5" />
-                  <span>{isFetchingContext ? t.agentPage.loadingContext : t.agentPage.testContextBtn}</span>
+                  <span>
+                    {isFetchingContext
+                      ? t.agentPage.loadingContext
+                      : t.agentPage.testContextBtn}
+                  </span>
                 </Button>
               </div>
 
               {contextData && (
-                <pre className="p-4 rounded-xl bg-zinc-950 text-sky-300 font-mono text-[11px] overflow-x-auto max-h-72 border border-zinc-800">
+                <pre className="max-h-72 overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950 p-4 font-mono text-[11px] text-sky-300">
                   {contextData}
                 </pre>
               )}
@@ -481,7 +587,7 @@ console.log("LIFE OS Context:", context);`;
 
             {/* Action Simulator */}
             <div className="space-y-4 pt-2">
-              <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300 block">
+              <span className="block text-xs font-bold text-zinc-700 dark:text-zinc-300">
                 2. Action Execution Simulator (POST /api/agent/hermes)
               </span>
 
@@ -498,10 +604,10 @@ console.log("LIFE OS Context:", context);`;
                   <button
                     key={act}
                     onClick={() => handleActionChange(act)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    className={`cursor-pointer rounded-xl px-3 py-1.5 text-xs font-bold transition-all ${
                       selectedAction === act
                         ? "bg-indigo-600 text-white shadow-xs"
-                        : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+                        : "bg-zinc-100 text-zinc-600 hover:text-zinc-900 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
                     }`}
                   >
                     {act}
@@ -517,17 +623,21 @@ console.log("LIFE OS Context:", context);`;
                   value={playgroundPayloadText}
                   onChange={(e) => setPlaygroundPayloadText(e.target.value)}
                   rows={6}
-                  className="font-mono text-xs rounded-2xl bg-zinc-50 dark:bg-zinc-800/80"
+                  className="rounded-2xl bg-zinc-50 font-mono text-xs dark:bg-zinc-800/80"
                 />
               </div>
 
               <Button
                 onClick={handleExecutePlayground}
                 disabled={isExecuting}
-                className="gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs cursor-pointer"
+                className="cursor-pointer gap-2 rounded-xl bg-indigo-600 text-xs font-bold text-white hover:bg-indigo-700"
               >
                 <Send className="h-4 w-4" />
-                <span>{isExecuting ? t.agentPage.executing : t.agentPage.executeAction}</span>
+                <span>
+                  {isExecuting
+                    ? t.agentPage.executing
+                    : t.agentPage.executeAction}
+                </span>
               </Button>
 
               {playgroundResponse && (
@@ -535,7 +645,7 @@ console.log("LIFE OS Context:", context);`;
                   <Label className="text-xs font-bold text-zinc-500">
                     {t.agentPage.responseTitle}
                   </Label>
-                  <pre className="p-4 rounded-2xl bg-zinc-950 text-emerald-400 font-mono text-xs overflow-x-auto border border-zinc-800">
+                  <pre className="overflow-x-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-4 font-mono text-xs text-emerald-400">
                     {playgroundResponse}
                   </pre>
                 </div>
