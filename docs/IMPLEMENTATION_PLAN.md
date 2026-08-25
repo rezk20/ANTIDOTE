@@ -96,7 +96,7 @@ It serves one user (the owner): a MERN/Next.js developer in Egypt with ~18,000 E
 - **Capture is a day-one mechanism:** fast capture ships with the app shell (Phase F2), before any other feature.
 - Conversion (→ Task / Note / Idea / Goal / Reminder / Question) ships with the Notes phase. Never auto-delete.
 
-### FR-12 Reviews (§18, §19, §20, §38, §84, §95)
+### FR-12 Reviews (§18, §19, §20, §38, §84, )
 - Weekly review (13 questions) with multi-dimensional scores (Revenue, Career, Financial, Relationship, Execution, Routine).
 - Monthly review with metrics + KEEP/START/STOP/DOUBLE DOWN.
 - Quarterly review; Year-in-Review page.
@@ -1048,11 +1048,11 @@ Rules: tests live in `tests/`; `npm run test` (vitest), `npm run test:e2e` (play
 **Dependencies:** Phase 8 (reviews framework), Phase 5 (finance data).
 **Implementation tasks:**
 1. Monthly review flow (§19 metrics + KEEP/START/STOP/DOUBLE DOWN) prefilled from real data.
-2. Quarterly review (§20) + Year in Review (§95).
+2. Quarterly review  + Year in Review .
 3. Finance alert logic (§49): behind-target, income-rise, unexpected-expense — suggestion cards, never decisions.
 **Acceptance criteria:** monthly review prefills real metrics; alerts fire per unit-tested conditions; tone non-punitive.
 **Tests:** unit: alert conditions; E2E: monthly review submit.
-**Definition of done:** §19/§20/§49/§95 covered.
+**Definition of done:** §19/§20/§49/ covered.
 
 ---
 

@@ -39,6 +39,7 @@ interface WeeklyReviewWizardProps {
   periodStart: string;
   periodEnd: string;
   onFinished?: () => void;
+  onClose?: () => void;
 }
 
 export function WeeklyReviewWizard({
@@ -47,6 +48,7 @@ export function WeeklyReviewWizard({
   periodStart,
   periodEnd,
   onFinished,
+  onClose,
 }: WeeklyReviewWizardProps) {
   const { t, isRtl } = useLocale();
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3 | 4>(1);
@@ -110,8 +112,8 @@ export function WeeklyReviewWizard({
 
       if (res.ok) {
         setStatusMessage(t.reviewsPage.reviewSavedSuccess);
-        if (isFinalizing && onFinished) {
-          onFinished();
+        if (isFinalizing) {
+          (onClose || onFinished)?.();
         }
       } else {
         setStatusMessage(res.error || "حدث خطأ أثناء الحفظ");
@@ -479,6 +481,15 @@ export function WeeklyReviewWizard({
             >
               {isRtl ? <ArrowRight className="h-3.5 w-3.5" /> : <ArrowLeft className="h-3.5 w-3.5" />}
               <span>{t.reviewsPage.prevStep}</span>
+            </Button>
+          ) : onClose ? (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onClose}
+              className="text-xs font-bold gap-1.5 cursor-pointer rounded-xl"
+            >
+              <span>{isRtl ? "إلغاء" : "Cancel"}</span>
             </Button>
           ) : (
             <div />

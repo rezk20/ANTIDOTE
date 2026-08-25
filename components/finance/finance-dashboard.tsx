@@ -10,6 +10,8 @@ import { MarriageExpensesList } from "./marriage-expenses-list";
 import { BucketCard } from "./bucket-card";
 import { BucketModal } from "./bucket-modal";
 import { BucketDetailModal } from "./bucket-detail-modal";
+import { FinanceAlertsBanner } from "./finance-alerts-banner";
+import { evaluateFinanceAlerts } from "@/lib/logic/alerts";
 import { useLocale } from "@/components/providers/locale-provider";
 import {
   Wallet,
@@ -57,6 +59,13 @@ export function FinanceDashboard({ data }: { data: FinanceSummaryData }) {
     },
   ];
 
+  const alerts = evaluateFinanceAlerts({
+    transactions: data.allTransactions,
+    marriageExpenses: data.marriageExpenses,
+    profile: data.profile,
+    currentMonth: data.selectedMonth,
+  });
+
   return (
     <div className="space-y-6">
       {/* Top Header */}
@@ -95,6 +104,9 @@ export function FinanceDashboard({ data }: { data: FinanceSummaryData }) {
       {/* Tab 1: Overview */}
       {activeTab === "overview" && (
         <div className="animate-in fade-in space-y-6 duration-150">
+          {/* Proactive Finance Suggestion Alerts (§49) */}
+          <FinanceAlertsBanner alerts={alerts} />
+
           {/* Monthly KPI Summary Cards */}
           <MonthlySummaryCards
             totals={data.monthlyTotals}

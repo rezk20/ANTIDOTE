@@ -523,6 +523,72 @@ export interface TranslationSchema {
     };
     convertTopThree: string;
     topThreeConvertedSuccess: string;
+    monthlyTab: string;
+    quarterlyTab: string;
+    yearlyTab: string;
+    monthlyReview: {
+      title: string;
+      subtitle: string;
+      prefilledTitle: string;
+      keep: string;
+      keepPh: string;
+      start: string;
+      startPh: string;
+      stop: string;
+      stopPh: string;
+      doubleDown: string;
+      doubleDownPh: string;
+      reflection: string;
+      reflectionPh: string;
+      wins: string;
+      winsPh: string;
+      challenges: string;
+      challengesPh: string;
+      relationship: string;
+      relationshipPh: string;
+      nextFocus: string;
+      nextFocusPh: string;
+    };
+    quarterlyReview: {
+      title: string;
+      subtitle: string;
+      revenueEvaluation: string;
+      revenueEvaluationPh: string;
+      pipelineHealth: string;
+      pipelineHealthPh: string;
+      marriageReadiness: string;
+      marriageReadinessPh: string;
+      strategyPivot: string;
+      strategyPivotPh: string;
+      timeReallocation: string;
+      timeReallocationPh: string;
+      nextGoals: string;
+      nextGoalsPh: string;
+    };
+    yearlyReview: {
+      title: string;
+      subtitle: string;
+      biggestClient: string;
+      biggestClientPh: string;
+      bestProject: string;
+      bestProjectPh: string;
+      biggestMistake: string;
+      biggestMistakePh: string;
+      biggestLesson: string;
+      biggestLessonPh: string;
+      relationshipHighlights: string;
+      relationshipHighlightsPh: string;
+      careerGrowth: string;
+      careerGrowthPh: string;
+      whatChanged: string;
+      whatChangedPh: string;
+      nextYearPlan: string;
+      nextYearPlanPh: string;
+    };
+    financeAlerts: {
+      title: string;
+      subtitle: string;
+    };
   };
   marriagePage: {
     title: string;
@@ -1089,7 +1155,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     todayPlan: {
       title: "Today's Mission & Execution",
-      subtitle: "Align your daily capacity, execute your Top 3, and protect your revenue and personal priorities.",
+      subtitle:
+        "Align your daily capacity, execute your Top 3, and protect your revenue and personal priorities.",
       energyLevel: "Energy Level",
       energyLow: "Low Energy (Lighter load advised)",
       energyHigh: "High Energy (Prime execution state)",
@@ -1099,20 +1166,27 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       capacityOptimal: "Optimal load aligned with available capacity.",
       hoursUnit: "hours",
       fridayRule: "Friday Rule Active",
-      fridayRuleDesc: "Lighter sprint load applied. Focus on reviews, admin, and weekly closeout.",
+      fridayRuleDesc:
+        "Lighter sprint load applied. Focus on reviews, admin, and weekly closeout.",
       focusQuestion: "The One Thing That Makes Today a Win",
-      focusQuestionPlaceholder: "If I only accomplish one major milestone today, it must be...",
+      focusQuestionPlaceholder:
+        "If I only accomplish one major milestone today, it must be...",
       topThreeTitle: "Top 3 Daily Focus",
-      topThreeSubtitle: "The three highest-impact tasks to execute before anything else today.",
+      topThreeSubtitle:
+        "The three highest-impact tasks to execute before anything else today.",
       topThreeEmpty: "No Top 3 tasks selected yet. Pin critical tasks below.",
       actionTriad: "Daily Action Triad",
-      actionTriadSubtitle: "Guaranteed balanced daily progress across money, personal, and relationship.",
+      actionTriadSubtitle:
+        "Guaranteed balanced daily progress across money, personal, and relationship.",
       moneyAction: "Revenue / Money Action",
-      moneyActionDesc: "A direct income-generating step (proposal, client delivery, or sales outreach).",
+      moneyActionDesc:
+        "A direct income-generating step (proposal, client delivery, or sales outreach).",
       personalAction: "Personal / Health Action",
-      personalActionDesc: "A key personal habit, workout, or self-care priority.",
+      personalActionDesc:
+        "A key personal habit, workout, or self-care priority.",
       relationshipAction: "Relationship / Marriage Action",
-      relationshipActionDesc: "A meaningful touchpoint, conversation, or wedding planning step.",
+      relationshipActionDesc:
+        "A meaningful touchpoint, conversation, or wedding planning step.",
       selectTask: "Assign a task...",
       noTaskAssigned: "No task assigned",
       scheduledTasks: "Scheduled for Today",
@@ -1122,7 +1196,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       incompleteTask: "Revert to Incomplete",
       shutdownDay: "Shutdown & Close Day",
       shutdownTitle: "Evening Shutdown & Daily Review",
-      shutdownSubtitle: "Close out today's execution cleanly and set up tomorrow's starting point.",
+      shutdownSubtitle:
+        "Close out today's execution cleanly and set up tomorrow's starting point.",
       shutdownConfirm: "Confirm Day Shutdown",
       dayClosed: "Day Successfully Closed",
       dayClosedDesc: "Great work today. Rest up and start fresh tomorrow.",
@@ -1131,9 +1206,11 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       tasksCompletedToday: "Tasks Completed Today",
       rolloverTasks: "Rollover Tasks for Tomorrow",
       tomorrowFocus: "Tomorrow's Starting Point",
-      tomorrowFocusPlaceholder: "What is the very first task to tackle tomorrow morning?",
+      tomorrowFocusPlaceholder:
+        "What is the very first task to tackle tomorrow morning?",
       shutdownNotes: "Shutdown Reflection & Notes",
-      shutdownNotesPlaceholder: "Any quick thoughts, wins, or lessons from today...",
+      shutdownNotesPlaceholder:
+        "Any quick thoughts, wins, or lessons from today...",
       generatePlan: "Generate Day Plan",
       planSaved: "Day plan updated successfully.",
     },
@@ -1152,7 +1229,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       followupCardTitle: "Next Client Follow-Up",
       followupCardSubtitle: "Upcoming pipeline outreach touchpoint.",
       quickDumpCardTitle: "Quick Brain Dump",
-      quickDumpCardSubtitle: "Capture raw thoughts instantly without leaving your dashboard.",
+      quickDumpCardSubtitle:
+        "Capture raw thoughts instantly without leaving your dashboard.",
       quickDumpPlaceholder: "Type an idea, task, or thought and press Enter...",
       quickDumpSubmit: "Capture",
       quickDumpSuccess: "Captured to Brain Dump inbox!",
@@ -1185,7 +1263,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     notesPage: {
       title: "Knowledge & Notes Engine",
-      subtitle: "Markdown notes, 13 structured folders, tags, and seamless knowledge organization.",
+      subtitle:
+        "Markdown notes, 13 structured folders, tags, and seamless knowledge organization.",
       newNote: "Create Note",
       editNote: "Edit Note",
       noteTitle: "Note Title",
@@ -1196,7 +1275,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       tags: "Tags",
       tagsPlaceholder: "Type a tag and press Enter...",
       content: "Markdown Content",
-      contentPlaceholder: "Write your note in Markdown. Supports # Headings, - Lists, - [ ] Checklists, ```code, > Quotes...",
+      contentPlaceholder:
+        "Write your note in Markdown. Supports # Headings, - Lists, - [ ] Checklists, ```code, > Quotes...",
       pinnedNotes: "Pinned Notes",
       allNotes: "All Active Notes",
       archivedNotes: "Archived Notes",
@@ -1210,7 +1290,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       readingTime: "min read",
       wordCount: "words",
       noNotesTitle: "No Notes in this Folder",
-      noNotesDesc: "Create a new note or convert an idea from your Brain Dump inbox.",
+      noNotesDesc:
+        "Create a new note or convert an idea from your Brain Dump inbox.",
       noteDetails: "Note Document Dossier",
       previousPage: "Previous",
       nextPage: "Next",
@@ -1261,7 +1342,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     reviewsPage: {
       title: "Reviews & Reflection Engine",
-      subtitle: "Weekly calibration, multi-dimensional progress scoring, and strategic blueprinting.",
+      subtitle:
+        "Weekly calibration, multi-dimensional progress scoring, and strategic blueprinting.",
       weeklyTab: "Weekly Review",
       dailyTab: "Daily Reflections",
       startWeeklyReview: "Start Friday Weekly Review",
@@ -1269,20 +1351,26 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       resumeWeeklyReview: "Resume Review",
       reviewHistory: "Past Reviews Timeline",
       noReviewsTitle: "No Completed Reviews Yet",
-      noReviewsDesc: "Complete your first Friday review to calibrate progress and establish historical momentum.",
+      noReviewsDesc:
+        "Complete your first Friday review to calibrate progress and establish historical momentum.",
       dailyReflectionsTitle: "Daily Reflections History",
-      noDailyReflections: "No daily shutdown reflections found yet. Complete your daily shutdown in the Today Plan.",
+      noDailyReflections:
+        "No daily shutdown reflections found yet. Complete your daily shutdown in the Today Plan.",
       weekOf: "Week of",
       overallBalance: "Overall Balance",
       reviewDossier: "Review Dossier",
       step1Title: "1. Reality & Metrics",
-      step1Subtitle: "Review auto-aggregated financial and execution numbers and weekly wins/misses.",
+      step1Subtitle:
+        "Review auto-aggregated financial and execution numbers and weekly wins/misses.",
       step2Title: "2. Dimension Scoring",
-      step2Subtitle: "Rate progress across the 6 core pillars of life and business on a 1–5 scale.",
+      step2Subtitle:
+        "Rate progress across the 6 core pillars of life and business on a 1–5 scale.",
       step3Title: "3. Strategy & Reflection",
-      step3Subtitle: "Examine client pipeline, learning insights, relationship harmony, and physical habits.",
+      step3Subtitle:
+        "Examine client pipeline, learning insights, relationship harmony, and physical habits.",
       step4Title: "4. Next Week Blueprint",
-      step4Subtitle: "Establish START/STOP/CONTINUE adjustments and select your Top 3 Non-Negotiable Priorities.",
+      step4Subtitle:
+        "Establish START/STOP/CONTINUE adjustments and select your Top 3 Non-Negotiable Priorities.",
       nextStep: "Next Step",
       prevStep: "Previous Step",
       completeReview: "Complete & Finalize Review",
@@ -1304,48 +1392,161 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         career: "Career & Delivery",
         careerDesc: "Client satisfaction, code delivery, and technical quality",
         financial: "Financial Discipline",
-        financialDesc: "Controlling expenses, bucket savings, and investment consistency",
+        financialDesc:
+          "Controlling expenses, bucket savings, and investment consistency",
         relationship: "Relationship & Home",
-        relationshipDesc: "Quality time with partner, wedding prep, and shared harmony",
+        relationshipDesc:
+          "Quality time with partner, wedding prep, and shared harmony",
         execution: "Execution & Deep Work",
-        executionDesc: "Deep work blocks, non-negotiable tasks completion, and focus",
+        executionDesc:
+          "Deep work blocks, non-negotiable tasks completion, and focus",
         routine: "Energy & Habits",
-        routineDesc: "Sleep quality, morning/evening routine stability, and health",
+        routineDesc:
+          "Sleep quality, morning/evening routine stability, and health",
       },
       questions: {
         q_wins: "What were your biggest wins and breakthroughs this week?",
-        q_wins_ph: "E.g., Closed a new freelance client, hit savings milestone, completed core auth engine...",
+        q_wins_ph:
+          "E.g., Closed a new freelance client, hit savings milestone, completed core auth engine...",
         q_misses: "What slipped through the cracks or fell behind schedule?",
-        q_misses_ph: "E.g., Delayed sending proposal by 2 days, missed gym twice...",
+        q_misses_ph:
+          "E.g., Delayed sending proposal by 2 days, missed gym twice...",
         q_revenue_reflection: "Reflection on actual revenue vs weekly target:",
-        q_revenue_reflection_ph: "How did income perform relative to your EGP goals? What drove the numbers?",
-        q_time_drain: "Where was time or energy drained by friction or distractions?",
-        q_time_drain_ph: "E.g., Excessive context switching on Discord, unorganized task priorities...",
+        q_revenue_reflection_ph:
+          "How did income perform relative to your EGP goals? What drove the numbers?",
+        q_time_drain:
+          "Where was time or energy drained by friction or distractions?",
+        q_time_drain_ph:
+          "E.g., Excessive context switching on Discord, unorganized task priorities...",
         q_client_health: "Client Projects & Pipeline Health:",
-        q_client_health_ph: "Status of active client deliverables, pending proposals, and testimonials...",
+        q_client_health_ph:
+          "Status of active client deliverables, pending proposals, and testimonials...",
         q_learning_growth: "Strategic Learning & Skills Practiced:",
-        q_learning_growth_ph: "What technical or business concept did you master this week?",
+        q_learning_growth_ph:
+          "What technical or business concept did you master this week?",
         q_relationship_check: "Relationship & Marriage Preparation:",
-        q_relationship_check_ph: "Shared moments, emotional support, and marriage checklist progress...",
+        q_relationship_check_ph:
+          "Shared moments, emotional support, and marriage checklist progress...",
         q_habits_energy: "Energy, Sleep & Habit Stability:",
-        q_habits_energy_ph: "How was your physical energy, shutdown discipline, and sleep rhythm?",
+        q_habits_energy_ph:
+          "How was your physical energy, shutdown discipline, and sleep rhythm?",
         q_start: "What should you START doing next week?",
-        q_start_ph: "E.g., Implement strict 2-hour morning deep work blocks before checking messages...",
+        q_start_ph:
+          "E.g., Implement strict 2-hour morning deep work blocks before checking messages...",
         q_stop: "What should you STOP doing immediately?",
         q_stop_ph: "E.g., Stop answering non-urgent client pings after 8 PM...",
-        q_continue: "What worked exceptionally well that you should DOUBLE DOWN on?",
-        q_continue_ph: "E.g., Daily shutdown ritual created incredible clarity...",
-        q_next_top_three: "Top 3 Non-Negotiable Strategic Priorities for Next Week:",
-        q_next_top_three_ph: "1. Ship client MVP\n2. Transfer monthly marriage savings\n3. Send 3 new proposals",
-        q_system_tweak: "One concrete tweak to your workflow, tools, or schedule:",
-        q_system_tweak_ph: "E.g., Block Friday 3 PM specifically for Weekly Review...",
+        q_continue:
+          "What worked exceptionally well that you should DOUBLE DOWN on?",
+        q_continue_ph:
+          "E.g., Daily shutdown ritual created incredible clarity...",
+        q_next_top_three:
+          "Top 3 Non-Negotiable Strategic Priorities for Next Week:",
+        q_next_top_three_ph:
+          "1. Ship client MVP\n2. Transfer monthly marriage savings\n3. Send 3 new proposals",
+        q_system_tweak:
+          "One concrete tweak to your workflow, tools, or schedule:",
+        q_system_tweak_ph:
+          "E.g., Block Friday 3 PM specifically for Weekly Review...",
       },
-      convertTopThree: "Create Top 3 Priorities as Actionable Tasks for Next Week",
-      topThreeConvertedSuccess: "Top 3 priorities created as tasks for next week!",
+      convertTopThree:
+        "Create Top 3 Priorities as Actionable Tasks for Next Week",
+      topThreeConvertedSuccess:
+        "Top 3 priorities created as tasks for next week!",
+      monthlyTab: "Monthly ",
+      quarterlyTab: "Quarterly ",
+      yearlyTab: "Year in Review ",
+      monthlyReview: {
+        title: "Monthly Strategic Review ",
+        subtitle:
+          "Review monthly performance, financials, deliverables, and the 4-Quadrant KEEP/START/STOP/DOUBLE DOWN roadmap.",
+        prefilledTitle: "Recorded Monthly System Metrics",
+        keep: "KEEP (What is working successfully and should be maintained?)",
+        keepPh:
+          "E.g., Morning deep work routine, client delivery sprint rhythm...",
+        start: "START (What high-impact action should you start immediately?)",
+        startPh: "E.g., Outreach cadence of 5 new leads weekly...",
+        stop: "STOP (What must you stop doing to protect time & energy?)",
+        stopPh:
+          "E.g., Unplanned meetings, scope creep without change requests...",
+        doubleDown:
+          "DOUBLE DOWN (Where should you invest 2x effort for maximum payoff?)",
+        doubleDownPh:
+          "E.g., Discord bot development services with recurring retainers...",
+        reflection: "Monthly Strategic Reflection & Key Observations:",
+        reflectionPh: "What were the macro lessons of this past month?",
+        wins: "Biggest Wins & Highlights:",
+        winsPh:
+          "Key milestones, financial targets hit, personal breakthroughs...",
+        challenges: "Bottlenecks & Frictions Encountered:",
+        challengesPh: "Where did projects or personal rhythm slow down?",
+        relationship: "Relationship & Marriage Preparation Progress:",
+        relationshipPh: "Quality time, shared memories, readiness checklist...",
+        nextFocus: "Primary Focus & Target for Next Month:",
+        nextFocusPh:
+          "The single most important outcome for the upcoming month...",
+      },
+      quarterlyReview: {
+        title: "Quarterly Strategic Review ",
+        subtitle:
+          "Evaluate revenue streams, pipeline health, marriage readiness, and pivot resources dynamically.",
+        revenueEvaluation: "Quarter Revenue Performance vs Targets:",
+        revenueEvaluationPh:
+          "Did income meet the quarterly target? What drove the results?",
+        pipelineHealth: "Client Pipeline & Career Positioning:",
+        pipelineHealthPh:
+          "Conversion rates, lead generation, client retention...",
+        marriageReadiness: "Marriage Timeline & Financial Readiness Check:",
+        marriageReadinessPh:
+          "Target vs actual savings trajectory, milestone status...",
+        strategyPivot:
+          "Strategy Adjustment & Pivots (if any stream underperformed):",
+        strategyPivotPh:
+          "What strategic shift is needed now instead of waiting for year-end?",
+        timeReallocation: "Time & Effort Reallocation:",
+        timeReallocationPh:
+          "Where will hours and deep-work blocks be redirected?",
+        nextGoals: "Top Strategic Goals for Next Quarter:",
+        nextGoalsPh: "3 key focus areas for the upcoming 3-month cycle...",
+      },
+      yearlyReview: {
+        title: "Year in Review & Retrospective ",
+        subtitle:
+          "Annual retrospective: numbers, career growth, major lessons, highlights, and next year's vision.",
+        biggestClient: "Biggest Client & Revenue Source:",
+        biggestClientPh:
+          "Name and impact of the most significant client/contract...",
+        bestProject: "Best Project Delivered:",
+        bestProjectPh:
+          "The project you are most proud of technically and financially...",
+        biggestMistake: "Biggest Mistake Made:",
+        biggestMistakePh:
+          "An error in judgment or execution that provided insight...",
+        biggestLesson: "Greatest Lesson Learned:",
+        biggestLessonPh:
+          "The single most valuable lesson from this entire year...",
+        relationshipHighlights: "Relationship & Personal Highlights:",
+        relationshipHighlightsPh:
+          "Special moments, emotional growth, and shared milestones...",
+        careerGrowth: "Career & Technical Growth:",
+        careerGrowthPh:
+          "Skills mastered, portfolio advances, professional maturity...",
+        whatChanged: "What Changed in Your Life & Philosophy?",
+        whatChangedPh:
+          "How are you different today compared to the start of the year?",
+        nextYearPlan: "Vision & Non-Negotiables for Next Year:",
+        nextYearPlanPh:
+          "Your primary goals, marriage completion, and growth horizon...",
+      },
+      financeAlerts: {
+        title: "Proactive Financial Alerts & Guidance (§49)",
+        subtitle:
+          "Non-punitive suggestions and insights to keep your marriage savings and cash flow on target.",
+      },
     },
     marriagePage: {
       title: "Marriage Mission",
-      subtitle: "250,000 EGP readiness tracker, itemized expense checklists, deadlines, and holistic readiness dimensions.",
+      subtitle:
+        "250,000 EGP readiness tracker, itemized expense checklists, deadlines, and holistic readiness dimensions.",
       targetAmount: "Target Fund",
       savedSoFar: "Saved in Marriage Bucket",
       remainingGap: "Remaining to Target",
@@ -1355,10 +1556,12 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       monthsRemaining: "Months Remaining",
       readinessScore: "Holistic Readiness",
       readinessTitle: "7 Dimensions of Marriage Readiness",
-      readinessSubtitle: "A complete framework ensuring financial, housing, and relationship harmony without chaos.",
+      readinessSubtitle:
+        "A complete framework ensuring financial, housing, and relationship harmony without chaos.",
       antiChaosTitle: "Anti-Chaos Principle (§10)",
       expensesTitle: "Itemized Expense Management & Deadlines",
-      expensesSubtitle: "Track furniture, appliances, hall, and payment schedules with zero stress.",
+      expensesSubtitle:
+        "Track furniture, appliances, hall, and payment schedules with zero stress.",
       newExpense: "Add Marriage Expense",
       editExpense: "Edit Expense Item",
       recordPayment: "Record Payment",
@@ -1396,7 +1599,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     relationshipPage: {
       title: "Relationship Engine (Us)",
-      subtitle: "Shared ideas library, budget-aware recommendations, shared wishlist, and private weekly check-in.",
+      subtitle:
+        "Shared ideas library, budget-aware recommendations, shared wishlist, and private weekly check-in.",
       tabs: {
         ideas: "Shared Ideas Library",
         wishlist: "Shared Wishlist",
@@ -1404,34 +1608,48 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       },
       budgetBannerTitle: "Budget-Aware Activity Recommendation",
       ideasTitle: "Shared Activities & Outing Ideas",
-      ideasSubtitle: "A curated collection of quality time activities categorized by budget and style.",
+      ideasSubtitle:
+        "A curated collection of quality time activities categorized by budget and style.",
       newIdea: "Add Shared Idea",
       editIdea: "Edit Idea",
       randomIdea: "Surprise Me (Random Picker)",
       randomIdeaPicked: "Here is your suggested activity for this week!",
       wishlistTitle: "Shared Wishlist & Gifts",
-      wishlistSubtitle: "Special gifts and home items we want to get over time.",
+      wishlistSubtitle:
+        "Special gifts and home items we want to get over time.",
       newWishlistItem: "Add Wishlist Item",
       bought: "Purchased",
       pending: "Pending",
       checkinTitle: "Private Weekly Reflection Check-In",
-      checkinSubtitle: "5 reflection questions designed to nurture connection and reduce stress (§81).",
+      checkinSubtitle:
+        "5 reflection questions designed to nurture connection and reduce stress (§81).",
       checkinHistory: "Previous Check-Ins History",
       saveCheckin: "Save Weekly Reflection",
       checkinSavedSuccess: "Weekly relationship reflection saved securely!",
       privacyBadge: "Strict Privacy Enforced",
-      privacyNotice: "Relationship data is strictly private and isolated from AI and general analytics (§83).",
+      privacyNotice:
+        "Relationship data is strictly private and isolated from AI and general analytics (§83).",
       questions: {
-        q_appreciation: "What did you deeply appreciate about your partner this week?",
-        q_appreciation_ph: "E.g., Her encouragement during the tough deadline, the warm message...",
-        q_connection: "How was the quality of our shared time and emotional closeness?",
-        q_connection_ph: "E.g., Great walk on Friday, felt deeply connected and relaxed...",
-        q_stressors: "What current stressors or pressures can we help each other with?",
-        q_stressors_ph: "E.g., Wedding hall search is feeling overwhelming, let's divide the calls...",
-        q_marriage_talk: "Do we need a calm conversation about wedding preparations?",
-        q_marriage_talk_ph: "E.g., Review the budget for appliances next Saturday morning...",
-        q_next_shared_time: "What is our planned shared activity or date for the coming week?",
-        q_next_shared_time_ph: "E.g., Friday sunset walk + home dinner together...",
+        q_appreciation:
+          "What did you deeply appreciate about your partner this week?",
+        q_appreciation_ph:
+          "E.g., Her encouragement during the tough deadline, the warm message...",
+        q_connection:
+          "How was the quality of our shared time and emotional closeness?",
+        q_connection_ph:
+          "E.g., Great walk on Friday, felt deeply connected and relaxed...",
+        q_stressors:
+          "What current stressors or pressures can we help each other with?",
+        q_stressors_ph:
+          "E.g., Wedding hall search is feeling overwhelming, let's divide the calls...",
+        q_marriage_talk:
+          "Do we need a calm conversation about wedding preparations?",
+        q_marriage_talk_ph:
+          "E.g., Review the budget for appliances next Saturday morning...",
+        q_next_shared_time:
+          "What is our planned shared activity or date for the coming week?",
+        q_next_shared_time_ph:
+          "E.g., Friday sunset walk + home dinner together...",
       },
       budgetTiers: {
         free: "Free (0 EGP)",
@@ -1455,7 +1673,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     habitsPage: {
       title: "Habits & Consistency",
-      subtitle: "Build core life and business habits with the 'Restart Today' anti-guilt philosophy.",
+      subtitle:
+        "Build core life and business habits with the 'Restart Today' anti-guilt philosophy.",
       todayHabits: "Today's Habits Check-off",
       allHabits: "All Active Habits",
       weeklyProgress: "Weekly Consistency",
@@ -1466,7 +1685,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       category: "Category",
       targetPerWeek: "Target Days / Week",
       restartTodayTitle: "Restart Today Philosophy (§30)",
-      restartTodayDesc: "Missed a day? No broken streaks or guilt. Just restart today with calm clarity.",
+      restartTodayDesc:
+        "Missed a day? No broken streaks or guilt. Just restart today with calm clarity.",
       restartButton: "Restart Today",
       streakDays: "Days Streak",
       completedDays: "Days Done",
@@ -1484,7 +1704,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     routinesPage: {
       title: "Daily Routines",
-      subtitle: "Structured morning, workday, evening, and night anchors to eliminate decision fatigue (§28).",
+      subtitle:
+        "Structured morning, workday, evening, and night anchors to eliminate decision fatigue (§28).",
       tabs: {
         morning: "Morning Anchor",
         workday: "Workday Flow",
@@ -1503,7 +1724,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     dailyLog: {
       title: "Sleep & Energy Logger",
-      subtitle: "Track physical energy and sleep rhythm to dynamically adapt daily planning capacity (§29).",
+      subtitle:
+        "Track physical energy and sleep rhythm to dynamically adapt daily planning capacity (§29).",
       sleepAt: "Bedtime",
       wokeAt: "Wake Time",
       hoursSlept: "Hours Slept",
@@ -1551,7 +1773,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     calendarPage: {
       title: "Calendar & Rhythm Hub",
-      subtitle: "Time blocks, weekly commitments, month deadlines, collision detection, and cash flow projections.",
+      subtitle:
+        "Time blocks, weekly commitments, month deadlines, collision detection, and cash flow projections.",
       modes: {
         day: "Day (Time Blocks)",
         week: "Week (Commitments)",
@@ -1906,30 +2129,38 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     todayPlan: {
       title: "مهمة وخطة اليوم (Today's Mission)",
-      subtitle: "ضبط ساعات العمل المتاحة، حسم الأولويات الـ 3 الكبرى، وضمان التوازن بين الدخل والحياة الشخصية.",
+      subtitle:
+        "ضبط ساعات العمل المتاحة، حسم الأولويات الـ 3 الكبرى، وضمان التوازن بين الدخل والحياة الشخصية.",
       energyLevel: "مستوى الطاقة والنشاط",
       energyLow: "طاقة منخفضة (يُنصح بتخفيف الحمل)",
       energyHigh: "طاقة عالية (جاهزية قصوى للعمل العميق)",
       availableHours: "ساعات العمل المتاحة",
       capacityGuard: "حارس السعة (Capacity Guard)",
-      capacityOverload: "تنبيه: حجم المهام المخططة يتجاوز الساعات المتاحة اليوم!",
+      capacityOverload:
+        "تنبيه: حجم المهام المخططة يتجاوز الساعات المتاحة اليوم!",
       capacityOptimal: "حجم المهام متوازن تماماً مع الساعات المتاحة.",
       hoursUnit: "ساعات",
       fridayRule: "قاعدة الجمعة مفعلة",
-      fridayRuleDesc: "يوم مخصص للمراجعات الأسبوعية والتنظيم وتصفية الذهن بدون ضغط مشاريع ثقيلة.",
+      fridayRuleDesc:
+        "يوم مخصص للمراجعات الأسبوعية والتنظيم وتصفية الذهن بدون ضغط مشاريع ثقيلة.",
       focusQuestion: "الشيء الواحد الذي يجعل اليوم إنجازاً ناجحاً",
-      focusQuestionPlaceholder: "لو لم أنجز سوى شيء واحد رئيسي اليوم، يجب أن يكون...",
+      focusQuestionPlaceholder:
+        "لو لم أنجز سوى شيء واحد رئيسي اليوم، يجب أن يكون...",
       topThreeTitle: "الأولويات الثلاث الكبرى (Top 3)",
       topThreeSubtitle: "أهم 3 مهام محورية يجب إتمامها قبل أي شيء آخر اليوم.",
-      topThreeEmpty: "لم يتم اختيار الـ Top 3 بعد. حدد أهم مهامك من القائمة بالأسفل.",
+      topThreeEmpty:
+        "لم يتم اختيار الـ Top 3 بعد. حدد أهم مهامك من القائمة بالأسفل.",
       actionTriad: "ثالوث الإنجاز اليومي المتوازن",
-      actionTriadSubtitle: "خطوات محددة تضمن تقدماً يومياً في المال، والذات، والعلاقة.",
+      actionTriadSubtitle:
+        "خطوات محددة تضمن تقدماً يومياً في المال، والذات، والعلاقة.",
       moneyAction: "إجراء العائد والمال (Revenue)",
-      moneyActionDesc: "خطوة مباشرة تدر دخلاً (بروبوزال، تسليم عميل، أو تواصل مبيعات).",
+      moneyActionDesc:
+        "خطوة مباشرة تدر دخلاً (بروبوزال، تسليم عميل، أو تواصل مبيعات).",
       personalAction: "إجراء الذات والصحة (Personal)",
       personalActionDesc: "عادة شخصية أساسية، تمرين رياضي، أو جلسة تعلم مركزة.",
       relationshipAction: "إجراء العلاقة والزواج (Relationship)",
-      relationshipActionDesc: "تواصل مع الشريك، جلسة نقاش، أو خطوة في تجهيزات الزواج.",
+      relationshipActionDesc:
+        "تواصل مع الشريك، جلسة نقاش، أو خطوة في تجهيزات الزواج.",
       selectTask: "تعيين مهمة...",
       noTaskAssigned: "لم يتم تعيين مهمة",
       scheduledTasks: "مجدولة لليوم",
@@ -1939,7 +2170,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       incompleteTask: "إعادة كغير مكتملة",
       shutdownDay: "حسم وإغلاق اليوم (Shutdown)",
       shutdownTitle: "الإغلاق المسائي والمراجعة اليومية",
-      shutdownSubtitle: "إنهاء اليوم بذهن صافٍ وتحديد نقطة الانطلاق لصباح الغد.",
+      shutdownSubtitle:
+        "إنهاء اليوم بذهن صافٍ وتحديد نقطة الانطلاق لصباح الغد.",
       shutdownConfirm: "تأكيد إغلاق اليوم",
       dayClosed: "تم إغلاق اليوم بنجاح",
       dayClosedDesc: "عمل رائع اليوم! استمتع بوقتك واستعد لصباح جديد.",
@@ -1950,7 +2182,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       tomorrowFocus: "نقطة البداية لصباح الغد",
       tomorrowFocusPlaceholder: "ما هي أول مهمة ستبدأ بها فور استيقاظك غداً؟",
       shutdownNotes: "ملاحظات وانطباعات ختام اليوم",
-      shutdownNotesPlaceholder: "دروس مستفادة، انتصارات سريعة، أو أفكار ملهمة...",
+      shutdownNotesPlaceholder:
+        "دروس مستفادة، انتصارات سريعة، أو أفكار ملهمة...",
       generatePlan: "توليد خطة اليوم",
       planSaved: "تم حفظ وتحديث خطة اليوم بنجاح.",
     },
@@ -1958,7 +2191,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       greetingMorning: "صباح الخير والإنتاجية",
       greetingAfternoon: "طاب مساؤك",
       greetingEvening: "مساء الخير",
-      commandSubtitle: "إليك الإحاطة التنفيذية المركزة ليومك عبر بطاقات القيادة الـ 5.",
+      commandSubtitle:
+        "إليك الإحاطة التنفيذية المركزة ليومك عبر بطاقات القيادة الـ 5.",
       vitalFocus: "التركيز الحيوي لليوم",
       topThreeCardTitle: "أولويات الـ Top 3 لليوم",
       topThreeCardSubtitle: "إنجاز هذه المهام الثلاث يضمن فوزك باليوم.",
@@ -1969,14 +2203,16 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       followupCardTitle: "متابعة العميل القادمة",
       followupCardSubtitle: "أقرب تواصل مطلوب في مسار المبيعات.",
       quickDumpCardTitle: "تسجيل فوري (Brain Dump)",
-      quickDumpCardSubtitle: "سجل أفكارك ومهامك اللحظية دون مغادرة لوحة القيادة.",
+      quickDumpCardSubtitle:
+        "سجل أفكارك ومهامك اللحظية دون مغادرة لوحة القيادة.",
       quickDumpPlaceholder: "اكتب الفكرة أو المهمة واضغط Enter...",
       quickDumpSubmit: "تسجيل",
       quickDumpSuccess: "تم الإرسال لصندوق الأفكار بنجاح!",
       noRevenueTask: "لا يوجد إجراء دخل محدد لليوم حتى الآن.",
       noFollowups: "رائع! جميع متابعات العملاء منجزة ومحدثة.",
       noTopThree: "لم تحدد أولويات الـ Top 3 لليوم بعد.",
-      allDoneCelebration: "🎉 إنجاز استثنائي! تم إتمام جميع أولويات الـ Top 3 لليوم.",
+      allDoneCelebration:
+        "🎉 إنجاز استثنائي! تم إتمام جميع أولويات الـ Top 3 لليوم.",
       shutdownCountdown: "موعد الإغلاق المستهدف",
       viewTodayPlan: "فتح خطة اليوم الكاملة",
       viewFinances: "عرض محرك المالية",
@@ -2000,7 +2236,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     notesPage: {
       title: "محرك الملاحظات والمعرفة (Knowledge Base)",
-      subtitle: "تدوين بمحرر Markdown غني، 13 مجلداً منظماً، ونظام وسوم ذكي للمشاريع والحياة.",
+      subtitle:
+        "تدوين بمحرر Markdown غني، 13 مجلداً منظماً، ونظام وسوم ذكي للمشاريع والحياة.",
       newNote: "ملاحظة جديدة",
       editNote: "تعديل الملاحظة",
       noteTitle: "عنوان الملاحظة",
@@ -2011,7 +2248,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       tags: "الوسوم (Tags)",
       tagsPlaceholder: "اكتب الوسم واضغط Enter...",
       content: "محتوى الملاحظة (Markdown)",
-      contentPlaceholder: "اكتب ملاحظتك بصيغة Markdown. يدعم العناوين #، القوائم -، القوائم التفاعلية - [ ]، الأكواد ```، والاقتباسات >...",
+      contentPlaceholder:
+        "اكتب ملاحظتك بصيغة Markdown. يدعم العناوين #، القوائم -، القوائم التفاعلية - [ ]، الأكواد ```، والاقتباسات >...",
       pinnedNotes: "الملاحظات المثبتة",
       allNotes: "كافة الملاحظات النشطة",
       archivedNotes: "الملاحظات المؤرشفة",
@@ -2025,7 +2263,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       readingTime: "دقيقة قراءة",
       wordCount: "كلمة",
       noNotesTitle: "لا توجد ملاحظات في هذا المجلد",
-      noNotesDesc: "أضف ملاحظة جديدة أو قم بتحويل فكرة من صندوق الـ Brain Dump.",
+      noNotesDesc:
+        "أضف ملاحظة جديدة أو قم بتحويل فكرة من صندوق الـ Brain Dump.",
       noteDetails: "ملف تفاصيل الملاحظة",
       previousPage: "السابق",
       nextPage: "التالي",
@@ -2076,7 +2315,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     reviewsPage: {
       title: "محرك المراجعات والتأمل الاستراتيجي",
-      subtitle: "المراجعة الأسبوعية، قياس توازن الأبعاد الستة، وتخطيط أولويات الأسبوع القادم.",
+      subtitle:
+        "المراجعة الأسبوعية، قياس توازن الأبعاد الستة، وتخطيط أولويات الأسبوع القادم.",
       weeklyTab: "المراجعة الأسبوعية",
       dailyTab: "التأملات اليومية (Daily Reflections)",
       startWeeklyReview: "بدء مراجعة يوم الجمعة الأسبوعية",
@@ -2084,20 +2324,26 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       resumeWeeklyReview: "استكمال المراجعة",
       reviewHistory: "سجل المراجعات السابقة",
       noReviewsTitle: "لا توجد مراجعات مكتملة بعد",
-      noReviewsDesc: "أكمل مراجعتك الأسبوعية الأولى يوم الجمعة لتقييم الأداء ورسم خطة الأسبوع الجديد.",
+      noReviewsDesc:
+        "أكمل مراجعتك الأسبوعية الأولى يوم الجمعة لتقييم الأداء ورسم خطة الأسبوع الجديد.",
       dailyReflectionsTitle: "سجل التأملات والإنهاء اليومي",
-      noDailyReflections: "لا توجد تأملات إغلاق يومي مسجلة بعد. أكمل إغلاق يومك من صفحة خطة اليوم (Today Plan).",
+      noDailyReflections:
+        "لا توجد تأملات إغلاق يومي مسجلة بعد. أكمل إغلاق يومك من صفحة خطة اليوم (Today Plan).",
       weekOf: "أسبوع",
       overallBalance: "مؤشر التوازن العام",
       reviewDossier: "ملف المراجعة الكامل",
       step1Title: "١. الأرقام والواقع",
-      step1Subtitle: "مراجعة الأرقام والبيانات المجمعة تلقائياً وإنجازات/تحديات الأسبوع.",
+      step1Subtitle:
+        "مراجعة الأرقام والبيانات المجمعة تلقائياً وإنجازات/تحديات الأسبوع.",
       step2Title: "٢. تقييم الأبعاد الستة",
-      step2Subtitle: "تقييم مستوى التقدم في أركان الحياة والعمل الستة على مقياس من ١ إلى ٥.",
+      step2Subtitle:
+        "تقييم مستوى التقدم في أركان الحياة والعمل الستة على مقياس من ١ إلى ٥.",
       step3Title: "٣. الاستراتيجية والدروس",
-      step3Subtitle: "تحليل مشاريع العملاء، التعلم والتطوير، التجهيزات المنزلية، والعادات.",
+      step3Subtitle:
+        "تحليل مشاريع العملاء، التعلم والتطوير، التجهيزات المنزلية، والعادات.",
       step4Title: "٤. خارطة الأسبوع القادم",
-      step4Subtitle: "تحديد قرارات (ابدأ / توقف / ضاعف) وتثبيت أهم ٣ أولويات استراتيجية حتمية.",
+      step4Subtitle:
+        "تحديد قرارات (ابدأ / توقف / ضاعف) وتثبيت أهم ٣ أولويات استراتيجية حتمية.",
       nextStep: "الخطوة التالية",
       prevStep: "الخطوة السابقة",
       completeReview: "إتمام واعتماد المراجعة",
@@ -2121,46 +2367,154 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         financial: "الانضباط المالي",
         financialDesc: "التحكم بالنفقات، وتغذية صناديق الادخار والاستثمار",
         relationship: "العلاقات والمنزل",
-        relationshipDesc: "الوقت المشترك مع شريكة الحياة وتجهيزات الزواج والانسجام",
+        relationshipDesc:
+          "الوقت المشترك مع شريكة الحياة وتجهيزات الزواج والانسجام",
         execution: "التنفيذ والتركيز العميق",
         executionDesc: "جلسات العمل العميق، إتمام المهام الحاسمة، وقوة التركيز",
         routine: "الطاقة والعادات",
-        routineDesc: "جودة النوم، استقرار الروتين الصباحي/المسائي، واللياقة البدنية",
+        routineDesc:
+          "جودة النوم، استقرار الروتين الصباحي/المسائي، واللياقة البدنية",
       },
       questions: {
         q_wins: "ما هي أكبر إنجازاتك ونجاحاتك هذا الأسبوع؟",
-        q_wins_ph: "مثال: إغلاق صفقة عميل جديد، تحقيق مستهدف ادخار، إنهاء هيكل الـ Auth البرمجي...",
+        q_wins_ph:
+          "مثال: إغلاق صفقة عميل جديد، تحقيق مستهدف ادخار، إنهاء هيكل الـ Auth البرمجي...",
         q_misses: "ما الذي تعثر أو تأخر عن موعده أو أفلت من الجدول؟",
-        q_misses_ph: "مثال: تأخر إرسال عرض سعر لمدة يومين، تفويت تمرين النادي مرتين...",
-        q_revenue_reflection: "تقييم الإيرادات والأرباح المحققة مقابل المستهدف:",
-        q_revenue_reflection_ph: "كيف كان أداء الدخل بالنسبة لمستهدفك المالي بالجنيه؟ ما الأسباب؟",
+        q_misses_ph:
+          "مثال: تأخر إرسال عرض سعر لمدة يومين، تفويت تمرين النادي مرتين...",
+        q_revenue_reflection:
+          "تقييم الإيرادات والأرباح المحققة مقابل المستهدف:",
+        q_revenue_reflection_ph:
+          "كيف كان أداء الدخل بالنسبة لمستهدفك المالي بالجنيه؟ ما الأسباب؟",
         q_time_drain: "أين تسرب الوقت أو تشتت الطاقة الذهنية؟",
-        q_time_drain_ph: "مثال: التنقل المستمر بين المحادثات في ديسكورد، عدم وضوح أولويات اليوم...",
+        q_time_drain_ph:
+          "مثال: التنقل المستمر بين المحادثات في ديسكورد، عدم وضوح أولويات اليوم...",
         q_client_health: "حالة مشاريع العملاء والصفقات القائمة:",
-        q_client_health_ph: "حالة تسليمات العملاء النشطين، العروض المعلقة، والمتابعات المطلوبة...",
+        q_client_health_ph:
+          "حالة تسليمات العملاء النشطين، العروض المعلقة، والمتابعات المطلوبة...",
         q_learning_growth: "التعلم الاستراتيجي والمهارات المكتسبة:",
-        q_learning_growth_ph: "ما المفهوم التقني أو العملي الذي أتقنته أو قرأته هذا الأسبوع؟",
+        q_learning_growth_ph:
+          "ما المفهوم التقني أو العملي الذي أتقنته أو قرأته هذا الأسبوع؟",
         q_relationship_check: "تجهيزات الزواج والعلاقات الأسرية:",
-        q_relationship_check_ph: "اللحظات المشتركة، الدعم المعنوي، والتقدم في قائمة تجهيزات الزواج...",
+        q_relationship_check_ph:
+          "اللحظات المشتركة، الدعم المعنوي، والتقدم في قائمة تجهيزات الزواج...",
         q_habits_energy: "مستوى الطاقة الجسدية والنوم واستقرار الروتين:",
-        q_habits_energy_ph: "كيف كان التزامك بموعد الإغلاق المسائي، ساعات النوم، ولياقتك البدنية؟",
+        q_habits_energy_ph:
+          "كيف كان التزامك بموعد الإغلاق المسائي، ساعات النوم، ولياقتك البدنية؟",
         q_start: "ما الذي يجب أن تبدأ بفعله (START) في الأسبوع القادم؟",
-        q_start_ph: "مثال: تخصيص أول ساعتين صباحاً للعمل العميق قبل قراءة الرسائل...",
+        q_start_ph:
+          "مثال: تخصيص أول ساعتين صباحاً للعمل العميق قبل قراءة الرسائل...",
         q_stop: "ما الذي يجب أن تتوقف عنه تماماً (STOP) فوراً؟",
-        q_stop_ph: "مثال: التوقف عن الرد على رسائل العمل غير الطارئة بعد ٨ مساءً...",
+        q_stop_ph:
+          "مثال: التوقف عن الرد على رسائل العمل غير الطارئة بعد ٨ مساءً...",
         q_continue: "ما الذي نجح بامتياز وتريد مضاعفته (DOUBLE DOWN)؟",
         q_continue_ph: "مثال: طقس الإغلاق اليومي منحني صفاءً ذهنياً ممتازاً...",
-        q_next_top_three: "أهم ٣ أولويات استراتيجية حتمية للأسبوع القادم (Top 3 Priorities):",
-        q_next_top_three_ph: "١. إطلاق وتطبيق النسخة الأولى للعميل\n٢. تحويل دفعة الادخار للزواج\n٣. إرسال ٣ عروض لعملاء جدد",
+        q_next_top_three:
+          "أهم ٣ أولويات استراتيجية حتمية للأسبوع القادم (Top 3 Priorities):",
+        q_next_top_three_ph:
+          "١. إطلاق وتطبيق النسخة الأولى للعميل\n٢. تحويل دفعة الادخار للزواج\n٣. إرسال ٣ عروض لعملاء جدد",
         q_system_tweak: "تعديل عملي واحد لتحسين نظام أو بيئة أو جدول عملك:",
-        q_system_tweak_ph: "مثال: حجز عصر كل جمعة في التقويم كموعد مقدس للمراجعة الأسبوعية...",
+        q_system_tweak_ph:
+          "مثال: حجز عصر كل جمعة في التقويم كموعد مقدس للمراجعة الأسبوعية...",
       },
       convertTopThree: "إنشاء الأولويات الثلاث كمهام تنفيذية في الأسبوع القادم",
       topThreeConvertedSuccess: "تم إنشاء المهام الثلاث للأسبوع القادم بنجاح!",
+      monthlyTab: "المراجعة الشهرية ",
+      quarterlyTab: "المراجعة الربع سنوية ",
+      yearlyTab: "مراجعة وحصاد العام ",
+      monthlyReview: {
+        title: "المراجعة والتأمل الاستراتيجي الشهري ",
+        subtitle:
+          "تقييم الأداء والماليات وحصيلة الشهر، وخارطة التوجيه الرباعي KEEP / START / STOP / DOUBLE DOWN.",
+        prefilledTitle:
+          "المؤشرات والأرقام الفعلية المسجلة في النظام لهذا الشهر",
+        keep: "KEEP (ما الذي يعمل بنجاح ويجب الحفاظ عليه ومواصلته؟)",
+        keepPh:
+          "مثال: الاستيقاظ المبكر وساعات العمل العميق الصباحية، تسليم مراحل المشاريع في موعدها...",
+        start:
+          "START (ما الممارسة ذات الأثر العالي التي يجب البدء فيها فوراً؟)",
+        startPh: "مثال: بدء حملة تواصل أسبوعية مع ٥ عملاء محتملين جدد...",
+        stop: "STOP (ما الذي يجب إيقافه فوراً لمنع استنزاف الوقت والجهد؟)",
+        stopPh:
+          "مثال: الاجتماعات غير المجهزة مسبقاً، تعديلات المشاريع بدون طلبات رسمية...",
+        doubleDown:
+          "DOUBLE DOWN (أين يجب مضاعفة التركيز والاستثمار لتحقيق قفزة كبرى؟)",
+        doubleDownPh:
+          "مثال: تطوير بوتات الديسكورد للشركات بعقود دعم شهري متكرر...",
+        reflection: "التأمل الاستراتيجي والملاحظات الكبرى للشهر:",
+        reflectionPh:
+          "ما هي أبرز الدروس والعِبر الكبرى المستخلصة من تجارب هذا الشهر؟",
+        wins: "أكبر إنجازات ونجاحات الشهر:",
+        winsPh:
+          "إغلاق صفقات، تحقيق مستهدفات ادخار، إنجاز مراحل زواج أو مشاريع...",
+        challenges: "أهم العقبات ونقاط الاحتكاك التي واجهتك:",
+        challengesPh: "أين حدث تباطؤ في التنفيذ أو تشتت في الطاقة؟",
+        relationship: "تجهيزات الزواج والانسجام الأسري والعلاقة:",
+        relationshipPh:
+          "الوقت النوعي المشترك، الدعم المتبادل، والتقدم في قائمة مستلزمات الزواج...",
+        nextFocus: "الهدف والتركيز الأكبر للشهر القادم (Primary Outcome):",
+        nextFocusPh:
+          "النتيجة الحاسمة الوحيدة التي إن تحققت اعتُبر الشهر القادم ناجحاً بامتياز...",
+      },
+      quarterlyReview: {
+        title: "المراجعة الاستراتيجية للربع السنوي ",
+        subtitle:
+          "تقييم مسارات الدخل، الـ Pipeline، وجاهزية الزواج، وإعادة توجيه الموارد دون انتظار نهاية العام.",
+        revenueEvaluation:
+          "تقييم أداء الدخل والنمو المالي مقابل مستهدفات الربع:",
+        revenueEvaluationPh:
+          "هل وافق الدخل التوقعات المخططة؟ ما العوامل الأساسية المؤثرة؟",
+        pipelineHealth: "صحة مسار المبيعات وتدفق العملاء وفرص العمل:",
+        pipelineHealthPh:
+          "معدلات التحويل، حجم الصفقات المفتوحة، وثقة العملاء...",
+        marriageReadiness: "جاهزية الزواج والجدول الزمني للادخار:",
+        marriageReadinessPh:
+          "مقارنة وتيرة الادخار الفعلية بالمستهدف والتقدم في التحضيرات...",
+        strategyPivot: "تعديل المسار وإعادة التوجيه (Pivots):",
+        strategyPivotPh:
+          "إذا كان هناك مسار لم يحقق نتائج، كيف نعيد توزيع الوقت والجهد الآن؟",
+        timeReallocation: "إعادة توزيع ساعات العمل والتركيز:",
+        timeReallocationPh:
+          "إلى أين ستوجه كتل العمل العميق وساعات التطوير في الربع القادم؟",
+        nextGoals: "الأهداف الاستراتيجية الكبرى للربع السنوي القادم:",
+        nextGoalsPh: "أهم ٣ نتائج حاسمة للـ ٣ أشهر القادمة...",
+      },
+      yearlyReview: {
+        title: "مراجعة وحصاد العام الكامل (Year in Review )",
+        subtitle:
+          "استرجاع سنوي شامل: الأرقام الكلية، النمو المهني، أعظم الدروس، ولحظات العمر، ورؤية العام القادم.",
+        biggestClient: "أكبر عميل ومصدر دخل خلال العام:",
+        biggestClientPh:
+          "اسم العميل أو العقد الأكثر أثراً من حيث القيمة والتجربة...",
+        bestProject: "أفضل وأنجح مشروع تم تسليمه:",
+        bestProjectPh: "المشروع الأكثر فخراً به برمجياً ومهنياً وقيمة مضافة...",
+        biggestMistake: "أكبر خطأ أو تعثر حدث خلال العام:",
+        biggestMistakePh: "قرار أو تقدير غير دقيق شكل نقطة تعلم وتحول...",
+        biggestLesson: "أعظم درس مستفاد في العام كاملاً:",
+        biggestLessonPh: "القاعدة الذهبية التي خرجت بها من تجارب هذا العام...",
+        relationshipHighlights: "أجمل اللحظات والمحطات مع شريكة الحياة:",
+        relationshipHighlightsPh:
+          "الذكريات المشتركة، الدعم، والمحطات السعيدة في رحلة الزواج...",
+        careerGrowth: "النمو المهني والتقني:",
+        careerGrowthPh:
+          "المهارات الجديدة، بناء البورتفوليو، والنضج في إدارة المشاريع...",
+        whatChanged: "ما الذي تغير في شخصيتك وفلسفتك في الحياة والعمل؟",
+        whatChangedPh:
+          "كيف اختلفت نظرتك للحياة والعمل عما كنت عليه في بداية العام؟",
+        nextYearPlan: "الرؤية والخطوط العريضة للعام الجديد:",
+        nextYearPlanPh:
+          "المستهدفات الاستراتيجية الكبرى، إتمام الزواج، وآفاق التوسع...",
+      },
+      financeAlerts: {
+        title: "التنبيهات والاستشارات المالية الاستباقية (§49)",
+        subtitle:
+          "اقتراحات إرشادية ذكية ومريحة للحفاظ على وتيرة الادخار وتجهيزات الزواج دون أي ضغط أو شعور بالذنب.",
+      },
     },
     marriagePage: {
       title: "مهمة الزواج (Marriage Mission)",
-      subtitle: "متابعة مستهدف الـ ٢٥٠,٠٠٠ ج.م، المصروفات التفصيلية ومواعيد السداد، والأبعاد السبعة للجاهزية الشاملة.",
+      subtitle:
+        "متابعة مستهدف الـ ٢٥٠,٠٠٠ ج.م، المصروفات التفصيلية ومواعيد السداد، والأبعاد السبعة للجاهزية الشاملة.",
       targetAmount: "المستهدف الإجمالي",
       savedSoFar: "المدخر في صندوق الزواج",
       remainingGap: "المتبقي للوصول للمستهدف",
@@ -2170,10 +2524,12 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       monthsRemaining: "أشهر متبقية للموعد",
       readinessScore: "مؤشر الجاهزية الشاملة",
       readinessTitle: "أبعاد الجاهزية السبعة للزواج",
-      readinessSubtitle: "منهجية متكاملة لضمان الاستعداد المالي والسكني والعاطفي بهدوء ووضوح.",
+      readinessSubtitle:
+        "منهجية متكاملة لضمان الاستعداد المالي والسكني والعاطفي بهدوء ووضوح.",
       antiChaosTitle: "قاعدة منع الفوضى والتشتت (§10)",
       expensesTitle: "سجل المصروفات ومواعيد السداد",
-      expensesSubtitle: "جدولة وتتبع تكاليف الأثاث والأجهزة والقاعة ومقدم الإيجار بدون ضغوط.",
+      expensesSubtitle:
+        "جدولة وتتبع تكاليف الأثاث والأجهزة والقاعة ومقدم الإيجار بدون ضغوط.",
       newExpense: "إضافة مصروف جديد",
       editExpense: "تعديل بند المصروف",
       recordPayment: "تسجيل دفعة مسددة",
@@ -2211,7 +2567,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     relationshipPage: {
       title: "محرك العلاقات (Us)",
-      subtitle: "بنك الأفكار المشتركة، مقترحات تراعي الميزانية، قائمة الرغبات، والتقييم الأسبوعي الخاص.",
+      subtitle:
+        "بنك الأفكار المشتركة، مقترحات تراعي الميزانية، قائمة الرغبات، والتقييم الأسبوعي الخاص.",
       tabs: {
         ideas: "بنك الأفكار المشتركة",
         wishlist: "قائمة الرغبات والهدايا",
@@ -2219,34 +2576,46 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       },
       budgetBannerTitle: "اقتراح الأنشطة وفقاً للوضع المالي الحالي",
       ideasTitle: "أفكار الخروجات والأنشطة المشتركة",
-      ideasSubtitle: "مجموعة منتقاة لقضاء أوقات نوعية مميزة مصنفة حسب التكلفة والأسلوب.",
+      ideasSubtitle:
+        "مجموعة منتقاة لقضاء أوقات نوعية مميزة مصنفة حسب التكلفة والأسلوب.",
       newIdea: "إضافة فكرة جديدة",
       editIdea: "تعديل الفكرة",
       randomIdea: "اقترح نشاطاً عشوائياً (Surprise Me)",
       randomIdeaPicked: "إليك النشاط المقترح لقضاء وقت رائع هذا الأسبوع!",
       wishlistTitle: "قائمة الرغبات والهدايا المشتركة",
-      wishlistSubtitle: "الهدايا ومستلزمات المنزل التي نخطط لاقتنائها بمرور الوقت.",
+      wishlistSubtitle:
+        "الهدايا ومستلزمات المنزل التي نخطط لاقتنائها بمرور الوقت.",
       newWishlistItem: "إضافة رغبة / هدية",
       bought: "تم الاقتناء",
       pending: "قيد الانتظار",
       checkinTitle: "التقييم الأسبوعي الخاص والاتصال الإنساني",
-      checkinSubtitle: "٥ أسئلة تأملية لتعزيز الترابط والتخفيف من ضغوطات التجهيز (§81).",
+      checkinSubtitle:
+        "٥ أسئلة تأملية لتعزيز الترابط والتخفيف من ضغوطات التجهيز (§81).",
       checkinHistory: "سجل التقييمات الأسبوعية السابقة",
       saveCheckin: "حفظ التقييم الأسبوعي",
       checkinSavedSuccess: "تم حفظ التقييم الأسبوعي بأمان وخصوصية تامة!",
       privacyBadge: "خصوصية مشددة ومحمية برمجياً",
-      privacyNotice: "بيانات العلاقة مشفرة ومستثناة برمجياً من الـ AI والتحليلات العامة (§83).",
+      privacyNotice:
+        "بيانات العلاقة مشفرة ومستثناة برمجياً من الـ AI والتحليلات العامة (§83).",
       questions: {
-        q_appreciation: "ما الذي قدّرته وشعرت بالامتنان تجاهه من شريكتك هذا الأسبوع؟",
-        q_appreciation_ph: "مثال: دعمها لي في ضغط العمل، رسالتها الصباحية الجميلة...",
+        q_appreciation:
+          "ما الذي قدّرته وشعرت بالامتنان تجاهه من شريكتك هذا الأسبوع؟",
+        q_appreciation_ph:
+          "مثال: دعمها لي في ضغط العمل، رسالتها الصباحية الجميلة...",
         q_connection: "كيف كانت جودة وقتنا المشترك ومستوى القرب والانسجام؟",
-        q_connection_ph: "مثال: تمشية يوم الجمعة كانت رائعة وشعرنا براحة وصفاء...",
+        q_connection_ph:
+          "مثال: تمشية يوم الجمعة كانت رائعة وشعرنا براحة وصفاء...",
         q_stressors: "ما هي الضغوطات الحالية التي يمكننا مساعدة بعضنا فيها؟",
-        q_stressors_ph: "مثال: البحث عن القاعة يسبب بعض التوتر، دعنا نقسم التواصل...",
-        q_marriage_talk: "هل نحتاج إلى جلسة هادئة لمناقشة أي تفاصيل في تجهيزات الزواج؟",
-        q_marriage_talk_ph: "مثال: مراجعة ميزانية الأجهزة الكهربائية صباح السبت القادم...",
-        q_next_shared_time: "ما هو النشاط أو الموعد المشترك المخطط له للأسبوع القادم؟",
-        q_next_shared_time_ph: "مثال: تمشية وقت الغروب يوم الجمعة + عشاء منزلي معاً...",
+        q_stressors_ph:
+          "مثال: البحث عن القاعة يسبب بعض التوتر، دعنا نقسم التواصل...",
+        q_marriage_talk:
+          "هل نحتاج إلى جلسة هادئة لمناقشة أي تفاصيل في تجهيزات الزواج؟",
+        q_marriage_talk_ph:
+          "مثال: مراجعة ميزانية الأجهزة الكهربائية صباح السبت القادم...",
+        q_next_shared_time:
+          "ما هو النشاط أو الموعد المشترك المخطط له للأسبوع القادم؟",
+        q_next_shared_time_ph:
+          "مثال: تمشية وقت الغروب يوم الجمعة + عشاء منزلي معاً...",
       },
       budgetTiers: {
         free: "مجاني (0 ج.م)",
@@ -2270,7 +2639,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     habitsPage: {
       title: "العادات والاستمرارية اليومية",
-      subtitle: "بناء وتثبيت عادات الحياة والعمل مع فلسفة 'Restart Today' الخالية من جلد الذات.",
+      subtitle:
+        "بناء وتثبيت عادات الحياة والعمل مع فلسفة 'Restart Today' الخالية من جلد الذات.",
       todayHabits: "تسجيل عادات اليوم",
       allHabits: "كافة العادات النشطة",
       weeklyProgress: "الالتزام الأسبوعي",
@@ -2281,7 +2651,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       category: "التصنيف",
       targetPerWeek: "المستهدف (أيام / أسبوع)",
       restartTodayTitle: "فلسفة ابدأ اليوم من جديد (§30)",
-      restartTodayDesc: "فاتك يوم؟ لا توجد سلاسل تفشل أو جلد ذات. ابدأ اليوم من جديد بكل هدوء ووضوح.",
+      restartTodayDesc:
+        "فاتك يوم؟ لا توجد سلاسل تفشل أو جلد ذات. ابدأ اليوم من جديد بكل هدوء ووضوح.",
       restartButton: "ابدأ من جديد اليوم",
       streakDays: "أيام متتالية",
       completedDays: "أيام منجزة",
@@ -2299,7 +2670,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     routinesPage: {
       title: "الروتين اليومي (Routines)",
-      subtitle: "محطات اليوم الأساسية (الصباح، العمل، المساء، وقبل النوم) لإلغاء إرهاق اتخاذ القرار (§28).",
+      subtitle:
+        "محطات اليوم الأساسية (الصباح، العمل، المساء، وقبل النوم) لإلغاء إرهاق اتخاذ القرار (§28).",
       tabs: {
         morning: "روتين الصباح",
         workday: "روتين العمل",
@@ -2312,13 +2684,15 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       durationMin: "المدة التقديرية (دقيقة)",
       totalDuration: "إجمالي مدة الروتين",
       resetDefaults: "استعادة القوالب الافتراضية",
-      resetConfirm: "هل تريد استعادة قالب هذا الروتين إلى الإعدادات الافتراضية للنظام؟",
+      resetConfirm:
+        "هل تريد استعادة قالب هذا الروتين إلى الإعدادات الافتراضية للنظام؟",
       saveSuccess: "تم تحديث الروتين بنجاح!",
       resetSuccess: "تمت استعادة قوالب الروتين الافتراضية بنجاح!",
     },
     dailyLog: {
       title: "مسجل النوم والطاقة اليومي",
-      subtitle: "متابعة ساعات النوم ومستوى الطاقة للتكييف التلقائي لسعة تخطيط اليوم (§29).",
+      subtitle:
+        "متابعة ساعات النوم ومستوى الطاقة للتكييف التلقائي لسعة تخطيط اليوم (§29).",
       sleepAt: "وقت النوم",
       wokeAt: "وقت الاستيقاظ",
       hoursSlept: "ساعات النوم",
@@ -2366,7 +2740,8 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     },
     calendarPage: {
       title: "التقويم والجدول الزمني المحمي",
-      subtitle: "إدارة الكتل الزمنية اليومية، الالتزامات الأسبوعية، والمواعيد النهائية مع حماية يوم الجمعة والتدفق النقدي.",
+      subtitle:
+        "إدارة الكتل الزمنية اليومية، الالتزامات الأسبوعية، والمواعيد النهائية مع حماية يوم الجمعة والتدفق النقدي.",
       modes: {
         day: "اليوم (كتل زمنية)",
         week: "الأسبوع (الالتزامات)",
