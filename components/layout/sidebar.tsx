@@ -21,6 +21,9 @@ import {
   RotateCcw,
   BarChart3,
   Settings,
+  Scale,
+  TrendingUp,
+  Bot,
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { useLocale } from "@/components/providers/locale-provider";
@@ -44,6 +47,8 @@ export function Sidebar({
         { label: t.nav.tasks, href: "/tasks", icon: CheckSquare },
         { label: t.nav.goals, href: "/goals", icon: Target },
         { label: t.nav.calendar, href: "/calendar", icon: Calendar },
+        { label: t.nav.decisions, href: "/decisions", icon: Scale },
+        { label: t.nav.agent, href: "/agent", icon: Bot },
       ],
     },
     {
@@ -53,6 +58,7 @@ export function Sidebar({
         { label: t.nav.clients, href: "/clients", icon: Users },
         { label: t.nav.projects, href: "/projects", icon: FolderKanban },
         { label: t.nav.finances, href: "/finances", icon: Wallet },
+        { label: t.nav.opportunities, href: "/opportunities", icon: TrendingUp },
       ],
     },
     {

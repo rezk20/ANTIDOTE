@@ -71,3 +71,35 @@ export async function logout(): Promise<void> {
   await supabase.auth.signOut();
   redirect("/login");
 }
+
+export async function signInWithGoogle(originUrl?: string): Promise<{ url?: string; error?: string }> {
+  try {
+    const supabase = await createSupabaseServerClient();
+    const origin = originUrl || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${origin}/auth/callback`,
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    });
+
+    if (error) {
+      console.error("signInWithGoogle error:", error);
+      return { error: error.message };
+    }
+
+    if (data.url) {
+      return { url: data.url };
+    }
+
+    return { error: "Failed to initialize Google OAuth." };
+  } catch (error) {
+    console.error("signInWithGoogle unexpected error:", error);
+    return { error: "An unexpected error occurred." };
+  }
+}

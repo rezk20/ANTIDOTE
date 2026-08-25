@@ -108,6 +108,7 @@ export type ProfileRow = {
   timezone: string;
   currency: string;
   weekly_off_day: string;
+  agent_api_key: string | null;
   settings: Json;
   created_at: string;
   updated_at: string;
@@ -500,6 +501,62 @@ export type TimeEntryRow = {
   updated_at: string;
 };
 
+export type DecisionStatus = "open" | "decided" | "reviewed";
+
+export type DecisionOption = {
+  id: string;
+  label: string;
+  notes?: string;
+};
+
+export type DecisionRow = {
+  id: string;
+  user_id: string;
+  title: string;
+  why_now: string | null;
+  options: Json; // DecisionOption[]
+  upside: string | null;
+  downside: string | null;
+  cost: string | null;
+  time_required: string | null;
+  risk: string | null;
+  worst_case: string | null;
+  best_case: string | null;
+  reversible: boolean;
+  decision: string | null;
+  review_date: string | null;
+  status: DecisionStatus;
+  created_at: string;
+  updated_at: string;
+};
+
+export type OpportunityKind =
+  | "job"
+  | "freelance"
+  | "discord_client"
+  | "remote"
+  | "partnership"
+  | "product"
+  | "other";
+
+export type OpportunityRisk = "low" | "medium" | "high";
+export type OpportunityStatus = "open" | "pursuing" | "won" | "dropped";
+
+export type OpportunityRow = {
+  id: string;
+  user_id: string;
+  title: string;
+  kind: OpportunityKind;
+  expected_value: number;
+  probability: number;
+  time_required_hours: number;
+  risk: OpportunityRisk;
+  next_action: string | null;
+  status: OpportunityStatus;
+  created_at: string;
+  updated_at: string;
+};
+
 export type GenericRelationship = {
   foreignKeyName: string;
   columns: string[];
@@ -673,6 +730,18 @@ export type Database = {
         Row: TimeEntryRow;
         Insert: Partial<TimeEntryRow> & { user_id: string };
         Update: Partial<TimeEntryRow>;
+        Relationships: GenericRelationship[];
+      };
+      decisions: {
+        Row: DecisionRow;
+        Insert: Partial<DecisionRow> & { user_id: string; title: string };
+        Update: Partial<DecisionRow>;
+        Relationships: GenericRelationship[];
+      };
+      opportunities: {
+        Row: OpportunityRow;
+        Insert: Partial<OpportunityRow> & { user_id: string; title: string };
+        Update: Partial<OpportunityRow>;
         Relationships: GenericRelationship[];
       };
     };

@@ -12,6 +12,7 @@ describe("Finance Alert Logic Module (§49)", () => {
     timezone: "Africa/Cairo",
     currency: "EGP",
     weekly_off_day: "friday",
+    agent_api_key: null,
     settings: {
       comfortIncomeTarget: 30000,
     },

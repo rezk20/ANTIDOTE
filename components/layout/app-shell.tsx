@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Sidebar } from "./sidebar";
 import { Topbar } from "./topbar";
 import { QuickCaptureModal } from "@/components/capture/quick-capture-modal";
+import { CommandPalette } from "./command-palette";
+import { ShortcutsModal } from "./shortcuts-modal";
 import type { ProfileRow } from "@/lib/supabase/types";
 
 export function AppShell({
@@ -39,6 +41,12 @@ export function AppShell({
 
       {/* Global Quick Capture Modal */}
       <QuickCaptureModal />
+
+      {/* Global Command & Navigation Palette (Ctrl+K) */}
+      <CommandPalette />
+
+      {/* Global Keyboard Shortcuts Guide (?) */}
+      <ShortcutsModal />
     </div>
   );
 }

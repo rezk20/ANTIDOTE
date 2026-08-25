@@ -23,6 +23,9 @@ export interface TranslationSchema {
     routines: string;
     calendar: string;
     analytics: string;
+    decisions: string;
+    opportunities: string;
+    agent: string;
     settings: string;
     logout: string;
     capture: string;
@@ -862,6 +865,196 @@ export interface TranslationSchema {
     signIn: string;
     signingIn: string;
   };
+  analyticsPage: {
+    title: string;
+    subtitle: string;
+    tabs: {
+      overview: string;
+      funnel: string;
+      forecast: string;
+      profitability: string;
+      allocation: string;
+      productivity: string;
+    };
+    kpi: {
+      savingsRate: string;
+      deepWorkHours: string;
+      pipelineRevenue: string;
+      winRate: string;
+    };
+    funnel: {
+      title: string;
+      subtitle: string;
+      discovered: string;
+      proposals: string;
+      calls: string;
+      won: string;
+      replyRate: string;
+      callRate: string;
+      closeRate: string;
+      avgDays: string;
+    };
+    forecast: {
+      title: string;
+      subtitle: string;
+      conservative: string;
+      base: string;
+      aggressive: string;
+      monthsToGoal: string;
+      reachDate: string;
+      in12Months: string;
+      currentPace: string;
+      realityCheckTitle: string;
+    };
+    profitability: {
+      title: string;
+      subtitle: string;
+      projectName: string;
+      budget: string;
+      hours: string;
+      rate: string;
+      status: string;
+      profitable: string;
+      underTarget: string;
+    };
+    allocation: {
+      title: string;
+      subtitle: string;
+      currentState: string;
+      recommendedSplit: string;
+      actualLogged: string;
+      deviation: string;
+    };
+  };
+  decisionsPage: {
+    title: string;
+    subtitle: string;
+    newDecision: string;
+    editDecision: string;
+    filterAll: string;
+    filterOpen: string;
+    filterDecided: string;
+    filterReviewed: string;
+    whyNow: string;
+    whyNowPh: string;
+    optionsTitle: string;
+    addOption: string;
+    upside: string;
+    downside: string;
+    cost: string;
+    timeRequired: string;
+    risk: string;
+    worstCase: string;
+    bestCase: string;
+    reversible: string;
+    irreversible: string;
+    decisionLabel: string;
+    reviewDate: string;
+    noDecisionsTitle: string;
+    noDecisionsDesc: string;
+  };
+  opportunitiesPage: {
+    title: string;
+    subtitle: string;
+    newOpportunity: string;
+    editOpportunity: string;
+    recommendedTitle: string;
+    recommendationBadge: string;
+    matrixTitle: string;
+    score: string;
+    expectedValue: string;
+    probability: string;
+    timeHours: string;
+    risk: string;
+    nextAction: string;
+    status: string;
+    pursue: string;
+    kinds: {
+      job: string;
+      freelance: string;
+      discordClient: string;
+      remote: string;
+      partnership: string;
+      product: string;
+      other: string;
+    };
+    noOpportunitiesTitle: string;
+    noOpportunitiesDesc: string;
+  };
+  agentPage: {
+    title: string;
+    subtitle: string;
+    tabs: {
+      credentials: string;
+      prompt: string;
+      tools: string;
+      playground: string;
+    };
+    endpointUrl: string;
+    apiKey: string;
+    showKey: string;
+    hideKey: string;
+    copyKey: string;
+    rotateKey: string;
+    rotateConfirm: string;
+    authNotice: string;
+    codeExamples: string;
+    promptTitle: string;
+    promptSubtitle: string;
+    copyPrompt: string;
+    promptUsageNotice: string;
+    toolsTitle: string;
+    toolsSubtitle: string;
+    copyTools: string;
+    playgroundTitle: string;
+    playgroundSubtitle: string;
+    selectAction: string;
+    executeAction: string;
+    executing: string;
+    testContextBtn: string;
+    loadingContext: string;
+    responseTitle: string;
+    statusSecured: string;
+    statusProtected: string;
+  };
+  commandPalette: {
+    placeholder: string;
+    noResults: string;
+    navigationGroup: string;
+    actionsGroup: string;
+    quickCapture: string;
+    quickCaptureDesc: string;
+    toggleTheme: string;
+    toggleThemeDesc: string;
+    toggleLanguage: string;
+    toggleLanguageDesc: string;
+    shortcutsHelp: string;
+    shortcutsHelpDesc: string;
+    signOut: string;
+    signOutDesc: string;
+  };
+  shortcutsModal: {
+    title: string;
+    subtitle: string;
+    globalSection: string;
+    navigationSection: string;
+    cmdK: string;
+    cmdKDesc: string;
+    keyB: string;
+    keyBDesc: string;
+    keyT: string;
+    keyTDesc: string;
+    keyD: string;
+    keyDDesc: string;
+    keyO: string;
+    keyODesc: string;
+    keyG: string;
+    keyGDesc: string;
+    keySlash: string;
+    keySlashDesc: string;
+    esc: string;
+    escDesc: string;
+  };
 }
 
 export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
@@ -888,6 +1081,9 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       routines: "Daily Routines",
       calendar: "Rhythm & Calendar",
       analytics: "System Analytics",
+      decisions: "Decision Desk",
+      opportunities: "Opportunity Prioritization",
+      agent: "AI Agent (Hermes)",
       settings: "Settings",
       logout: "Sign Out",
       capture: "Quick Capture",
@@ -1840,6 +2036,211 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       signIn: "Sign in",
       signingIn: "Signing in…",
     },
+    analyticsPage: {
+      title: "Command Analytics & Intelligence",
+      subtitle:
+        "Transparent, activity-driven insights across career funnels, 3-scenario forecasts, profitability, and adaptive time allocation.",
+      tabs: {
+        overview: "Overview",
+        funnel: "Career Funnel",
+        forecast: "3-Scenario Forecast",
+        profitability: "Project Profitability",
+        allocation: "Work Allocation",
+        productivity: "Productivity & Habits",
+      },
+      kpi: {
+        savingsRate: "Savings Rate",
+        deepWorkHours: "Deep Work Hours",
+        pipelineRevenue: "Won Pipeline Revenue",
+        winRate: "Close Rate",
+      },
+      funnel: {
+        title: "Freelance Client Acquisition Funnel (§4)",
+        subtitle:
+          "Conversion metrics derived directly from activity events (lead_events), not superficial snapshots.",
+        discovered: "Opportunities Found",
+        proposals: "Proposals Sent",
+        calls: "Client Calls",
+        won: "Deals Won",
+        replyRate: "Reply Rate",
+        callRate: "Call-to-Close Rate",
+        closeRate: "Overall Win Rate",
+        avgDays: "Avg Days to Close",
+      },
+      forecast: {
+        title: "3-Scenario Marriage & Savings Forecast (§7, D-10)",
+        subtitle:
+          "Projections calculated from historical net savings towards the 250,000 EGP marriage milestone.",
+        conservative: "Conservative (70% Pace)",
+        base: "Base Case (100% Pace)",
+        aggressive: "Aggressive (135% Pace)",
+        monthsToGoal: "Months to Target",
+        reachDate: "Target Month",
+        in12Months: "Balance in 12 Months",
+        currentPace: "Historical Monthly Surplus",
+        realityCheckTitle: "Reality Check Advisor (§Rule 6)",
+      },
+      profitability: {
+        title: "Project Effective Hourly Rate (§47)",
+        subtitle:
+          "Realized hourly value based on contract budget divided by tracked delivery & deep-work hours.",
+        projectName: "Project",
+        budget: "Budget",
+        hours: "Hours Logged",
+        rate: "Effective Rate",
+        status: "Status",
+        profitable: "Healthy Rate",
+        underTarget: "Below Target",
+      },
+      allocation: {
+        title: "Adaptive Weekly Work Allocation (§51/§52)",
+        subtitle:
+          "Intelligent work-stream splits that adapt smoothly to your active pipeline state.",
+        currentState: "Current Pipeline Stage",
+        recommendedSplit: "Target Time Split",
+        actualLogged: "Actual Time Logged",
+        deviation: "Variance",
+      },
+    },
+    decisionsPage: {
+      title: "Decision Desk (§34)",
+      subtitle:
+        "A structured decision-making canvas for high-impact crossroads, assessing cost, risk, worst-case scenarios, and reversibility.",
+      newDecision: "Log New Decision",
+      editDecision: "Edit Decision Dossier",
+      filterAll: "All Decisions",
+      filterOpen: "Open / In Evaluation",
+      filterDecided: "Decided",
+      filterReviewed: "Reviewed",
+      whyNow: "Why Now?",
+      whyNowPh: "What triggered this decision at this exact moment?",
+      optionsTitle: "Options Considered",
+      addOption: "Add Option",
+      upside: "Upside (Best Possible Outcome)",
+      downside: "Downside (Potential Costs/Downfalls)",
+      cost: "Financial & Resource Cost",
+      timeRequired: "Time Required",
+      risk: "Risk Level & Assessment",
+      worstCase: "Worst Case Scenario (Can I survive it?)",
+      bestCase: "Best Case Scenario",
+      reversible: "Reversible Decision (Type 2)",
+      irreversible: "Irreversible Decision (Type 1 - High Caution)",
+      decisionLabel: "Final Chosen Decision",
+      reviewDate: "Review Date",
+      noDecisionsTitle: "No Decisions Recorded Yet",
+      noDecisionsDesc:
+        "Use the Decision Desk whenever you face significant business, technical, or life forks in the road.",
+    },
+    opportunitiesPage: {
+      title: "Opportunity Prioritization Engine (§50)",
+      subtitle:
+        "Objective ranking using Expected Value × Probability / Effort (Hours) to maximize ROI on your energy.",
+      newOpportunity: "Add Opportunity",
+      editOpportunity: "Edit Opportunity",
+      recommendedTitle: "Recommended Next Opportunity",
+      recommendationBadge: "Top Pick",
+      matrixTitle: "Evaluated Opportunities Matrix",
+      score: "Score (EV/Hr)",
+      expectedValue: "Expected Value",
+      probability: "Win Probability",
+      timeHours: "Estimated Hours",
+      risk: "Risk Level",
+      nextAction: "Next Concrete Action",
+      status: "Pipeline Status",
+      pursue: "Pursue Opportunity",
+      kinds: {
+        job: "Full-Time Role",
+        freelance: "Freelance Project",
+        discordClient: "Discord Bot Client",
+        remote: "Remote Contract",
+        partnership: "Strategic Partnership",
+        product: "Digital Product",
+        other: "Other Opportunity",
+      },
+      noOpportunitiesTitle: "No Opportunities in Pipeline",
+      noOpportunitiesDesc:
+        "Add upcoming gigs, client requests, or potential partnerships to compare expected return on time.",
+    },
+    agentPage: {
+      title: "Hermes AI Agent Bridge & Integration Hub",
+      subtitle:
+        "Protected executive copilot API endpoint, pre-configured master system prompt, and OpenAI-compatible tool specifications for external autonomous agents.",
+      tabs: {
+        credentials: "API & Endpoint",
+        prompt: "Master System Prompt",
+        tools: "Tool Calling Specs (JSON)",
+        playground: "Interactive Test Console",
+      },
+      endpointUrl: "Protected Endpoint URL",
+      apiKey: "Personal Agent API Key (Bearer Token)",
+      showKey: "Show Key",
+      hideKey: "Hide Key",
+      copyKey: "Copy API Key",
+      rotateKey: "Regenerate / Rotate Key",
+      rotateConfirm: "Are you sure you want to regenerate your API key? Any existing agent scripts using the old key will need to be updated.",
+      authNotice:
+        "Security & Authentication: Requests from outside the dashboard must include the 'Authorization: Bearer <API_KEY>' header. When called from the browser dashboard, your active session cookie is automatically validated.",
+      codeExamples: "Integration Quickstart Code Snippets",
+      promptTitle: "Hermes Master System Prompt",
+      promptSubtitle:
+        "Copy and paste this comprehensive system prompt into Hermes, OpenClaw, Cursor, or any external autonomous agent to instruct it on your LIFE OS schema, rules, and operations.",
+      copyPrompt: "Copy Master Prompt",
+      promptUsageNotice:
+        "This prompt grounds Hermes in your strategic rules (§Rule 1-6), non-punitive coaching directives (§41, §70, §71), and exact JSON action schemas.",
+      toolsTitle: "Tool Calling Specifications (JSON Schema)",
+      toolsSubtitle:
+        "Standard OpenAI function calling format definitions ready for Hermes, LangChain, or autonomous agent tool suites.",
+      copyTools: "Copy JSON Specs",
+      playgroundTitle: "Agent Action Playground & Live Context Inspector",
+      playgroundSubtitle:
+        "Test live context retrieval (GET) or simulate structured agent operations (POST) directly against your authenticated account.",
+      selectAction: "Select Action to Simulate",
+      executeAction: "Execute Agent Action",
+      executing: "Executing on LIFE OS...",
+      testContextBtn: "Fetch Live Context (GET /api/agent/hermes)",
+      loadingContext: "Fetching live context...",
+      responseTitle: "API Response / Execution Output",
+      statusSecured: "Secured & RLS Protected",
+      statusProtected: "Authentication Required (Bearer / Session)",
+    },
+    commandPalette: {
+      placeholder: "Type a command, page name, or search...",
+      noResults: "No matching commands or pages found.",
+      navigationGroup: "Quick Page Navigation",
+      actionsGroup: "Quick Actions & Commands",
+      quickCapture: "Quick Capture Brain Dump",
+      quickCaptureDesc: "Capture idea, raw thought, or inbox item instantly",
+      toggleTheme: "Toggle Dark / Light Theme",
+      toggleThemeDesc: "Switch between dark and light appearance",
+      toggleLanguage: "Switch Interface Language",
+      toggleLanguageDesc: "Toggle between Arabic and English",
+      shortcutsHelp: "Keyboard Shortcuts Cheat Sheet",
+      shortcutsHelpDesc: "View all system hotkeys and shortcuts",
+      signOut: "Sign Out",
+      signOutDesc: "Log out from your current session safely",
+    },
+    shortcutsModal: {
+      title: "Keyboard Shortcuts Guide",
+      subtitle: "Master rapid keyboard navigation across LIFE OS.",
+      globalSection: "Global & System Shortcuts",
+      navigationSection: "Single-Key Quick Navigation",
+      cmdK: "Ctrl + K / ⌘K",
+      cmdKDesc: "Open Global Command & Navigation Palette",
+      keyB: "B / C",
+      keyBDesc: "Open Instant Brain Dump Quick Capture",
+      keyT: "T",
+      keyTDesc: "Go to Today's Dashboard & Execution Plan",
+      keyD: "D",
+      keyDDesc: "Go to Decision Desk (§34)",
+      keyO: "O",
+      keyODesc: "Go to Opportunity Prioritization Engine (§50)",
+      keyG: "G",
+      keyGDesc: "Go to Goals & Strategic Vision Tree",
+      keySlash: "?",
+      keySlashDesc: "Open this Keyboard Shortcuts Guide",
+      esc: "ESC",
+      escDesc: "Close any modal, dialog, or search palette",
+    },
   },
   ar: {
     nav: {
@@ -1863,7 +2264,10 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       habits: "العادات والاستمرارية",
       routines: "الروتين اليومي",
       calendar: "التقويم والروتين",
-      analytics: "التحليلات والإحصائيات",
+      analytics: "التحليلات والرؤى الاستراتيجية",
+      decisions: "غرفة القرارات (Decision Desk)",
+      opportunities: "ترتيب الفرص (Opportunities)",
+      agent: "الوكيل الذكي (Hermes)",
       settings: "الإعدادات",
       logout: "تسجيل الخروج",
       capture: "تسجيل فكرة سريعة",
@@ -2805,6 +3209,211 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       password: "كلمة المرور",
       signIn: "تسجيل الدخول",
       signingIn: "جاري الدخول…",
+    },
+    analyticsPage: {
+      title: "مركز التحليلات والرؤى الاستراتيجية",
+      subtitle:
+        "تحليلات دقيقة مستندة لأفعال حقيقية في مسار الفريلانس، سيناريوهات توقع الادخار، ربحية المشاريع، وتوزيع الوقت المتكيف.",
+      tabs: {
+        overview: "نظرة عامة",
+        funnel: "قمع المبيعات والفريلانس",
+        forecast: "سيناريوهات توقع الادخار",
+        profitability: "ربحية المشاريع والعائد بالساعة",
+        allocation: "توزيع الوقت المتكيف",
+        productivity: "الإنتاجية والعادات",
+      },
+      kpi: {
+        savingsRate: "نسبة الادخار الصافية",
+        deepWorkHours: "ساعات العمل العميق",
+        pipelineRevenue: "إجمالي قيمة الصفقات المكسوبة",
+        winRate: "نسبة إغلاق الصفقات",
+      },
+      funnel: {
+        title: "قمع استقطاب عملاء الفريلانس (§4)",
+        subtitle:
+          "مؤشرات تحويل مستخرجة مباشرة من سجل الأحداث الفعلي (lead_events) لتعكس حركة المبيعات الحقيقية.",
+        discovered: "الفرص المكتشفة",
+        proposals: "عروض الأسعار المرسلة",
+        calls: "مكالمات العملاء المكتملة",
+        won: "الصفقات المكسوبة",
+        replyRate: "معدل الردود",
+        callRate: "معدل التحويل من المكالمات",
+        closeRate: "معدل الإغلاق الكلي",
+        avgDays: "متوسط أيام إغلاق الصفقة",
+      },
+      forecast: {
+        title: "سيناريوهات توقع ادخار الزواج الثلاثة (§7, D-10)",
+        subtitle:
+          "توقعات محسوبة بناءً على متوسط الفائض المالي التاريخي للوصول لهدف الـ 250,000 ج.م.",
+        conservative: "السيناريو المتحفظ (70% من الوتيرة)",
+        base: "السيناريو الأساسي (100% من الوتيرة)",
+        aggressive: "السيناريو المتفائل (135% من الوتيرة)",
+        monthsToGoal: "الشهور المتبقية للهدف",
+        reachDate: "الشهر المتوقع لتحقيق الهدف",
+        in12Months: "الرصيد المتوقع بعد 12 شهراً",
+        currentPace: "متوسط الفائض الشهري الفعلي",
+        realityCheckTitle: "مرشد مطابقة الواقع (§Rule 6)",
+      },
+      profitability: {
+        title: "العائد الفعلي بالساعة للمشاريع (§47)",
+        subtitle:
+          "القيمة الحقيقية لساعة العمل المحققة بقسمة ميزانية المشروع على ساعات التسليم والعمل العميق المسجلة.",
+        projectName: "المشروع",
+        budget: "الميزانية",
+        hours: "الساعات المسجلة",
+        rate: "العائد الفعلي / ساعة",
+        status: "الحالة",
+        profitable: "عائد ممتاز",
+        underTarget: "أقل من المستهدف",
+      },
+      allocation: {
+        title: "توزيع الوقت الأسبوعي المتكيف (§51/§52)",
+        subtitle:
+          "توزيع ذكي لمسارات العمل يتكيف تلقائياً مع وضع وحالة الـ Pipeline الحالية.",
+        currentState: "المرحلة الحالية للـ Pipeline",
+        recommendedSplit: "التوزيع المستهدف المقترح",
+        actualLogged: "الوقت الفعلي المسجل",
+        deviation: "الانحراف عن الخطة",
+      },
+    },
+    decisionsPage: {
+      title: "غرفة القرارات الكبرى (Decision Desk §34)",
+      subtitle:
+        "نموذج تفكير هيكلي للقرارات المفصلية، لتقييم التكلفة، المخاطر، أسوأ وأفضل السيناريوهات، وقابلية التراجع.",
+      newDecision: "تسجيل قرار جديد",
+      editDecision: "تعديل ملف القرار",
+      filterAll: "جميع القرارات",
+      filterOpen: "مفتوح / قيد التقييم",
+      filterDecided: "تم اتخاذ القرار",
+      filterReviewed: "تمت مراجعته وتقييمه",
+      whyNow: "لماذا الآن؟ (Why Now)",
+      whyNowPh: "ما الذي استدعى اتخاذ هذا القرار في هذه اللحظة بالذات؟",
+      optionsTitle: "الخيارات والبدائل المطروحة",
+      addOption: "إضافة خيار / بديل",
+      upside: "المكاسب والفرص المحتملة (Upside)",
+      downside: "السلبيات والتكاليف المحتملة (Downside)",
+      cost: "التكلفة المالية والموارد",
+      timeRequired: "الوقت المطلوب للتنفيذ",
+      risk: "درجة المخاطرة وتقييمها",
+      worstCase: "أسوأ سيناريو محتمل (وهل يمكن النجاة منه؟)",
+      bestCase: "أفضل سيناريو محتمل",
+      reversible: "قرار قابل للتراجع (Reversible - Type 2)",
+      irreversible: "قرار غير قابل للتراجع (Irreversible - Type 1 حذر شديد)",
+      decisionLabel: "القرار النهائي المتخذ",
+      reviewDate: "تاريخ المراجعة والتقييم اللاحق",
+      noDecisionsTitle: "لا توجد قرارات مسجلة بعد",
+      noDecisionsDesc:
+        "استخدم غرفة القرارات كلما واجهت مفترق طرق تقني أو مالي أو شخصي كبير لتفادي التردد.",
+    },
+    opportunitiesPage: {
+      title: "محرك ترتيب الفرص وتحديد الأولويات (§50)",
+      subtitle:
+        "ترتيب موضوعي بالمعادلة الرياضية: القيمة المتوقعة × الاحتمالية ÷ الجهد (الساعات) لأعلى عائد على طاقتك.",
+      newOpportunity: "إضافة فرصة جديدة",
+      editOpportunity: "تعديل بيانات الفرصة",
+      recommendedTitle: "الفرصة المرشحة كأولوية قصوى",
+      recommendationBadge: "الخيار الأفضل حالياً",
+      matrixTitle: "مصفوفة الفرص المقيّمة",
+      score: "درجة الجدوى (ج.م/ساعة)",
+      expectedValue: "القيمة المالية المتوقعة",
+      probability: "احتمالية الإغلاق والفوز",
+      timeHours: "الساعات المقدرة للعمل",
+      risk: "مستوى المخاطرة",
+      nextAction: "الخطوة القادمة المحددة",
+      status: "حالة الفرصة",
+      pursue: "البدء في ملاحقة الفرصة",
+      kinds: {
+        job: "وظيفة بدوام",
+        freelance: "مشروع فريلانس",
+        discordClient: "عميل بوت ديسكورد",
+        remote: "عقد عمل عن بعد",
+        partnership: "شراكة استراتيجية",
+        product: "منتج رقمي",
+        other: "فرصة أخرى",
+      },
+      noOpportunitiesTitle: "لا توجد فرص في القائمة حالياً",
+      noOpportunitiesDesc:
+        "أضف العروض والمشاريع والشراكات المطروحة لمقارنة العائد المتوقع لكل ساعة استثمار من وقتك.",
+    },
+    agentPage: {
+      title: "جسر الوكيل الذكي ومنصة تكامل Hermes",
+      subtitle:
+        "نقطة اتصال برمجية (API Endpoint) مؤمّنة ومحمية بالكامل، مع برومبت رئيسي شامل ومواصفات أدوات متوافقة مع معايير OpenAI للوكلاء المستقلين.",
+      tabs: {
+        credentials: "نقطة الاتصال والـ API",
+        prompt: "البرومبت الرئيسي (Master Prompt)",
+        tools: "مواصفات الأدوات (JSON Specs)",
+        playground: "كونسول الاختبار التفاعلي",
+      },
+      endpointUrl: "رابط الـ Endpoint المحمي",
+      apiKey: "مفتاح الربط الخاص بالوكيل (Bearer Token)",
+      showKey: "إظهار المفتاح",
+      hideKey: "إخفاء المفتاح",
+      copyKey: "نسخ مفتاح الـ API",
+      rotateKey: "إعادة توليد وتدوير المفتاح",
+      rotateConfirm: "هل أنت متأكد من إعادة توليد المفتاح؟ سيتعين عليك تحديث أي سكريبتات أو وكلاء خارجيين يستخدمون المفتاح القديم.",
+      authNotice:
+        "قواعد الأمان والتحقق: تتطلب الطلبات القادمة من خارج لوحة التحكم إرفاق ترويسة 'Authorization: Bearer <API_KEY>'. عند الاستدعاء من المتصفح أثناء تسجيل الدخول، يتم التحقق تلقائياً من جلسة المستخدم (Cookie Session).",
+      codeExamples: "أمثلة سريعة للأكواد والربط البرمجي",
+      promptTitle: "البرومبت الرئيسي الشامل لـ Hermes",
+      promptSubtitle:
+        "انسخ هذا البرومبت بالكامل وضعه في Hermes أو OpenClaw أو Cursor لتعريف الوكيل الذكي بنظام حياتك وقواعدك وصيغ البيانات المعتمدة.",
+      copyPrompt: "نسخ البرومبت بالكامل",
+      promptUsageNotice:
+        "هذا البرومبت يرسخ قواعدك الست الاستراتيجية وأسلوب التوجيه غير العقابي (§41, §70, §71) وصيغ الـ JSON الدقيقة لتنفيذ الإجراءات.",
+      toolsTitle: "مواصفات الأدوات المدمجة (Tool Calling Specs)",
+      toolsSubtitle:
+        "مخطط الدوال القياسي (OpenAI Tool Calling Format) جاهز للإدراج في منظومة الوكلاء المستقلين مثل Hermes أو LangChain.",
+      copyTools: "نسخ مواصفات الأدوات (JSON)",
+      playgroundTitle: "مختبر تجربة الأوامر وفحص السياق الحي",
+      playgroundSubtitle:
+        "اختبر جلب سياق حسابك الفعلي (GET) أو حاكِ تنفيذ الأوامر والعمليات (POST) مباشرة على بيانات حسابك بأمان.",
+      selectAction: "اختر الإجراء المراد اختباره",
+      executeAction: "تنفيذ الإجراء على Life OS",
+      executing: "جاري التنفيذ على النظام...",
+      testContextBtn: "فحص وجلب السياق الحي (GET /api/agent/hermes)",
+      loadingContext: "جاري جلب السياق الحي...",
+      responseTitle: "استجابة الـ API ونتيجة العملية",
+      statusSecured: "مؤمن ومعزول تماماً (RLS Protected)",
+      statusProtected: "مطلوب مصادقة (Bearer Token أو Session)",
+    },
+    commandPalette: {
+      placeholder: "اكتب أمراً، اسم صفحة، أو ابحث...",
+      noResults: "لم يتم العثور على أوامر أو صفحات مطابقة.",
+      navigationGroup: "الانتقال السريع للصفحات",
+      actionsGroup: "الإجراءات والأوامر السريعة",
+      quickCapture: "تسجيل فكرة سريعة (Brain Dump)",
+      quickCaptureDesc: "التقاط فكرة، ملاحظة، أو مهمة فورية في الصندوق",
+      toggleTheme: "تبديل المظهر (ليلي / نهاري)",
+      toggleThemeDesc: "التبديل الفوري بين المظهر الداكن والفاتح",
+      toggleLanguage: "تغيير لغة الواجهة",
+      toggleLanguageDesc: "التبديل بين العربية والإنجليزية",
+      shortcutsHelp: "دليل اختصارات لوحة المفاتيح",
+      shortcutsHelpDesc: "عرض جميع المفاتيح السريعة للنظام",
+      signOut: "تسجيل الخروج",
+      signOutDesc: "تسجيل الخروج بأمان من جلستك الحالية",
+    },
+    shortcutsModal: {
+      title: "دليل اختصارات لوحة المفاتيح",
+      subtitle: "تنقل وتحكم في Life OS بسرعة فائقة بدون مغادرة لوحة المفاتيح.",
+      globalSection: "الاختصارات العامة والنظام",
+      navigationSection: "التنقل السريع المباشر (مفتاح واحد)",
+      cmdK: "Ctrl + K / ⌘K",
+      cmdKDesc: "فتح شريط الأوامر والتنقل السريع",
+      keyB: "B / C",
+      keyBDesc: "فتح نافذة تسجيل الأفكار السريعة (Brain Dump)",
+      keyT: "T",
+      keyTDesc: "الانتقال إلى خطة اليوم وغرفة القيادة",
+      keyD: "D",
+      keyDDesc: "الانتقال إلى غرفة القرارات (§34)",
+      keyO: "O",
+      keyODesc: "الانتقال إلى محرك ترتيب الفرص (§50)",
+      keyG: "G",
+      keyGDesc: "الانتقال إلى شجرة الأهداف الاستراتيجية",
+      keySlash: "?",
+      keySlashDesc: "فتح هذا الدليل التفاعلي للاختصارات",
+      esc: "ESC",
+      escDesc: "إغلاق أي نافذة منبثقة أو شريط بحث مفتوح",
     },
   },
 };

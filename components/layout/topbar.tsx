@@ -46,8 +46,21 @@ export function Topbar({
         </div>
       </div>
 
-      {/* Right items: Language toggle, Capture trigger, theme toggle, profile & logout */}
+      {/* Right items: Search, Language toggle, Capture trigger, theme toggle, profile & logout */}
       <div className="flex items-center gap-2 sm:gap-3">
+        {/* Command Palette Trigger */}
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent("open-command-palette"))}
+          className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-xs text-zinc-500 dark:text-zinc-400 transition-colors cursor-pointer"
+          title="Search & Commands (Ctrl+K)"
+        >
+          <span className="hidden md:inline font-medium">{t.commandPalette.placeholder.split("...")[0]}...</span>
+          <span className="md:hidden font-medium">بحث</span>
+          <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded-md bg-zinc-200 dark:bg-zinc-700 font-mono text-[10px] font-bold text-zinc-600 dark:text-zinc-300">
+            Ctrl+K
+          </kbd>
+        </button>
+
         {/* Language Toggle */}
         <LanguageToggle />
 
