@@ -1,46 +1,36 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Link from "next/link";
 import { reopenDayPlan } from "@/lib/actions/day-plan";
 import { MorningMissionHeader } from "./morning-mission-header";
 import { FocusQuestionCard } from "./focus-question-card";
-import { TopThreeSlots } from "./top-three-slots";
+import { TodayStepsTaskList } from "./today-steps-task-list";
 import { ActionTriadSlots } from "./action-triad-slots";
-import { TodayTaskList } from "./today-task-list";
 import { ShutdownModal } from "./shutdown-modal";
-import { DailyLogWidget } from "./daily-log-widget";
-import { DeepWorkTimer } from "./deep-work-timer";
 import { TaskDetailModal } from "@/components/tasks/task-detail-modal";
 import { TaskModal } from "@/components/tasks/task-modal";
 import { Button } from "@/components/ui/button";
 import { useLocale } from "@/components/providers/locale-provider";
-import { Moon, CheckCircle2, RotateCcw } from "lucide-react";
+import {
+  Zap,
+  Moon,
+  CheckCircle2,
+  RotateCcw,
+  ArrowLeft,
+  ArrowRight,
+} from "lucide-react";
 import type { TodayMissionData } from "@/lib/dal/day-plan";
-import type { TaskRow, GoalRow, ProjectRow, DailyLogRow } from "@/lib/supabase/types";
-import type { CapacityAdvice } from "@/lib/logic/daily-log";
-import { calculateWeeklyTimeDistribution, type WeeklyTimeDistribution } from "@/lib/logic/time-tracking";
-
-const DEFAULT_WEEKLY_DISTRIBUTION = calculateWeeklyTimeDistribution([]);
+import type { TaskRow, GoalRow, ProjectRow } from "@/lib/supabase/types";
 
 export function TodayView({
   data,
   goals = [],
   projects = [],
-  dailyLog = null,
-  capacityAdvice = {
-    capacity: "normal",
-    maxCoreTasks: 2,
-    messageAr: "طاقة متوازنة",
-    messageEn: "Balanced energy",
-  },
-  weeklyTimeDistribution = DEFAULT_WEEKLY_DISTRIBUTION,
 }: {
   data: TodayMissionData;
   goals?: GoalRow[];
   projects?: ProjectRow[];
-  dailyLog?: DailyLogRow | null;
-  capacityAdvice?: CapacityAdvice;
-  weeklyTimeDistribution?: WeeklyTimeDistribution;
 }) {
   const { t, isRtl } = useLocale();
   const [isPending, startTransition] = useTransition();
@@ -76,7 +66,7 @@ export function TodayView({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 animate-in fade-in duration-150">
       {/* Closed Day Notice Banner */}
       {isDayClosed && (
         <div className="animate-in fade-in flex flex-col justify-between gap-3 rounded-3xl border border-purple-200 bg-purple-50 p-4 sm:flex-row sm:items-center dark:border-purple-800 dark:bg-purple-950/60">
@@ -109,7 +99,7 @@ export function TodayView({
         </div>
       )}
 
-      {/* Morning Mission Header */}
+      {/* 1. Morning Mission Header & Available Capacity */}
       <MorningMissionHeader
         dayPlan={data.dayPlan}
         capacity={data.capacity}
@@ -117,33 +107,23 @@ export function TodayView({
         selectedDate={data.selectedDate}
       />
 
-      {/* Daily Sleep & Energy Log Widget */}
-      <DailyLogWidget
-        initialLog={dailyLog}
-        advice={capacityAdvice}
-        todayDate={data.selectedDate}
-      />
-
-      {/* "The One Thing" Focus Question Card */}
+      {/* 2. "The One Thing" Focus Question Card */}
       <FocusQuestionCard
         dayPlan={data.dayPlan}
         selectedDate={data.selectedDate}
       />
 
-      {/* Top 3 Priorities Board */}
-      <TopThreeSlots
-        topThreeTasks={data.topThreeTasks}
+      {/* 3. Steps Sequential Priority Tasks Roadmap */}
+      <TodayStepsTaskList
+        tasks={data.todayTasks}
+        projects={projects}
+        goals={goals}
+        onAddTask={handleAddTask}
+        onEditTask={handleEditTask}
         onViewDetails={handleViewDetails}
-        onOpenTaskPicker={handleAddTask}
       />
 
-      {/* Deep Work Timer Session */}
-      <DeepWorkTimer
-        plannedTasks={data.todayTasks}
-        weeklyDistribution={weeklyTimeDistribution}
-      />
-
-      {/* Action Triad Slots */}
+      {/* 4. Action Triad Slots Summary */}
       <ActionTriadSlots
         dayPlan={data.dayPlan}
         todayTasks={data.todayTasks}
@@ -154,33 +134,41 @@ export function TodayView({
         onViewDetails={handleViewDetails}
       />
 
-      {/* Today's Tasks Execution List */}
-      <TodayTaskList
-        tasks={data.todayTasks}
-        selectedDate={data.selectedDate}
-        onViewDetails={handleViewDetails}
-        onAddTask={handleAddTask}
-      />
-
-      {/* Evening Shutdown Action Footer */}
-      {!isDayClosed && (
-        <div className="flex items-center justify-between rounded-3xl bg-white p-5 shadow-md dark:bg-zinc-900 dark:text-white">
-          <div className="space-y-0.5">
-            <h3 className="flex items-center gap-2 text-sm font-extrabold">
-              <Moon className="h-4 w-4 text-purple-400" />
-              <span>{t.todayPlan.shutdownDay}</span>
+      {/* 5. Quick Transition Card to /energy */}
+      <div className="p-6 rounded-3xl bg-gradient-to-r from-amber-500/10 via-purple-500/5 to-emerald-500/10 border border-amber-200/80 dark:border-amber-900/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-2xl bg-amber-500 text-white shadow-xs">
+            <Zap className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="text-sm font-black text-zinc-900 dark:text-zinc-100">
+              {isRtl ? "مؤشرات الطاقة ومؤقت العمل العميق" : "Energy & Deep Work Timer"}
             </h3>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">
               {isRtl
-                ? "حسم مهام اليوم، ترحيل المتبقي للغد، والمراجعة اليومية."
-                : "Wrap up today, review wins, and set tomorrow's starting focus."}
+                ? "تتبع ساعات النوم، تقييم الطاقة، وجلسات مؤقت التركيز (بومودورو) في صفحة مخصصة."
+                : "Sleep logs, bio-rhythms, and Pomodoro deep work timers in their dedicated space."}
             </p>
           </div>
+        </div>
 
+        <Link
+          href={`/energy?date=${data.selectedDate}`}
+          className="px-4 py-2 rounded-2xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-bold hover:bg-zinc-800 dark:hover:bg-white transition-all shadow-xs flex items-center justify-center gap-2 shrink-0"
+        >
+          <span>{isRtl ? "فتح صفحة الطاقة والبيوريثم" : "Open Energy Dashboard"}</span>
+          {isRtl ? <ArrowLeft className="h-4 w-4" /> : <ArrowRight className="h-4 w-4" />}
+        </Link>
+      </div>
+
+      {/* Evening Shutdown Trigger Button */}
+      {!isDayClosed && (
+        <div className="flex justify-center pt-2">
           <Button
-            size="md"
+            size="lg"
+            variant="outline"
             onClick={() => setIsShutdownOpen(true)}
-            className="shrink-0 gap-1.5 rounded-xl bg-purple-600 font-bold text-white hover:bg-purple-700"
+            className="gap-2.5 rounded-2xl border-purple-200 px-6 text-xs font-black text-purple-700 hover:bg-purple-50 hover:text-purple-800 dark:border-purple-800 dark:text-purple-300 dark:hover:bg-purple-950/40 cursor-pointer shadow-xs"
           >
             <Moon className="h-4 w-4" />
             <span>{t.todayPlan.shutdownDay}</span>
@@ -192,11 +180,11 @@ export function TodayView({
       <ShutdownModal
         isOpen={isShutdownOpen}
         onClose={() => setIsShutdownOpen(false)}
-        selectedDate={data.selectedDate}
         summary={data.shutdownSummary}
+        selectedDate={data.selectedDate}
       />
 
-      {/* Task Modal (Create / Edit) */}
+      {/* Task Add / Edit Modal */}
       <TaskModal
         isOpen={isTaskModalOpen}
         onClose={() => setIsTaskModalOpen(false)}
@@ -206,7 +194,7 @@ export function TodayView({
         defaultDate={data.selectedDate}
       />
 
-      {/* Task Detail Peek Modal ("Eye" Icon) */}
+      {/* Task Details Modal */}
       <TaskDetailModal
         isOpen={isDetailOpen}
         onClose={() => setIsDetailOpen(false)}
@@ -214,7 +202,10 @@ export function TodayView({
         goals={goals}
         projects={projects}
         onEdit={() => {
-          if (selectedTask) handleEditTask(selectedTask);
+          if (selectedTask) {
+            setIsDetailOpen(false);
+            handleEditTask(selectedTask);
+          }
         }}
       />
     </div>

@@ -280,3 +280,31 @@ export async function getAgentContext(userId: string) {
     openDecisions: openDecisionsRes.data || [],
   };
 }
+
+/**
+ * Fetch all AI agent activity reports and audit logs for the user
+ */
+export const getAgentReports = cache(
+  async (userId?: string): Promise<{ id: string; title: string; content: string; created_at: string; tags: string[] }[]> => {
+    let resolvedUserId = userId;
+    if (!resolvedUserId) {
+      const session = await verifySession();
+      resolvedUserId = session.userId;
+    }
+
+    const adminClient = createSupabaseAdminClient();
+    const { data, error } = await adminClient
+      .from("notes")
+      .select("id, title, content, created_at, tags")
+      .eq("user_id", resolvedUserId)
+      .eq("folder", "agent_reports")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching agent reports:", error);
+      return [];
+    }
+
+    return (data || []) as { id: string; title: string; content: string; created_at: string; tags: string[] }[];
+  },
+);

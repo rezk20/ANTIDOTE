@@ -25,6 +25,7 @@ import {
   TrendingUp,
   Bot,
   BookOpen,
+  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { useLocale } from "@/components/providers/locale-provider";
@@ -82,6 +83,7 @@ export function Sidebar({
         { label: t.nav.relationship, href: "/relationship", icon: Users2 },
         { label: t.nav.habits, href: "/habits", icon: Flame },
         { label: t.nav.routines, href: "/routines", icon: RotateCcw },
+        { label: t.nav.energy, href: "/energy", icon: Zap },
         { label: t.nav.analytics, href: "/analytics", icon: BarChart3 },
         { label: t.nav.settings, href: "/settings", icon: Settings },
       ],

@@ -84,6 +84,22 @@ export async function executeAgentAction(
         return { ok: true, data: { item: data, message: "Thought captured to Brain Dump inbox." } };
       }
 
+      case "add_brain_dump": {
+        const { data, error } = await supabase
+          .from("brain_dumps")
+          .insert({
+            user_id: userId,
+            content: `[${payload.category.toUpperCase()}] ${payload.content}`,
+            status: payload.status || "inbox",
+          })
+          .select("id, content, status, created_at")
+          .single();
+
+        if (error) throw error;
+        revalidatePath("/brain-dump");
+        return { ok: true, data: { item: data, message: "Idea added to Brain Dump." } };
+      }
+
       case "create_task": {
         const taskPriority = priorityMap[payload.priority] || "medium";
         const { data, error } = await supabase
@@ -98,14 +114,17 @@ export async function executeAgentAction(
             duration_min: payload.estimated_minutes || null,
             goal_id: payload.goal_id || null,
             project_id: payload.project_id || null,
+            is_top_three: payload.is_top_three || false,
+            description: payload.description || null,
             status: "planned",
           })
-          .select("id, title, priority, scheduled_date")
+          .select("id, title, priority, scheduled_date, is_top_three")
           .single();
 
         if (error) throw error;
         revalidatePath("/tasks");
         revalidatePath("/today");
+        revalidatePath("/calendar");
         return { ok: true, data: { task: data, message: "Task created successfully." } };
       }
 
@@ -114,24 +133,237 @@ export async function executeAgentAction(
           status?: "backlog" | "planned" | "in_progress" | "done" | "dropped" | "someday";
           priority?: "critical" | "high" | "medium" | "low";
           scheduled_date?: string | null;
+          is_top_three?: boolean;
         } = {};
 
         if (payload.status) updateData.status = statusMap[payload.status] || "planned";
         if (payload.priority) updateData.priority = priorityMap[payload.priority] || "medium";
         if (payload.scheduled_date !== undefined) updateData.scheduled_date = payload.scheduled_date;
+        if (payload.is_top_three !== undefined) updateData.is_top_three = payload.is_top_three;
 
         const { data, error } = await supabase
           .from("tasks")
           .update(updateData)
           .eq("id", payload.task_id)
           .eq("user_id", userId)
-          .select("id, title, status, priority")
+          .select("id, title, status, priority, is_top_three")
           .single();
 
         if (error) throw error;
         revalidatePath("/tasks");
         revalidatePath("/today");
+        revalidatePath("/calendar");
         return { ok: true, data: { task: data, message: "Task updated." } };
+      }
+
+      case "set_day_plan": {
+        const { data, error } = await supabase
+          .from("day_plans")
+          .upsert(
+            {
+              user_id: userId,
+              plan_date: payload.plan_date,
+              available_hours: payload.available_hours,
+              energy: payload.energy,
+              focus_question_answer: payload.focus_question_answer,
+              notes: payload.notes || null,
+              status: "active",
+            },
+            { onConflict: "user_id,plan_date" },
+          )
+          .select("*")
+          .single();
+
+        if (error) throw error;
+
+        // If top three task IDs provided, update them
+        if (payload.top_three_task_ids && payload.top_three_task_ids.length > 0) {
+          // Reset existing top 3 for this day
+          await supabase
+            .from("tasks")
+            .update({ is_top_three: false })
+            .eq("user_id", userId)
+            .eq("scheduled_date", payload.plan_date);
+
+          // Mark selected ones
+          await supabase
+            .from("tasks")
+            .update({ is_top_three: true, scheduled_date: payload.plan_date })
+            .eq("user_id", userId)
+            .in("id", payload.top_three_task_ids);
+        }
+
+        revalidatePath("/today");
+        revalidatePath("/calendar");
+        return { ok: true, data: { dayPlan: data, message: "Morning mission calibrated successfully." } };
+      }
+
+      case "orchestrate_day": {
+        const results = {
+          dayPlan: null as unknown,
+          createdTasks: [] as unknown[],
+          brainDumpItems: [] as unknown[],
+          report: null as unknown,
+        };
+
+        // 1. Set / Upsert Day Plan
+        const { data: dayPlanData, error: dayPlanErr } = await supabase
+          .from("day_plans")
+          .upsert(
+            {
+              user_id: userId,
+              plan_date: payload.target_date,
+              available_hours: payload.available_hours,
+              energy: payload.energy,
+              focus_question_answer: payload.focus_question_answer,
+              notes: payload.executive_briefing,
+              status: "active",
+            },
+            { onConflict: "user_id,plan_date" },
+          )
+          .select("*")
+          .single();
+
+        if (dayPlanErr) throw dayPlanErr;
+        results.dayPlan = dayPlanData;
+
+        // 2. Create any new tasks
+        if (payload.new_tasks && payload.new_tasks.length > 0) {
+          for (const t of payload.new_tasks) {
+            const taskPriority = priorityMap[t.priority] || "medium";
+            const { data: createdTask } = await supabase
+              .from("tasks")
+              .insert({
+                user_id: userId,
+                title: t.title,
+                priority: taskPriority,
+                task_type: t.task_type,
+                scheduled_date: payload.target_date,
+                duration_min: t.estimated_minutes || 60,
+                is_top_three: t.is_top_three || false,
+                description: t.description || null,
+                status: "planned",
+              })
+              .select("id, title, priority, scheduled_date, is_top_three")
+              .single();
+
+            if (createdTask) results.createdTasks.push(createdTask);
+          }
+        }
+
+        // 3. Mark Top 3 Tasks if specified
+        if (payload.top_three_task_ids && payload.top_three_task_ids.length > 0) {
+          await supabase
+            .from("tasks")
+            .update({ is_top_three: true, scheduled_date: payload.target_date })
+            .eq("user_id", userId)
+            .in("id", payload.top_three_task_ids);
+        }
+
+        // 4. Drop Brain Dump Suggestions
+        if (payload.brain_dump_suggestions && payload.brain_dump_suggestions.length > 0) {
+          for (const s of payload.brain_dump_suggestions) {
+            const { data: dumpData } = await supabase
+              .from("brain_dumps")
+              .insert({
+                user_id: userId,
+                content: `[AI Suggestion] ${s}`,
+                status: "inbox",
+              })
+              .select("id, content")
+              .single();
+
+            if (dumpData) results.brainDumpItems.push(dumpData);
+          }
+        }
+
+        // 5. Automatically record an Executive Report in notes (folder: agent_reports)
+        const reportContent = `### 📋 ملخص التخطيط اليومي للـ AI Orchestrator (${payload.target_date})
+
+**🎯 الهدف الرئيسي لليوم (The One Thing):**
+> ${payload.focus_question_answer}
+
+**⏱️ الساعات المتاحة ومستوى الطاقة:**
+- ساعات العمل المركزة: **${payload.available_hours} ساعات**
+- تقييم الطاقة: **${payload.energy} / 5**
+
+**⚡ التقرير التنفيذي:**
+${payload.executive_briefing}
+
+---
+*تمت أتمتة هذه الجلسة تلقائياً بواسطة Hermes AI Engine بنجاح.*`;
+
+        const { data: reportNote } = await supabase
+          .from("notes")
+          .insert({
+            user_id: userId,
+            title: `تقرير التخطيط اليومي - ${payload.target_date}`,
+            content: reportContent,
+            folder: "agent_reports",
+            tags: ["ai_orchestration", "daily_plan", "hermes"],
+            pinned: true,
+          })
+          .select("id, title, created_at")
+          .single();
+
+        results.report = reportNote;
+
+        revalidatePath("/today");
+        revalidatePath("/tasks");
+        revalidatePath("/calendar");
+        revalidatePath("/brain-dump");
+        revalidatePath("/notes");
+        revalidatePath("/agent");
+
+        return {
+          ok: true,
+          data: {
+            results,
+            message: `Autonomous orchestration completed for ${payload.target_date}!`,
+          },
+        };
+      }
+
+      case "log_report": {
+        const changesList = payload.changes_made.length > 0
+          ? payload.changes_made.map((c) => `- ${c}`).join("\n")
+          : "- لا توجد تعديلات إضافية.";
+
+        const recsList = payload.strategic_recommendations.length > 0
+          ? payload.strategic_recommendations.map((r) => `- ${r}`).join("\n")
+          : "- الاستمرار على نفس الخطة الحالية.";
+
+        const markdownContent = payload.full_markdown || `### 📊 ${payload.title}
+
+**الملخص التنفيذي:**
+${payload.summary}
+
+### 🔄 التعديلات والمهام المنجزة:
+${changesList}
+
+### 💡 التوصيات الاستراتيجية للمرحلة القادمة:
+${recsList}
+
+---
+*سجل بواسطة Hermes AI Copilot في ${new Date().toLocaleTimeString("ar-EG")}*`;
+
+        const { data, error } = await supabase
+          .from("notes")
+          .insert({
+            user_id: userId,
+            title: payload.title,
+            content: markdownContent,
+            folder: "agent_reports",
+            tags: ["agent_report", "audit_log", "briefing"],
+            pinned: true,
+          })
+          .select("id, title, folder, created_at")
+          .single();
+
+        if (error) throw error;
+        revalidatePath("/notes");
+        revalidatePath("/agent");
+        return { ok: true, data: { report: data, message: "Agent report logged successfully." } };
       }
 
       case "log_time_entry": {

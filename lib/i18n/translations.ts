@@ -21,6 +21,7 @@ export interface TranslationSchema {
     relationship: string;
     habits: string;
     routines: string;
+    energy: string;
     calendar: string;
     analytics: string;
     decisions: string;
@@ -1106,6 +1107,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       relationship: "Relationship",
       habits: "Habits & Streaks",
       routines: "Daily Routines",
+      energy: "Energy & Bio-Rhythms",
       calendar: "Rhythm & Calendar",
       analytics: "System Analytics",
       decisions: "Decision Desk",
@@ -2328,6 +2330,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       relationship: "العلاقة",
       habits: "العادات والاستمرارية",
       routines: "الروتين اليومي",
+      energy: "الطاقة والبيوريثم",
       calendar: "التقويم والروتين",
       analytics: "التحليلات والرؤى الاستراتيجية",
       decisions: "غرفة القرارات",

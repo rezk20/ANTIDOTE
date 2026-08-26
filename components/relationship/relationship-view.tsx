@@ -81,7 +81,7 @@ export function RelationshipView({ data }: RelationshipViewProps) {
         {/* Action & Tab Navigation */}
         <div className="mt-4 flex flex-wrap items-center gap-2">
           {/* JSON Sync Button */}
-          {/* <Button
+          <Button
             variant="outline"
             size="sm"
             onClick={handleSyncJson}
@@ -101,7 +101,7 @@ export function RelationshipView({ data }: RelationshipViewProps) {
                   ? "مزامنة ملفات JSON"
                   : "Sync from JSON"}
             </span>
-          </Button> */}
+          </Button>
 
           <div className="scrollbar-none flex items-center gap-1 overflow-x-auto rounded-2xl border border-zinc-200 bg-zinc-100 p-1 text-xs font-bold dark:border-zinc-700 dark:bg-zinc-800">
             <button

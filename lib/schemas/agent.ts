@@ -2,13 +2,17 @@ import { z } from "zod";
 
 export const agentActionKindSchema = z.enum([
   "capture_thought",
+  "add_brain_dump",
   "create_task",
   "update_task",
+  "set_day_plan",
+  "orchestrate_day",
   "log_time_entry",
   "log_lead",
   "add_note",
   "create_decision",
   "save_debrief",
+  "log_report",
 ]);
 
 export type AgentActionKind = z.infer<typeof agentActionKindSchema>;
@@ -20,45 +24,152 @@ export const captureThoughtPayloadSchema = z.object({
   source: z.string().optional().default("ai_agent"),
 });
 
+export const addBrainDumpPayloadSchema = z.object({
+  action: z.literal("add_brain_dump"),
+  content: z.string().min(1, "Content is required"),
+  category: z
+    .enum(["career", "business", "personal", "marriage", "idea", "general"])
+    .optional()
+    .default("general"),
+  status: z
+    .enum(["inbox", "converted", "archived"])
+    .optional()
+    .default("inbox"),
+});
+
 // 2. Create Task
 export const createTaskPayloadSchema = z.object({
   action: z.literal("create_task"),
   title: z.string().min(1, "Title is required"),
-  priority: z.enum(["critical", "high", "medium", "low", "P1", "P2", "P3", "P4"]).default("medium"),
-  task_type: z.enum([
-    "revenue",
-    "career",
-    "client",
-    "learning",
-    "product",
-    "finance",
-    "marriage",
-    "relationship",
-    "personal",
-    "admin",
-    "health_routine",
-  ]).default("personal"),
-  scheduled_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date (YYYY-MM-DD)").optional(),
-  due_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date (YYYY-MM-DD)").optional(),
+  priority: z
+    .enum(["critical", "high", "medium", "low", "P1", "P2", "P3", "P4"])
+    .default("medium"),
+  task_type: z
+    .enum([
+      "revenue",
+      "career",
+      "client",
+      "learning",
+      "product",
+      "finance",
+      "marriage",
+      "relationship",
+      "personal",
+      "admin",
+      "health_routine",
+    ])
+    .default("personal"),
+  scheduled_date: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date (YYYY-MM-DD)")
+    .optional(),
+  due_date: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date (YYYY-MM-DD)")
+    .optional(),
   estimated_minutes: z.number().int().positive().optional(),
   goal_id: z.string().uuid().optional(),
   project_id: z.string().uuid().optional(),
+  is_top_three: z.boolean().optional(),
+  description: z.string().optional(),
 });
 
 // 3. Update Task
 export const updateTaskPayloadSchema = z.object({
   action: z.literal("update_task"),
   task_id: z.string().uuid("Invalid task_id"),
-  status: z.enum(["backlog", "planned", "in_progress", "done", "dropped", "someday", "todo"]).optional(),
-  priority: z.enum(["critical", "high", "medium", "low", "P1", "P2", "P3", "P4"]).optional(),
-  scheduled_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable().optional(),
+  status: z
+    .enum([
+      "backlog",
+      "planned",
+      "in_progress",
+      "done",
+      "dropped",
+      "someday",
+      "todo",
+    ])
+    .optional(),
+  priority: z
+    .enum(["critical", "high", "medium", "low", "P1", "P2", "P3", "P4"])
+    .optional(),
+  scheduled_date: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .nullable()
+    .optional(),
+  is_top_three: z.boolean().optional(),
 });
 
-// 4. Log Time Entry
+// 4. Set Day Plan (Morning Calibration & Focus)
+export const setDayPlanPayloadSchema = z.object({
+  action: z.literal("set_day_plan"),
+  plan_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be YYYY-MM-DD"),
+  available_hours: z.number().min(1).max(24).default(8),
+  energy: z.number().int().min(1).max(5).default(4),
+  focus_question_answer: z.string().min(1, "Focus question answer is required"),
+  top_three_task_ids: z.array(z.string().uuid()).max(3).optional(),
+  notes: z.string().optional(),
+});
+
+// 5. Autonomous Midnight Daily Orchestration (Batch action)
+export const orchestrateDayPayloadSchema = z.object({
+  action: z.literal("orchestrate_day"),
+  target_date: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be YYYY-MM-DD"),
+  available_hours: z.number().min(1).max(24).default(8),
+  energy: z.number().int().min(1).max(5).default(4),
+  focus_question_answer: z.string().min(1, "Focus answer required"),
+  top_three_task_ids: z.array(z.string().uuid()).max(3).optional(),
+  new_tasks: z
+    .array(
+      z.object({
+        title: z.string().min(1),
+        priority: z
+          .enum(["critical", "high", "medium", "low", "P1", "P2", "P3", "P4"])
+          .default("medium"),
+        task_type: z
+          .enum([
+            "revenue",
+            "career",
+            "client",
+            "learning",
+            "product",
+            "finance",
+            "marriage",
+            "relationship",
+            "personal",
+            "admin",
+            "health_routine",
+          ])
+          .default("revenue"),
+        estimated_minutes: z.number().int().positive().optional().default(60),
+        is_top_three: z.boolean().optional(),
+        description: z.string().optional(),
+      }),
+    )
+    .optional(),
+  rescheduled_task_ids: z.array(z.string().uuid()).optional(),
+  brain_dump_suggestions: z.array(z.string()).optional(),
+  executive_briefing: z.string().min(1, "Executive briefing is required"),
+});
+
+// 6. Log Time Entry
 export const logTimeEntryPayloadSchema = z.object({
   action: z.literal("log_time_entry"),
   duration_min: z.number().int().positive("Duration must be positive"),
-  kind: z.enum(["deep_work", "delivery", "sales", "learning", "product", "admin", "relationship", "rest"]).default("deep_work"),
+  kind: z
+    .enum([
+      "deep_work",
+      "delivery",
+      "sales",
+      "learning",
+      "product",
+      "admin",
+      "relationship",
+      "rest",
+    ])
+    .default("deep_work"),
   task_id: z.string().uuid().optional(),
   project_id: z.string().uuid().optional(),
   focus_rating: z.number().int().min(1).max(5).optional().default(4),
@@ -66,30 +177,32 @@ export const logTimeEntryPayloadSchema = z.object({
   started_at: z.string().optional(),
 });
 
-// 5. Log Lead
+// 7. Log Lead
 export const logLeadPayloadSchema = z.object({
   action: z.literal("log_lead"),
   title: z.string().min(1, "Lead title / client name is required"),
   source: z.string().optional().default("agent_outreach"),
   expected_value: z.number().positive().optional(),
-  stage: z.enum([
-    "new",
-    "qualified",
-    "contacted",
-    "proposal_sent",
-    "follow_up",
-    "call",
-    "negotiation",
-    "won",
-    "in_progress",
-    "delivered",
-    "paid",
-    "lost",
-  ]).default("new"),
+  stage: z
+    .enum([
+      "new",
+      "qualified",
+      "contacted",
+      "proposal_sent",
+      "follow_up",
+      "call",
+      "negotiation",
+      "won",
+      "in_progress",
+      "delivered",
+      "paid",
+      "lost",
+    ])
+    .default("new"),
   notes: z.string().optional(),
 });
 
-// 6. Add Note
+// 8. Add Note
 export const addNotePayloadSchema = z.object({
   action: z.literal("add_note"),
   title: z.string().min(1, "Title is required"),
@@ -98,7 +211,7 @@ export const addNotePayloadSchema = z.object({
   tags: z.array(z.string()).default([]),
 });
 
-// 7. Create Decision
+// 9. Create Decision
 export const createDecisionPayloadSchema = z.object({
   action: z.literal("create_decision"),
   title: z.string().min(1, "Decision title is required"),
@@ -112,10 +225,10 @@ export const createDecisionPayloadSchema = z.object({
   reversible: z.boolean().default(true),
 });
 
-// 8. Save Daily Debrief
+// 10. Save Debrief
 export const saveDebriefPayloadSchema = z.object({
   action: z.literal("save_debrief"),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date (YYYY-MM-DD)"),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be YYYY-MM-DD"),
   energy_rating: z.number().int().min(1).max(5).default(4),
   accomplishments: z.string().optional(),
   obstacles: z.string().optional(),
@@ -123,55 +236,177 @@ export const saveDebriefPayloadSchema = z.object({
   tomorrow_focus: z.string().optional(),
 });
 
+// 11. Log Agent Report / Audit Trail
+export const logReportPayloadSchema = z.object({
+  action: z.literal("log_report"),
+  title: z.string().min(1, "Report title is required"),
+  summary: z.string().min(1, "Summary is required"),
+  changes_made: z.array(z.string()).optional().default([]),
+  strategic_recommendations: z.array(z.string()).optional().default([]),
+  full_markdown: z.string().optional(),
+});
+
 // Combined Action Payload Schema
 export const agentActionSchema = z.discriminatedUnion("action", [
   captureThoughtPayloadSchema,
+  addBrainDumpPayloadSchema,
   createTaskPayloadSchema,
   updateTaskPayloadSchema,
+  setDayPlanPayloadSchema,
+  orchestrateDayPayloadSchema,
   logTimeEntryPayloadSchema,
   logLeadPayloadSchema,
   addNotePayloadSchema,
   createDecisionPayloadSchema,
   saveDebriefPayloadSchema,
+  logReportPayloadSchema,
 ]);
 
 export type AgentActionPayload = z.infer<typeof agentActionSchema>;
 
 /**
- * Master System Prompt for Hermes or external AI agents interacting with LIFE OS
+ * Master System Prompt for Hermes / External LLM running the daily Midnight Cron Orchestration
  */
-export const HERMES_MASTER_SYSTEM_PROMPT = `You are Hermes, an autonomous AI executive partner and operating copilot integrated directly into LIFE OS (ANTIDOTE).
+export const HERMES_MASTER_SYSTEM_PROMPT = `# HERMES: AUTONOMOUS LIFE OS CHIEF OF STAFF & STRATEGIC ORCHESTRATOR
 
-### Your Core Directives:
-1. **Context-Grounded Operations**: When starting any session or when requested, always inspect the live context provided by the LIFE OS API (GET /api/agent/hermes).
-2. **Prioritization & Focus (§Rule 1, §Rule 2)**: Help the owner guard high-leverage Deep Work, prevent context switching, and keep the critical 250k EGP marriage goal and freelance pipeline front and center.
-3. **Execution Rigor (§Rule 4)**: Never produce vague motivational advice. Always propose structured, atomic actions with priority (P1/P2/P3), clear estimates, or specific next moves.
-4. **Non-Punitive Tone (§41, §70, §71)**: If tasks slip or reviews reveal friction, provide objective, actionable adjustments rather than guilt or pressure.
-5. **Tool & Action Execution**:
-   - To capture thoughts/ideas: Execute action "capture_thought".
-   - To schedule work: Execute action "create_task" or "update_task".
-   - To record deep work sessions: Execute action "log_time_entry".
-   - To track prospective deals: Execute action "log_lead".
-   - To document insights/learning: Execute action "add_note".
-   - To weigh high-impact forks in the road: Execute action "create_decision".
-   - To close the day: Execute action "save_debrief".
+You are Hermes, the autonomous AI Chief of Staff and life-operating copilot for LIFE OS (ANTIDOTE).
+You have programmatic access via REST API to plan, organize, and track the owner's career, marriage target (250,000 EGP), freelance MERN/Next.js revenue engine (30k/mo), deep work blocks, and life rhythms.
 
-### API Interaction Protocol:
-- **Base Endpoint**: \`/api/agent/hermes\`
-- **Authentication**: Include \`Authorization: Bearer <YOUR_AGENT_API_KEY>\` header with all HTTP requests, or run within an active authenticated browser session.
-- **GET Request**: Returns full live state (Today's tasks, Day plan, Active Goals, Marriage budget progress, Open Leads, Recent notes).
-- **POST Request**: JSON payload containing \`{ "action": "<ACTION_NAME>", ...params }\`.
+---
+
+## 🕒 DAILY MIDNIGHT SCHEDULE (12:00 AM CRON PROTOCOL)
+
+Every night at **12:00 AM (00:00)**, you execute an autonomous orchestration cycle so the owner wakes up with a calibrated, ready-to-execute day plan.
+
+### 4-Step Orchestration Workflow:
+
+1. **INSPECT LIVE CONTEXT (GET /api/agent/hermes)**:
+   - Call \`GET /api/agent/hermes\` with header \`Authorization: Bearer <API_KEY>\`.
+   - Read today's backlog tasks, active goals, open projects, leads in pipeline, and marriage budget status.
+
+2. **CALIBRATE MORNING MISSION & PRIORITIES**:
+   - Determine available deep work capacity (typically 8 hours).
+   - Select or generate the **Top 3 Strategic Focus Tasks (P1 Critical)** for tomorrow:
+     * Focus Task 1: Revenue / Client / Outreach Action (e.g. Upwork Proposals, Lead follow-ups).
+     * Focus Task 2: Flagship Product / Code Milestone (e.g. SaaS Dashboard feature, Demo deployment).
+     * Focus Task 3: Personal / Habit / Relationship Growth (e.g. Partner activity, Evening shutdown).
+   - Formulate a razor-sharp **"The One Thing" Focus Question Answer** that defines success for tomorrow.
+
+3. **EXECUTE PROGRAMMATIC UPDATES (POST /api/agent/hermes)**:
+   - Call \`POST /api/agent/hermes\` with action \`"orchestrate_day"\` or \`"set_day_plan"\`.
+   - Automatically assign \`scheduled_date\` to upcoming tasks and mark \`is_top_three = true\` for the top 3.
+   - If new high-leverage opportunities arise, drop creative business suggestions via \`"add_brain_dump"\`.
+
+4. **RECORD EXECUTIVE AUDIT BRIEFING (\`"log_report"\`)**:
+   - Log an executive report summarizing:
+     * What was planned and prioritized for the day.
+     * Strategic rationale for chosen tasks.
+     * Suggested improvements and ideas.
+
+---
+
+## 🛠️ API REFERENCE & PAYLOADS
+
+### Base URL: \`https://smart-antidote.vercel.app/api/agent/hermes\`
+### Headers: \`Authorization: Bearer <YOUR_AGENT_API_KEY>\`, \`Content-Type: application/json\`
+
+### 1. Autonomous Midnight Orchestration (\`action: "orchestrate_day"\`):
+\`\`\`json
+{
+  "action": "orchestrate_day",
+  "target_date": "2026-08-26",
+  "available_hours": 8,
+  "energy": 4,
+  "focus_question_answer": "إنهاء ونشر Live Demo لمشروع SaaS Dashboard وإرسال 5 مقترحات Upwork.",
+  "top_three_task_ids": ["uuid-1", "uuid-2", "uuid-3"],
+  "new_tasks": [
+    {
+      "title": "متابعة العميل المحتمل للـ SaaS Dashboard على Upwork",
+      "priority": "critical",
+      "task_type": "revenue",
+      "estimated_minutes": 45,
+      "is_top_three": true,
+      "description": "إرسال مقطع فيديو دقيقة واحدة يشرح كيفية حل مشكلة الـ Performance."
+    }
+  ],
+  "brain_dump_suggestions": [
+    "فكرة باقة جديدة: أتمتة ديسكورد + لوحة إدارة اشتراكات لمجتمعات الألعاب.",
+    "اقتراح خروجة نهاية الأسبوع: تمشية الغروب في الممشى السياحي بالمنصورة."
+  ],
+  "executive_briefing": "تم تجهيز خطة الصباح بنجاح: تم تخصيص 4 ساعات للـ Deep Work و 2 ساعة للـ Outreach والمبيعات. الهدف الأكبر اليوم هو إغلاق أول عميل فريلانس."
+}
+\`\`\`
+
+### 2. Set Morning Plan (\`action: "set_day_plan"\`):
+\`\`\`json
+{
+  "action": "set_day_plan",
+  "plan_date": "2026-08-26",
+  "available_hours": 8,
+  "energy": 4,
+  "focus_question_answer": "إنجاز المهام الاستراتيجية الثلاث وتجنب المشتتات.",
+  "top_three_task_ids": ["uuid-task-1", "uuid-task-2", "uuid-task-3"],
+  "notes": "خطة مضبوطة بدقة بناء على أولويات الـ MERN Stack وصندوق الزواج."
+}
+\`\`\`
+
+### 3. Drop Brain Dump Ideas (\`action: "add_brain_dump"\`):
+\`\`\`json
+{
+  "action": "add_brain_dump",
+  "content": "فكرة خدمة مصغرة: تحسين سرعة مواقع Next.js و Core Web Vitals للشركات.",
+  "category": "business"
+}
+\`\`\`
+
+### 4. Create Action Task (\`action: "create_task"\`):
+\`\`\`json
+{
+  "action": "create_task",
+  "title": "تصميم نموذج المقترحات التفاعلي بـ Next.js",
+  "priority": "P1",
+  "task_type": "revenue",
+  "scheduled_date": "2026-08-26",
+  "estimated_minutes": 90,
+  "is_top_three": true
+}
+\`\`\`
+
+### 5. Log Executive Briefing Report (\`action: "log_report"\`):
+\`\`\`json
+{
+  "action": "log_report",
+  "title": "تقرير التخطيط اليومي - 26 أغسطس 2026",
+  "summary": "تمت مراجعة خطة اليوم وتوزيع 8 ساعات عمل مركزة على 3 مراحل تنفيذية.",
+  "changes_made": [
+    "تحديد أهم 3 مهام لليوم وجدولتها في /today",
+    "ترحيل المهام الإدارية المنخفضة للمساء",
+    "إضافة فكرة جديدة في Brain Dump لتوسيع باقات الفريلانس"
+  ],
+  "strategic_recommendations": [
+    "التركيز على كتلة الـ Deep Work الصباحية بدون فتح السوشيال ميديا.",
+    "متابعة الـ 3 صفقات المفتوحة في قمع المبيعات لزيادة احتمالية الإغلاق."
+  ]
+}
+\`\`\`
+
+### 6. Quick Capture Thought (\`action: "capture_thought"\`):
+\`\`\`json
+{
+  "action": "capture_thought",
+  "text": "متابعة العميل بخصوص المقترح الفني",
+  "source": "hermes_chat"
+}
+\`\`\`
 `;
 
-/**
- * OpenAI / Function Calling JSON Schemas for Hermes tool use
- */
 export const HERMES_TOOL_DEFINITIONS = [
   {
     type: "function",
     function: {
       name: "get_life_os_context",
-      description: "Fetch real-time LIFE OS context including today's schedule, active tasks, financial marriage fund status, freelance leads, and goals.",
+      description:
+        "Fetch real-time LIFE OS context including today's schedule, active tasks, financial marriage fund status, freelance leads, and goals.",
       parameters: {
         type: "object",
         properties: {},
@@ -181,13 +416,70 @@ export const HERMES_TOOL_DEFINITIONS = [
   {
     type: "function",
     function: {
-      name: "capture_thought",
-      description: "Quickly capture an idea, task, or raw note into the Brain Dump inbox for later triage.",
+      name: "orchestrate_day",
+      description:
+        "Autonomous 12:00 AM Midnight daily planner that sets morning mission, creates tasks, marks top 3, and writes executive briefing.",
       parameters: {
         type: "object",
         properties: {
-          text: { type: "string", description: "The captured thought or note content." },
-          source: { type: "string", description: "Source of capture (e.g. 'hermes_chat', 'telegram', 'voice')." },
+          target_date: {
+            type: "string",
+            description: "Target date in YYYY-MM-DD format",
+          },
+          available_hours: {
+            type: "number",
+            description: "Total available deep work hours",
+          },
+          energy: {
+            type: "number",
+            description: "Expected energy rating from 1 to 5",
+          },
+          focus_question_answer: {
+            type: "string",
+            description: "The One Thing focus for the day",
+          },
+          executive_briefing: {
+            type: "string",
+            description: "Executive summary of planned schedule",
+          },
+        },
+        required: [
+          "target_date",
+          "focus_question_answer",
+          "executive_briefing",
+        ],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "set_day_plan",
+      description:
+        "Calibrate the morning plan and available hours for a target date.",
+      parameters: {
+        type: "object",
+        properties: {
+          plan_date: { type: "string" },
+          available_hours: { type: "number" },
+          energy: { type: "number" },
+          focus_question_answer: { type: "string" },
+        },
+        required: ["plan_date", "focus_question_answer"],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "capture_thought",
+      description:
+        "Quickly capture an idea or thought into the Brain Dump inbox without breaking flow.",
+      parameters: {
+        type: "object",
+        properties: {
+          text: { type: "string", description: "Raw thought text content" },
+          source: { type: "string" },
         },
         required: ["text"],
       },
@@ -196,15 +488,47 @@ export const HERMES_TOOL_DEFINITIONS = [
   {
     type: "function",
     function: {
-      name: "create_task",
-      description: "Create an actionable task in LIFE OS with priority, scheduled date, and optional goal alignment.",
+      name: "add_brain_dump",
+      description:
+        "Add a creative strategic suggestion or idea to the Brain Dump inbox.",
       parameters: {
         type: "object",
         properties: {
-          title: { type: "string", description: "Clear, verb-first task title." },
-          priority: { type: "string", enum: ["P1", "P2", "P3", "P4"], description: "P1 (Urgent/Critical), P2 (High), P3 (Medium), P4 (Low)." },
-          scheduled_date: { type: "string", description: "Target date in YYYY-MM-DD format." },
-          estimated_minutes: { type: "number", description: "Estimated completion time in minutes." },
+          content: { type: "string" },
+          category: {
+            type: "string",
+            enum: [
+              "career",
+              "business",
+              "personal",
+              "marriage",
+              "idea",
+              "general",
+            ],
+          },
+        },
+        required: ["content"],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "create_task",
+      description:
+        "Create an actionable task linked to a project or strategic goal.",
+      parameters: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          priority: {
+            type: "string",
+            enum: ["P1", "P2", "P3", "P4", "critical", "high", "medium", "low"],
+          },
+          task_type: { type: "string" },
+          scheduled_date: { type: "string" },
+          estimated_minutes: { type: "number" },
+          is_top_three: { type: "boolean" },
         },
         required: ["title"],
       },
@@ -213,15 +537,56 @@ export const HERMES_TOOL_DEFINITIONS = [
   {
     type: "function",
     function: {
-      name: "log_time_entry",
-      description: "Log a completed work session (deep work, delivery, or learning) towards project and productivity metrics.",
+      name: "update_task",
+      description:
+        "Update the status, priority, or scheduled date of an existing task.",
       parameters: {
         type: "object",
         properties: {
-          duration_min: { type: "number", description: "Duration of the work session in minutes." },
-          kind: { type: "string", enum: ["deep_work", "delivery", "learning", "admin", "shallow"], description: "Category of work." },
-          focus_rating: { type: "number", minimum: 1, maximum: 5, description: "Focus quality rating from 1 to 5." },
-          note: { type: "string", description: "Optional brief note on what was accomplished." },
+          task_id: { type: "string" },
+          status: {
+            type: "string",
+            enum: [
+              "backlog",
+              "planned",
+              "in_progress",
+              "done",
+              "dropped",
+              "someday",
+            ],
+          },
+          priority: { type: "string" },
+          scheduled_date: { type: "string" },
+        },
+        required: ["task_id"],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "log_time_entry",
+      description:
+        "Record a focused Deep Work, Client delivery, or Sales outreach session.",
+      parameters: {
+        type: "object",
+        properties: {
+          duration_min: { type: "number" },
+          kind: {
+            type: "string",
+            enum: [
+              "deep_work",
+              "delivery",
+              "sales",
+              "learning",
+              "product",
+              "admin",
+              "relationship",
+              "rest",
+            ],
+          },
+          focus_rating: { type: "number" },
+          note: { type: "string" },
         },
         required: ["duration_min"],
       },
@@ -231,14 +596,14 @@ export const HERMES_TOOL_DEFINITIONS = [
     type: "function",
     function: {
       name: "log_lead",
-      description: "Create or log a freelance client lead into the acquisition pipeline.",
+      description:
+        "Track an incoming prospective client lead in the freelance pipeline.",
       parameters: {
         type: "object",
         properties: {
-          title: { type: "string", description: "Client or project title." },
-          expected_value: { type: "number", description: "Expected deal value in EGP." },
-          stage: { type: "string", enum: ["lead", "contacted", "call_scheduled", "proposal_sent", "negotiating", "won", "lost"] },
-          notes: { type: "string", description: "Context, requirements, or client background." },
+          title: { type: "string" },
+          stage: { type: "string" },
+          expected_value: { type: "number" },
         },
         required: ["title"],
       },
@@ -248,14 +613,14 @@ export const HERMES_TOOL_DEFINITIONS = [
     type: "function",
     function: {
       name: "add_note",
-      description: "Create a structured knowledge note in a specific folder with tags.",
+      description:
+        "Save structured knowledge, technical playbook, or architecture note.",
       parameters: {
         type: "object",
         properties: {
-          title: { type: "string", description: "Note title." },
-          content: { type: "string", description: "Markdown body content." },
-          folder: { type: "string", description: "Target folder (e.g., 'freelance', 'tech', 'general')." },
-          tags: { type: "array", items: { type: "string" }, description: "Tags for categorization." },
+          title: { type: "string" },
+          content: { type: "string" },
+          folder: { type: "string" },
         },
         required: ["title", "content"],
       },
@@ -265,15 +630,14 @@ export const HERMES_TOOL_DEFINITIONS = [
     type: "function",
     function: {
       name: "create_decision",
-      description: "Log a structured decision canvas with upside, downside, worst case, and reversibility.",
+      description:
+        "Open a Decision Canvas to evaluate irreversible vs reversible forks in the road.",
       parameters: {
         type: "object",
         properties: {
-          title: { type: "string", description: "Decision statement." },
-          why_now: { type: "string", description: "Trigger reason." },
-          upside: { type: "string", description: "Potential upside / gains." },
-          downside: { type: "string", description: "Potential downside / risks." },
-          reversible: { type: "boolean", description: "True if Type 2 (reversible), false if Type 1 (irreversible)." },
+          title: { type: "string" },
+          risk: { type: "string", enum: ["low", "medium", "high"] },
+          reversible: { type: "boolean" },
         },
         required: ["title"],
       },
@@ -283,17 +647,38 @@ export const HERMES_TOOL_DEFINITIONS = [
     type: "function",
     function: {
       name: "save_debrief",
-      description: "Save a daily evening debrief and energy rating.",
+      description:
+        "Save daily shutdown debrief wins, obstacles, and tomorrow's focus.",
       parameters: {
         type: "object",
         properties: {
-          date: { type: "string", description: "Date in YYYY-MM-DD format." },
-          energy_rating: { type: "number", minimum: 1, maximum: 5, description: "Daily energy score (1-5)." },
-          accomplishments: { type: "string", description: "Highlights and wins." },
-          obstacles: { type: "string", description: "Frictions or blocks faced." },
-          tomorrow_focus: { type: "string", description: "Top focus for tomorrow." },
+          date: { type: "string" },
+          energy_rating: { type: "number" },
+          accomplishments: { type: "string" },
+          tomorrow_focus: { type: "string" },
         },
         required: ["date"],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "log_report",
+      description:
+        "Log an executive briefing report of what was planned and executed.",
+      parameters: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          summary: { type: "string" },
+          changes_made: { type: "array", items: { type: "string" } },
+          strategic_recommendations: {
+            type: "array",
+            items: { type: "string" },
+          },
+        },
+        required: ["title", "summary"],
       },
     },
   },
