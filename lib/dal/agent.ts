@@ -178,13 +178,17 @@ export async function getAgentContext(userId: string) {
   const [
     profileRes,
     tasksRes,
+    backlogTasksRes,
     dayPlanRes,
+    recentDayPlansRes,
+    recentDailyLogsRes,
     goalsRes,
     leadsRes,
     projectsRes,
     marriageExpensesRes,
     recentNotesRes,
     openDecisionsRes,
+    habitsRes,
   ] = await Promise.all([
     adminClient.from("profiles").select("*").eq("id", userId).single(),
     adminClient
@@ -195,11 +199,30 @@ export async function getAgentContext(userId: string) {
       .order("priority", { ascending: true })
       .limit(15),
     adminClient
+      .from("tasks")
+      .select("id, title, priority, task_type, duration_min, project_id, goal_id, status, scheduled_date, is_top_three")
+      .eq("user_id", userId)
+      .not("status", "in", '("done","dropped")')
+      .order("priority", { ascending: true })
+      .limit(30),
+    adminClient
       .from("day_plans")
       .select("*")
       .eq("user_id", userId)
       .eq("plan_date", todayStr)
       .maybeSingle(),
+    adminClient
+      .from("day_plans")
+      .select("*")
+      .eq("user_id", userId)
+      .order("plan_date", { ascending: false })
+      .limit(5),
+    adminClient
+      .from("daily_logs")
+      .select("*")
+      .eq("user_id", userId)
+      .order("log_date", { ascending: false })
+      .limit(5),
     adminClient
       .from("goals")
       .select("*")
@@ -232,6 +255,11 @@ export async function getAgentContext(userId: string) {
       .eq("user_id", userId)
       .eq("status", "open")
       .limit(5),
+    adminClient
+      .from("habits")
+      .select("id, title, streak_current, frequency")
+      .eq("user_id", userId)
+      .limit(10),
   ]);
 
   const profile = profileRes.data as ProfileRow | null;
@@ -263,6 +291,11 @@ export async function getAgentContext(userId: string) {
       dayPlan: dayPlanRes.data || null,
       activeTasks: tasksRes.data || [],
     },
+    history: {
+      recentDayPlans: recentDayPlansRes.data || [],
+      recentDailyLogs: recentDailyLogsRes.data || [],
+    },
+    backlogTasks: backlogTasksRes.data || [],
     strategicGoals: goalsRes.data || [],
     marriageMission: {
       targetGoal: marriageTarget,
@@ -276,6 +309,7 @@ export async function getAgentContext(userId: string) {
       leads: leadsRes.data || [],
     },
     activeProjects: projectsRes.data || [],
+    habits: habitsRes.data || [],
     recentNotes: recentNotesRes.data || [],
     openDecisions: openDecisionsRes.data || [],
   };
