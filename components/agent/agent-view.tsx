@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { HERMES_MASTER_SYSTEM_PROMPT } from "@/lib/schemas/agent";
+import { AgentReportViewer } from "./agent-report-viewer";
 import {
   regenerateAgentApiKeyAction,
   runAgentPlaygroundAction,
@@ -59,9 +60,6 @@ export function AgentView({
 
   // Reports
   const [reports] = useState<AgentReportItem[]>(initialReports);
-  const [selectedReport, setSelectedReport] = useState<AgentReportItem | null>(
-    reports.length > 0 ? reports[0] : null,
-  );
 
   // Playground State
   const [selectedAction, setSelectedAction] =
@@ -563,95 +561,7 @@ runMidnightOrchestration().catch(console.error);`;
 
       {/* TAB 3: Reports & Audit Timeline */}
       {activeTab === "reports" && (
-        <div className="space-y-6">
-          {reports.length === 0 ? (
-            <div className="space-y-3 rounded-3xl border border-dashed border-zinc-200 bg-white p-12 text-center dark:border-zinc-800 dark:bg-zinc-900">
-              <div className="mx-auto w-fit rounded-2xl bg-purple-50 p-3 text-purple-600 dark:bg-purple-950/60">
-                <FileText className="h-6 w-6" />
-              </div>
-              <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
-                لا توجد تقارير مسجلة من الـ AI حتى الآن
-              </h3>
-              <p className="mx-auto max-w-md text-xs text-zinc-500">
-                عندما يقوم Hermes أو سكريبت الـ Cron بتخطيط اليوم أو تنفيذ
-                عمليات عبر الـ API، سيتم تسجيل التقارير التنفيذية هنا تلقائياً.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-              {/* Reports List */}
-              <div className="space-y-2.5">
-                {reports.map((report) => (
-                  <div
-                    key={report.id}
-                    onClick={() => setSelectedReport(report)}
-                    className={`cursor-pointer space-y-1.5 rounded-2xl border p-4 shadow-xs transition-all ${
-                      selectedReport?.id === report.id
-                        ? "border-purple-300 bg-purple-50/80 dark:border-purple-800 dark:bg-purple-950/40"
-                        : "border-zinc-200 bg-white hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between text-[10px] text-zinc-400">
-                      <span>
-                        {new Date(report.created_at).toLocaleDateString(
-                          "ar-EG",
-                        )}
-                      </span>
-                      <span className="font-mono">
-                        {new Date(report.created_at).toLocaleTimeString(
-                          "ar-EG",
-                        )}
-                      </span>
-                    </div>
-                    <h4 className="line-clamp-1 text-xs font-bold text-zinc-900 dark:text-zinc-100">
-                      {report.title}
-                    </h4>
-                  </div>
-                ))}
-              </div>
-
-              {/* Selected Report Content */}
-              <div className="space-y-4 rounded-3xl border border-zinc-200 bg-white p-6 shadow-xs lg:col-span-2 dark:border-zinc-800 dark:bg-zinc-900">
-                {selectedReport ? (
-                  <>
-                    <div className="flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
-                      <div>
-                        <h3 className="text-sm font-black text-zinc-900 dark:text-zinc-100">
-                          {selectedReport.title}
-                        </h3>
-                        <span className="text-[11px] text-zinc-400">
-                          تم الإنشاء:{" "}
-                          {new Date(selectedReport.created_at).toLocaleString(
-                            "ar-EG",
-                          )}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-1">
-                        {selectedReport.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-md bg-purple-50 px-2 py-0.5 text-[10px] font-bold text-purple-700 dark:bg-purple-950 dark:text-purple-300"
-                          >
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="prose prose-sm dark:prose-invert max-w-none text-xs leading-relaxed whitespace-pre-wrap">
-                      {selectedReport.content}
-                    </div>
-                  </>
-                ) : (
-                  <div className="py-12 text-center text-xs text-zinc-400">
-                    اختر تقريراً لعرض تفاصيله
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
+        <AgentReportViewer reports={reports} />
       )}
 
       {/* TAB 4: Playground */}

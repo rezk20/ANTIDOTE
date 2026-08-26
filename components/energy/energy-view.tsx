@@ -1,5 +1,6 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { useLocale } from "@/components/providers/locale-provider";
 import { DailyLogWidget } from "@/components/today/daily-log-widget";
 import { DeepWorkTimer } from "@/components/today/deep-work-timer";
@@ -12,6 +13,8 @@ import {
   Clock,
   BatteryCharging,
   RotateCcw,
+  CheckCircle2,
+  Circle,
 } from "lucide-react";
 
 interface EnergyViewProps {
@@ -24,6 +27,25 @@ interface EnergyViewProps {
   selectedDate: string;
 }
 
+function subscribeToStorage(callback: () => void) {
+  window.addEventListener("storage", callback);
+  window.addEventListener("life_os_routines_change", callback);
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener("life_os_routines_change", callback);
+  };
+}
+
+function getRoutinesSnapshot(): string {
+  if (typeof window === "undefined") return "{}";
+  const todayKey = new Date().toISOString().split("T")[0];
+  return localStorage.getItem(`life_os_routines_done_${todayKey}`) || "{}";
+}
+
+function getRoutinesServerSnapshot(): string {
+  return "{}";
+}
+
 export function EnergyView({
   dailyLog,
   recentLogs,
@@ -34,6 +56,33 @@ export function EnergyView({
   selectedDate,
 }: EnergyViewProps) {
   const { isRtl } = useLocale();
+
+  const rawStorage = useSyncExternalStore(
+    subscribeToStorage,
+    getRoutinesSnapshot,
+    getRoutinesServerSnapshot,
+  );
+
+  const completedItems: Record<string, boolean> = (() => {
+    try {
+      return JSON.parse(rawStorage);
+    } catch {
+      return {};
+    }
+  })();
+
+  const todayKey = new Date().toISOString().split("T")[0];
+  const storageKey = `life_os_routines_done_${todayKey}`;
+
+  const toggleItemDone = (id: string) => {
+    try {
+      const next = { ...completedItems, [id]: !completedItems[id] };
+      localStorage.setItem(storageKey, JSON.stringify(next));
+      window.dispatchEvent(new Event("life_os_routines_change"));
+    } catch {
+      // ignore
+    }
+  };
 
   // Compute average sleep and energy from recent 7 logs
   const validRecentLogs = recentLogs.slice(0, 7);
@@ -175,14 +224,29 @@ export function EnergyView({
                   </h3>
 
                   <div className="space-y-1.5 pt-1">
-                    {items.slice(0, 3).map((it: unknown, idx: number) => {
-                      const itemObj = it as { title?: string; duration_min?: number };
+                    {items.slice(0, 4).map((it: unknown, idx: number) => {
+                      const itemObj = it as { id?: string; title?: string; duration_min?: number };
+                      const itemId = itemObj.id || `${routine.id}-${idx}`;
+                      const isDone = !!completedItems[itemId];
+
                       return (
                         <div
-                          key={idx}
-                          className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400 flex items-center justify-between"
+                          key={itemId}
+                          onClick={() => toggleItemDone(itemId)}
+                          className={`text-[11px] font-medium p-1.5 rounded-xl border transition-all flex items-center justify-between cursor-pointer ${
+                            isDone
+                              ? "bg-emerald-50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 text-zinc-400 line-through"
+                              : "bg-zinc-50 dark:bg-zinc-800/40 border-zinc-100 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-zinc-300"
+                          }`}
                         >
-                          <span className="truncate">• {itemObj.title || "بند"}</span>
+                          <div className="flex items-center gap-1.5 truncate">
+                            {isDone ? (
+                              <CheckCircle2 className="h-3 w-3 text-emerald-500 shrink-0" />
+                            ) : (
+                              <Circle className="h-3 w-3 text-zinc-300 dark:text-zinc-600 shrink-0" />
+                            )}
+                            <span className="truncate">{itemObj.title || "بند"}</span>
+                          </div>
                           {itemObj.duration_min && (
                             <span className="text-[10px] font-mono text-zinc-400 shrink-0">
                               {itemObj.duration_min}m
