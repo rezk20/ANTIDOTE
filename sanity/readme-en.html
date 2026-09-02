@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>README → paste into Sanity</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+  .hint { background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 8px; padding: .75rem 1rem; margin-bottom: 2rem; }
+  pre { background: #18181b; color: #f4f4f5; padding: 1rem; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+  code { background: #f4f4f5; padding: .1rem .3rem; border-radius: 4px; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-inline-start: 4px solid #6366f1; margin: 0; padding-inline-start: 1rem; color: #52525b; }
+</style>
+</head>
+<body>
+<p class="hint">📌 اضغط Ctrl+A ثم Ctrl+C لنسخ المحتوى، والصقه في Sanity — Ctrl+A then Ctrl+C to copy, then paste into Sanity.</p>
+<h1>ANTIDOTE — LIFE OS</h1>
+<blockquote><p>A personal command center for financial, career, and life execution. Not a todo app — a system that translates a yearly transformation mission into a daily executable loop.</p></blockquote>
+<pre><code>Vision → Annual Goals → Quarterly Targets → Monthly Objectives → Weekly Plan
+→ Daily Actions → Tracking → Review → Adjustment</code></pre>
+<p><strong>ANTIDOTE</strong> is a private, single-user web application built around one north-star question: <em>did the system help the owner make better actions today?</em> The daily dashboard is designed to answer five questions every morning:</p>
+<ol><li>What do I do today?</li>
+<li>What could increase my income?</li>
+<li>Where am I from the marriage goal?</li>
+<li>What's waiting from clients?</li>
+<li>When do I stop today?</li></ol>
+<h2>✨ Features</h2>
+<ul>
+  <li><strong>Module — Route — Purpose</strong></li>
+  <li><strong>Dashboard</strong> — <code>/dashboard</code> — "Good Morning" screen — Top 3, Money, Revenue Action, Client Follow-up, Brain Dump</li>
+  <li><strong>Today Plan</strong> — <code>/today</code> — Day plan builder, morning mission, shutdown flow</li>
+  <li><strong>Tasks</strong> — <code>/tasks</code> — Priority-scored tasks (urgency + financial/strategic impact − effort)</li>
+  <li><strong>Goals</strong> — <code>/goals</code> — Hierarchical goal tree: Vision → Year → Quarter → Month → Week → Day</li>
+  <li><strong>Projects</strong> — <code>/projects</code> — Project tracking linked to goals</li>
+  <li><strong>Finances</strong> — <code>/finances</code> — Personal finance tracking &amp; marriage-readiness numbers</li>
+  <li><strong>Freelance</strong> — <code>/freelance</code> — Revenue pipeline — proposals, active work, payments</li>
+  <li><strong>Clients</strong> — <code>/clients</code> — Client CRM with follow-up tracking</li>
+  <li><strong>Opportunities</strong> — <code>/opportunities</code> — Income opportunity capture &amp; evaluation</li>
+  <li><strong>Notes</strong> — <code>/notes</code> — Knowledge base</li>
+  <li><strong>Habits</strong> — <code>/habits</code> — Habit tracking &amp; streaks</li>
+  <li><strong>Routines</strong> — <code>/routines</code> — Daily routine definitions</li>
+  <li><strong>Calendar</strong> — <code>/calendar</code> — Time-blocking &amp; schedule</li>
+  <li><strong>Reviews</strong> — <code>/reviews</code> — Weekly / quarterly / yearly review wizards</li>
+  <li><strong>Energy</strong> — <code>/energy</code> — Energy level tracking</li>
+  <li><strong>Decisions</strong> — <code>/decisions</code> — Decision log</li>
+  <li><strong>Brain Dump</strong> — <code>/brain-dump</code> — Fast capture → convert to tasks/projects/goals</li>
+  <li><strong>AI Agent</strong> — <code>/agent</code> — AI assistant layer (server-only, keyed)</li>
+  <li><strong>Analytics</strong> — <code>/analytics</code> — Charts &amp; trends (Recharts)</li>
+  <li><strong>Marriage / Relationship</strong> — <code>/marriage</code>, <code>/relationship</code> — Shared-finance &amp; relationship mission tracking</li>
+</ul>
+<p>Bilingual UI: <strong>Arabic (RTL, default) and English</strong>, switchable at runtime. Dark/light themes via <code>next-themes</code>.</p>
+<h2>🛠 Tech Stack</h2>
+<ul><li><strong>Framework:</strong> <a href="https://nextjs.org">Next.js 16</a> (App Router) + React 19, TypeScript (strict)</li>
+<li><strong>Styling:</strong> Tailwind CSS v4, <code>tailwind-merge</code>, <code>clsx</code>, lucide-react icons</li>
+<li><strong>Database &amp; Auth:</strong> <a href="https://supabase.com">Supabase</a> (<code>@supabase/ssr</code> + <code>supabase-js</code>) with Row-Level Security</li>
+<li><strong>Validation:</strong> Zod</li>
+<li><strong>Charts:</strong> Recharts</li>
+<li><strong>Testing:</strong> Vitest (unit) + Playwright (E2E) + RLS security regression tests</li>
+<li><strong>Tooling:</strong> ESLint, Prettier (<code>prettier-plugin-tailwindcss</code>), tsx</li></ul>
+<h2>🚀 Getting Started</h2>
+<h3>Prerequisites</h3>
+<ul><li>Node.js ≥ 22, npm ≥ 10</li>
+<li>A Supabase project (cloud — no local Docker stack required)</li></ul>
+<h3>1. Install &amp; configure</h3>
+<pre><code>npm install
+cp .env.example .env.local   # then fill in the values</code></pre>
+<ul>
+  <li><strong>Variable — Required — Description</strong></li>
+  <li><code>NEXT_PUBLIC_SUPABASE_URL</code> — ✅ — Supabase project URL</li>
+  <li><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> — ✅ — Supabase anon key (Settings → API)</li>
+  <li><code>SUPABASE_SERVICE_ROLE_KEY</code> — ⚠️ scripts only — Bypasses RLS — used <strong>only</strong> by <code>scripts/seed.ts</code> &amp; <code>scripts/reset-dev.ts</code>. Never import from <code>app/</code> or <code>lib/</code></li>
+  <li><code>OWNER_EMAIL</code> / <code>OWNER_PASSWORD</code> — ✅ — Owner account created by the seed script</li>
+  <li><code>NEXT_PUBLIC_SITE_URL</code> — prod — Canonical site URL (SEO metadata, auth callbacks)</li>
+  <li><code>AI_PROVIDER_API_KEY</code> — optional — AI agent layer</li>
+  <li><code>CRON_SECRET</code> — optional — Protects <code>/api/cron/*</code></li>
+  <li><code>GOOGLE_SITE_VERIFICATION</code> — optional — Google Search Console verification</li>
+</ul>
+<h3>2. Database</h3>
+<pre><code>npm run db:push      # apply Supabase migrations
+npm run db:seed      # create the owner account + seed data</code></pre>
+<h3>3. Run</h3>
+<pre><code>npm run dev          # http://localhost:3000</code></pre>
+<h2>📜 Scripts</h2>
+<ul>
+  <li><strong>Command — Description</strong></li>
+  <li><code>npm run dev</code> — Development server</li>
+  <li><code>npm run build</code> / <code>npm start</code> — Production build / serve</li>
+  <li><code>npm run lint</code> — ESLint</li>
+  <li><code>npm run typecheck</code> — TypeScript, no emit</li>
+  <li><code>npm run format</code> / <code>format:check</code> — Prettier</li>
+  <li><code>npm run test</code> / <code>test:watch</code> — Vitest unit tests</li>
+  <li><code>npm run test:rls</code> — RLS security regression tests (<code>tests/security/</code>)</li>
+  <li><code>npm run test:e2e</code> — Playwright E2E (<code>tests/e2e/</code>)</li>
+  <li><code>npm run db:push</code> — Push Supabase migrations</li>
+  <li><code>npm run db:seed</code> — Seed owner account &amp; baseline data</li>
+  <li><code>npm run db:reset-dev</code> — Reset the dev database</li>
+</ul>
+<h2>📁 Project Structure</h2>
+<pre><code>app/
+  (app)/            # authenticated group — sidebar layout, all private modules
+  (auth)/           # login + auth callback
+  robots.ts         # robots.txt (private routes disallowed)
+  sitemap.ts        # sitemap.xml (public pages only)
+  layout.tsx        # root layout, metadata, JSON-LD
+components/         # UI by domain (landing/, tasks/, finance/, reviews/, ...)
+lib/
+  actions/          # server actions
+  dal/              # data-access layer (auth session, etc.)
+  ai/               # AI agent helpers (server-only)
+  i18n/             # ar/en translations
+supabase/
+  migrations/       # SQL schema migrations
+scripts/            # seed / reset / guard scripts
+tests/
+  unit/  e2e/  security/
+docs/               # implementation plan, architecture review, master spec</code></pre>
+<h2>🔒 Security Notes</h2>
+<ul><li><strong>Single-user system.</strong> All <code>(app)</code> routes sit behind authentication and are blocked from search indexes in <code>app/robots.ts</code>.</li>
+<li><strong>RLS everywhere:</strong> the Postgres schema relies on Row-Level Security; regression tests live in <code>tests/security/rls-regression.ts</code>.</li>
+<li><strong><code>SUPABASE_SERVICE_ROLE_KEY</code> bypasses RLS</strong> — server-side scripts only, never exposed to the client. The <code>server-only</code> package guards sensitive modules.</li>
+<li>API keys for the AI layer are server-only route handlers, never client bundles.</li></ul>
+<h2>📚 Further Documentation</h2>
+<ul><li><a href="docs/IMPLEMENTATION_PLAN.md"><code>docs/IMPLEMENTATION_PLAN.md</code></a> — full phased implementation plan (v2)</li>
+<li><a href="docs/LIFE_OS_MASTER_PROMPT.md"><code>docs/LIFE_OS_MASTER_PROMPT.md</code></a> — product specification</li>
+<li><a href="docs/ARCHITECTURE_REVIEW.md"><code>docs/ARCHITECTURE_REVIEW.md</code></a> — architecture review findings</li>
+<li><a href="docs/LIFE_CAREER_AND_LIFE_PLAN_AR.md"><code>docs/LIFE_CAREER_AND_LIFE_PLAN_AR.md</code></a> — the life/career plan behind the product (Arabic)</li></ul>
+<h2>Deployment</h2>
+<p>Deploy on Vercel (or any Node host). Set <code>NEXT_PUBLIC_SITE_URL</code> to the production domain so canonical URLs, Open Graph images, and auth callbacks resolve correctly.</p>
+<p><em>Private project — single owner. Not intended for public use or contribution.</em></p>
+</body>
+</html>

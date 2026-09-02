@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>README → paste into Sanity</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+  .hint { background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 8px; padding: .75rem 1rem; margin-bottom: 2rem; }
+  pre { background: #18181b; color: #f4f4f5; padding: 1rem; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; }
+  code { background: #f4f4f5; padding: .1rem .3rem; border-radius: 4px; }
+  pre code { background: none; padding: 0; }
+  blockquote { border-inline-start: 4px solid #6366f1; margin: 0; padding-inline-start: 1rem; color: #52525b; }
+</style>
+</head>
+<body>
+<p class="hint">📌 اضغط Ctrl+A ثم Ctrl+C لنسخ المحتوى، والصقه في Sanity — Ctrl+A then Ctrl+C to copy, then paste into Sanity.</p>
+<h1>ANTIDOTE — LIFE OS</h1>
+<blockquote><p>مركز قيادة شخصي للتنفيذ المالي والمهني والحياتي. ليس تطبيق مهام — بل نظام يحوّل مهمة التحول السنوية إلى حلقة تنفيذ يومية.</p></blockquote>
+<pre><code>Vision → Annual Goals → Quarterly Targets → Monthly Objectives → Weekly Plan
+→ Daily Actions → Tracking → Review → Adjustment</code></pre>
+<p><strong>ANTIDOTE</strong> هو تطبيق ويب خاص بمستخدم واحد، مبني حول سؤال جوهري واحد: <em>هل ساعدني النظام اليوم على اتخاذ قرارات وأفعال أفضل؟</em> لوحة القيادة اليومية مصممة للإجابة على خمسة أسئلة كل صباح:</p>
+<ol><li>ماذا أفعل اليوم؟</li>
+<li>ما الذي قد يزيد دخلي؟</li>
+<li>أين أنا من هدف الزواج؟</li>
+<li>ما الذي ينتظر من العملاء؟</li>
+<li>متى أتوقف اليوم؟</li></ol>
+<h2>✨ المزايا</h2>
+<ul>
+  <li><strong>الوحدة — المسار — الوصف</strong></li>
+  <li><strong>لوحة القيادة</strong> — <code>/dashboard</code> — شاشة "صباح الخير" — أهم 3، المال، إجراء الإيرادات، متابعة العملاء، تفريغ الذهن</li>
+  <li><strong>خطة اليوم</strong> — <code>/today</code> — بناء خطة اليوم، مهمة الصباح، تدفق إنهاء اليوم</li>
+  <li><strong>المهام</strong> — <code>/tasks</code> — مهام بأولوية محسوبة (الاستعجال + الأثر المالي/الاستراتيجي − الجهد)</li>
+  <li><strong>الأهداف</strong> — <code>/goals</code> — شجرة أهداف هرمية: الرؤية → السنة → الربع → الشهر → الأسبوع → اليوم</li>
+  <li><strong>المشاريع</strong> — <code>/projects</code> — تتبع المشاريع المرتبطة بالأهداف</li>
+  <li><strong>المالية</strong> — <code>/finances</code> — تتبع المالية الشخصية وأرقام جاهزية الزواج</li>
+  <li><strong>الفريلانس</strong> — <code>/freelance</code> — خط أنابيب الإيرادات — العروض، العمل الجاري، المدفوعات</li>
+  <li><strong>العملاء</strong> — <code>/clients</code> — إدارة علاقات العملاء مع تتبع المتابعات</li>
+  <li><strong>الفرص</strong> — <code>/opportunities</code> — التقاط وتقييم فرص الدخل</li>
+  <li><strong>الملاحظات</strong> — <code>/notes</code> — قاعدة المعرفة</li>
+  <li><strong>العادات</strong> — <code>/habits</code> — تتبع العادات والسلاسل (Streaks)</li>
+  <li><strong>الروتينات</strong> — <code>/routines</code> — تعريف الروتينات اليومية</li>
+  <li><strong>التقويم</strong> — <code>/calendar</code> — تقسيم الوقت والجدولة</li>
+  <li><strong>المراجعات</strong> — <code>/reviews</code> — معالجات المراجعة الأسبوعية / الربع سنوية / السنوية</li>
+  <li><strong>الطاقة</strong> — <code>/energy</code> — تتبع مستويات الطاقة</li>
+  <li><strong>القرارات</strong> — <code>/decisions</code> — سجل القرارات</li>
+  <li><strong>تفريغ الذهن</strong> — <code>/brain-dump</code> — التقاط سريع → تحويل إلى مهام/مشاريع/أهداف</li>
+  <li><strong>الوكيل الذكي</strong> — <code>/agent</code> — طبقة المساعد الذكي (Server-only، محمية بمفتاح)</li>
+  <li><strong>التحليلات</strong> — <code>/analytics</code> — الرسوم البيانية والاتجاهات (Recharts)</li>
+  <li><strong>الزواج / العلاقة</strong> — <code>/marriage</code>, <code>/relationship</code> — المالية المشتركة وتتبع مهمة العلاقة</li>
+</ul>
+<p>واجهة ثنائية اللغة: <strong>العربية (RTL، الافتراضية) والإنجليزية</strong>، قابلة للتبديل أثناء التشغيل. ثيمات داكنة/فاتحة عبر <code>next-themes</code>.</p>
+<h2>🛠 التقنيات المستخدمة</h2>
+<ul><li><strong>الإطار:</strong> <a href="https://nextjs.org">Next.js 16</a> (App Router) + React 19، TypeScript (strict)</li>
+<li><strong>التنسيق:</strong> Tailwind CSS v4، <code>tailwind-merge</code>، <code>clsx</code>، أيقونات lucide-react</li>
+<li><strong>قاعدة البيانات والمصادقة:</strong> <a href="https://supabase.com">Supabase</a> (<code>@supabase/ssr</code> + <code>supabase-js</code>) مع Row-Level Security</li>
+<li><strong>التحقق من البيانات:</strong> Zod</li>
+<li><strong>الرسوم البيانية:</strong> Recharts</li>
+<li><strong>الاختبارات:</strong> Vitest (وحدة) + Playwright (E2E) + اختبارات انحدار أمنية لـ RLS</li>
+<li><strong>الأدوات:</strong> ESLint، Prettier (<code>prettier-plugin-tailwindcss</code>)، tsx</li></ul>
+<h2>🚀 البدء</h2>
+<h3>المتطلبات</h3>
+<ul><li>Node.js ≥ 22، npm ≥ 10</li>
+<li>مشروع Supabase (سحابي — لا حاجة لحزمة Supabase محلية عبر Docker)</li></ul>
+<h3>1. التثبيت والإعداد</h3>
+<pre><code>npm install
+cp .env.example .env.local   # ثم عبّئ القيم</code></pre>
+<ul>
+  <li><strong>المتغير — مطلوب؟ — الوصف</strong></li>
+  <li><code>NEXT_PUBLIC_SUPABASE_URL</code> — ✅ — رابط مشروع Supabase</li>
+  <li><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> — ✅ — مفتاح anon من Supabase (Settings → API)</li>
+  <li><code>SUPABASE_SERVICE_ROLE_KEY</code> — ⚠️ للسكربتات فقط — يتجاوز RLS — يُستخدم <strong>فقط</strong> في <code>scripts/seed.ts</code> و<code>scripts/reset-dev.ts</code>. لا تستورده أبداً من <code>app/</code> أو <code>lib/</code></li>
+  <li><code>OWNER_EMAIL</code> / <code>OWNER_PASSWORD</code> — ✅ — حساب المالك الذي ينشئه سكربت الـ seed</li>
+  <li><code>NEXT_PUBLIC_SITE_URL</code> — للإنتاج — رابط الموقع الرسمي (بيانات SEO الوصفية، واستدعاءات المصادقة)</li>
+  <li><code>AI_PROVIDER_API_KEY</code> — اختياري — طبقة الوكيل الذكي</li>
+  <li><code>CRON_SECRET</code> — اختياري — يحمي مسارات <code>/api/cron/*</code></li>
+  <li><code>GOOGLE_SITE_VERIFICATION</code> — اختياري — التحقق من Google Search Console</li>
+</ul>
+<h3>2. قاعدة البيانات</h3>
+<pre><code>npm run db:push      # تطبيق ترحيلات (migrations) Supabase
+npm run db:seed      # إنشاء حساب المالك + تعبئة البيانات الأولية</code></pre>
+<h3>3. التشغيل</h3>
+<pre><code>npm run dev          # http://localhost:3000</code></pre>
+<h2>📜 السكربتات</h2>
+<ul>
+  <li><strong>الأمر — الوصف</strong></li>
+  <li><code>npm run dev</code> — خادم التطوير</li>
+  <li><code>npm run build</code> / <code>npm start</code> — بناء الإنتاج / التشغيل</li>
+  <li><code>npm run lint</code> — ESLint</li>
+  <li><code>npm run typecheck</code> — فحص TypeScript دون إخراج</li>
+  <li><code>npm run format</code> / <code>format:check</code> — Prettier</li>
+  <li><code>npm run test</code> / <code>test:watch</code> — اختبارات الوحدة (Vitest)</li>
+  <li><code>npm run test:rls</code> — اختبارات انحدار أمنية لـ RLS (<code>tests/security/</code>)</li>
+  <li><code>npm run test:e2e</code> — اختبارات E2E عبر Playwright (<code>tests/e2e/</code>)</li>
+  <li><code>npm run db:push</code> — دفع ترحيلات Supabase</li>
+  <li><code>npm run db:seed</code> — تعبئة حساب المالك والبيانات الأساسية</li>
+  <li><code>npm run db:reset-dev</code> — إعادة تعيين قاعدة بيانات التطوير</li>
+</ul>
+<h2>📁 بنية المشروع</h2>
+<pre><code>app/
+  (app)/            # مجموعة الصفحات المحمية — تخطيط الشريط الجانبي، جميع الوحدات الخاصة
+  (auth)/           # تسجيل الدخول + استدعاء المصادقة
+  robots.ts         # robots.txt (المسارات الخاصة محجوبة)
+  sitemap.ts        # sitemap.xml (الصفحات العامة فقط)
+  layout.tsx        # التخطيط الجذري، البيانات الوصفية، JSON-LD
+components/         # الواجهة حسب النطاق (landing/, tasks/, finance/, reviews/, ...)
+lib/
+  actions/          # Server Actions
+  dal/              # طبقة الوصول للبيانات (جلسة المصادقة، إلخ)
+  ai/               # مساعدات الوكيل الذكي (server-only)
+  i18n/             # ترجمات عربي/إنجليزي
+supabase/
+  migrations/       # ترحيلات مخطط SQL
+scripts/            # سكربتات seed / reset / guards
+tests/
+  unit/  e2e/  security/
+docs/               # خطة التنفيذ، مراجعة المعمارية، المواصفة الرئيسية</code></pre>
+<h2>🔒 ملاحظات أمنية</h2>
+<ul><li><strong>نظام بمستخدم واحد.</strong> جميع مسارات <code>(app)</code> خلف المصادقة، ومحجوبة من فهارس البحث في <code>app/robots.ts</code>.</li>
+<li><strong>RLS في كل مكان:</strong> مخطط Postgres يعتمد على Row-Level Security؛ واختبارات الانحدار موجودة في <code>tests/security/rls-regression.ts</code>.</li>
+<li><strong><code>SUPABASE_SERVICE_ROLE_KEY</code> يتجاوز RLS</strong> — للسكربتات من جهة الخادم فقط، ولا يُكشف أبداً للعميل. حزمة <code>server-only</code> تحمي الوحدات الحساسة.</li>
+<li>مفاتيح طبقة الذكاء الاصطناعي تُدار في Route Handlers من جهة الخادم فقط، ولا تدخل أبداً في حزم العميل.</li></ul>
+<h2>📚 وثائق إضافية</h2>
+<ul><li><a href="docs/IMPLEMENTATION_PLAN.md"><code>docs/IMPLEMENTATION_PLAN.md</code></a> — خطة التنفيذ الكاملة بالمراحل (v2)</li>
+<li><a href="docs/LIFE_OS_MASTER_PROMPT.md"><code>docs/LIFE_OS_MASTER_PROMPT.md</code></a> — مواصفة المنتج</li>
+<li><a href="docs/ARCHITECTURE_REVIEW.md"><code>docs/ARCHITECTURE_REVIEW.md</code></a> — نتائج مراجعة المعمارية</li>
+<li><a href="docs/LIFE_CAREER_AND_LIFE_PLAN_AR.md"><code>docs/LIFE_CAREER_AND_LIFE_PLAN_AR.md</code></a> — خطة الحياة والمسار المهني وراء المنتج (عربي)</li></ul>
+<h2>النشر</h2>
+<p>انشر المشروع على Vercel (أو أي استضافة Node). اضبط <code>NEXT_PUBLIC_SITE_URL</code> على نطاق الإنتاج حتى تُبنى روابط canonical وصور Open Graph واستدعاءات المصادقة بشكل صحيح.</p>
+<p><em>مشروع خاص — مالك واحد. غير مخصص للاستخدام العام أو المساهمة.</em></p>
+</body>
+</html>
