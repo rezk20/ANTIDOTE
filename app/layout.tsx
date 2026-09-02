@@ -33,8 +33,53 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://smart-antidote.vercel.app"),
+  // Sub-page titles already include "| ANTIDOTE" (e.g. "الروتين اليومي | ANTIDOTE"),
+  // so no template is used here to avoid brand duplication.
   title: "ANTIDOTE — LIFE OS",
-  description: "Personal command center for financial, career, and life execution.",
+  description:
+    "Personal command center for financial, career, and life execution.",
+  alternates: {
+    canonical: "/",
+    languages: {
+      ar: "/",
+      en: "/",
+    },
+  },
+  openGraph: {
+    title: "ANTIDOTE — LIFE OS",
+    description:
+      "Personal command center for financial, career, and life execution.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1536,
+        height: 1024,
+        alt: "ANTIDOTE — LIFE OS",
+      },
+    ],
+    locale: "ar",
+    alternateLocale: ["en"],
+    type: "website",
+    siteName: "ANTIDOTE",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ANTIDOTE — LIFE OS",
+    description:
+      "Personal command center for financial, career, and life execution.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  // Set GOOGLE_SITE_VERIFICATION in your env (from Google Search Console)
+  ...(process.env.GOOGLE_SITE_VERIFICATION && {
+    verification: {
+      google: process.env.GOOGLE_SITE_VERIFICATION,
+    },
+  }),
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
@@ -43,6 +88,23 @@ export const metadata: Metadata = {
   },
   formatDetection: {
     telephone: false,
+  },
+};
+
+// Structured data for search engines (JSON-LD)
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "ANTIDOTE — LIFE OS",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  description:
+    "Personal command center for financial, career, and life execution.",
+  inLanguage: ["ar", "en"],
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
   },
 };
 
@@ -63,7 +125,11 @@ export default async function RootLayout({
       suppressHydrationWarning
       className={`${cairo.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="bg-background text-foreground flex min-h-full flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

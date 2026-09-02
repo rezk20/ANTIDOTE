@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { useLocale } from "@/components/providers/locale-provider";
+import Image from "next/image";
 
 export function Sidebar({
   isOpen,
@@ -111,9 +112,7 @@ export function Sidebar({
       >
         {/* Branding Header */}
         <div className="flex h-16 items-center gap-3 border-b border-zinc-100 px-6 dark:border-zinc-800/80">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 text-base font-extrabold text-white shadow-sm dark:bg-zinc-100 dark:text-zinc-900">
-            L
-          </div>
+          <Image src="/icon.png" alt="Antidote Logo" width={32} height={32} />
           <div>
             <div className="text-sm font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
               ANTIDOTE
